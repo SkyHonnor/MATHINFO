@@ -28,22 +28,22 @@ namespace SAE_MATINFO.Model
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<Materiel> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ObservableCollection<Materiel> FindBySelection(string criteres)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Read()
         {
             throw new NotImplementedException();
         }
 
         public void Update()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<Materiel> FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<Materiel> FindBySelection(string criteres)
         {
             throw new NotImplementedException();
         }
