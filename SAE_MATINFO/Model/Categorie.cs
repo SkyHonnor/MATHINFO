@@ -28,7 +28,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO materiel (nom_categorie) VALUES ({NomCategorie})";
+            String requete = $"INSERT INTO materiel (nom_categorie) VALUES ('{NomCategorie}')";
 
             accesBD.SetData(requete);
         }
@@ -46,7 +46,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"SELECT * FROM categorie WHERE nom_categorie = {NomCategorie}";
+            String requete = $"SELECT * FROM categorie WHERE nom_categorie = '{NomCategorie}'";
 
             DataTable data = accesBD.GetData(requete);
 
@@ -61,7 +61,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"UPDATE categorie SET id_categorie = {IdCategorie}, nom_categorie = {NomCategorie}";
+            String requete = $"UPDATE categorie SET id_categorie = {IdCategorie}, nom_categorie = '{NomCategorie}' WHERE id_categorie = {IdCategorie}";
 
             accesBD.SetData(requete);
         }

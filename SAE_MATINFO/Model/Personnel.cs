@@ -15,7 +15,9 @@ namespace SAE_MATINFO.Model
         public string NomPersonnel { get; set; }
         public string PrenomPersonnel { get; set; }
         public string MailPersonnel { get; set; }
-        public Categorie Categorie { get; set; }
+
+        public Personnel() {}
+
         public Personnel(int idPersonnel)
         {
             IdPersonnel = idPersonnel;
@@ -37,7 +39,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO personnel (nom,prenom,mail) VALUES ({NomPersonnel}, {PrenomPersonnel}, {MailPersonnel})";
+            String requete = $"INSERT INTO personnel (nom,prenom,mail) VALUES ('{NomPersonnel}', '{PrenomPersonnel}', '{MailPersonnel}')";
 
             accesBD.SetData(requete);
         }
@@ -55,7 +57,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requetemagique = $"SELECT * FROM personnel WHERE nom = {NomPersonnel}";
+            String requetemagique = $"SELECT * FROM personnel WHERE nom = '{NomPersonnel}' AND prenom = '{PrenomPersonnel}'";
 
             DataTable data = accesBD.GetData(requetemagique);
 
@@ -72,7 +74,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"UPDATE materiel SET nom = {NomPersonnel}, prenom = {PrenomPersonnel}, mail = {MailPersonnel}";
+            String requete = $"UPDATE personnel SET nom = '{NomPersonnel}', prenom = '{PrenomPersonnel}', mail = '{MailPersonnel}' WHERE id_personnel = {IdPersonnel}";
 
             accesBD.SetData(requete);
         }
