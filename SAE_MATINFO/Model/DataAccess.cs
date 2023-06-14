@@ -19,7 +19,7 @@ namespace SAE_MATINFO.Model
             {
                 NpgSQLConnect = new NpgsqlConnection
                 {
-                    ConnectionString = "Server=srv-peda.iut-acy.local;port=5433;Database=sae0.1;Search Path=exemplewpf;uid=battigd;password=DADULr;"
+                    ConnectionString = "Server=srv-peda.iut-acy.local;port=5433;Database=projectdb_sae201;Search Path=matinfo;uid=projectdb;password=5455aevbTJ3vDR;"
                 };
 
                 NpgSQLConnect.Open();
