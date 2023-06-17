@@ -12,11 +12,12 @@ namespace SAE_MATINFO.Model
 {
     public class Personnel : Crud<Personnel>
     {
-
         private int idPersonnel;
         private string nomPersonnel;
         private string prenomPersonnel;
         private string mailPersonnel;
+
+        private ObservableCollection<Attribution> attributions;
 
         public int IdPersonnel
         {
@@ -56,7 +57,6 @@ namespace SAE_MATINFO.Model
 
             set
             {
-
                 if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le champs PrenomPersonnel doit etre sasie");
 
@@ -75,15 +75,24 @@ namespace SAE_MATINFO.Model
             {
                 bool valid = MailAddress.TryCreate(value, out _);
                 if (!valid)
-                {
                     throw new ArgumentException("Le champ mail n'est pas valide");
-                }
 
                 this.mailPersonnel = value;
             }
         }
-      
 
+        public ObservableCollection<Attribution> Attributions
+        {
+            get
+            {
+                return this.attributions;
+            }
+
+            set
+            {
+                this.attributions = value;
+            }
+        }
 
         public Personnel() {}
 

@@ -1,0 +1,52 @@
+﻿<Page x:Class="SAE_MATINFO.Pages.CategoriePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SAE_MATINFO.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CategoriePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontSize="20" VerticalAlignment="Center" Content="{Binding Categories.Count}" ContentStringFormat="Liste de catégories ({0})"></Label>
+
+        <Grid Grid.Row="1">
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left">
+                <Label Foreground="#FFFFFF">Ajouter une catégorie</Label>
+            </Button>
+        </Grid>
+
+        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Categories}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom catégorie" Width="*" Binding="{Binding NomCategorie}"/>
+
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Modifier
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Delete">
+                                Supprimer
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

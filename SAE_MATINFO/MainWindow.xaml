@@ -3,10 +3,61 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:SAE_MATINFO"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="700" Width="1000">
 
+    <Window.DataContext>
+        <local:ApplicationData x:Name="applicationData"></local:ApplicationData>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="#C0392B">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.RowSpan="2" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">MATINFO</Label>
+
+            <StackPanel Grid.Row="2">
+                <Button Style="{StaticResource PanelButtonContainer}" Click="Button_Click_Categorie">
+                    <StackPanel Style="{StaticResource PanelButton}" >
+                        <icon:PackIconIonicons Kind="FolderiOS" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Label VerticalAlignment="Center">Catégories</Label>
+                    </StackPanel>
+                </Button>
+                
+                <Button Style="{StaticResource PanelButtonContainer}" Click="Button_Click_Materiel">
+                    <StackPanel Style="{StaticResource PanelButton}" >
+                        <icon:PackIconIonicons Kind="PricetagsiOS" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Label VerticalAlignment="Center">Materiels</Label>
+                    </StackPanel>
+                </Button>
+                
+                <Button Style="{StaticResource PanelButtonContainer}" Click="Button_Click_Personnel">
+                    <StackPanel Style="{StaticResource PanelButton}" >
+                        <icon:PackIconIonicons Kind="PeopleiOS" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Label VerticalAlignment="Center">Personnels</Label>
+                    </StackPanel>
+                </Button>
+                
+                <Button Style="{StaticResource PanelButtonContainer}" Click="Button_Click_Attribution">
+                    <StackPanel Style="{StaticResource PanelButton}" >
+                        <icon:PackIconIonicons Kind="BookiOS" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Label VerticalAlignment="Center">Attributions</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Frame Name="Frame" Grid.Column="1" Margin="50" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"></Frame>
     </Grid>
 </Window>

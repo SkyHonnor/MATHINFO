@@ -4,6 +4,96 @@
              xmlns:local="clr-namespace:SAE_MATINFO"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="PanelButtonContainer" TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8" />
+                </Style>
+            </Style.Resources>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#ecf0f1" />
+                    <Setter Property="Foreground" Value="#C0392B" />
+                </Trigger>
+            </Style.Triggers>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="#FFFFFF" />
+            <Setter Property="Foreground" Value="#C0392B" />
+
+            <Setter Property="BorderThickness" Value="0"></Setter>
+
+            <Setter Property="FontSize" Value="13"></Setter>
+
+            <Setter Property="Height" Value="40"></Setter>
+
+            <Setter Property="Margin" Value="10,5,10,5"></Setter>
+
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+        </Style>
+
+        <Style x:Key="PanelButton" TargetType="StackPanel">
+            <Setter Property="Margin" Value="20,0,20,0"></Setter>
+            <Setter Property="Orientation" Value="Horizontal"></Setter>
+        </Style>
+
+        <Style x:Key="MainButton" TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8" />
+                </Style>
+            </Style.Resources>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#E44230" />
+                </Trigger>
+            </Style.Triggers>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="#C0392B" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            
+            <Setter Property="FontSize" Value="13"></Setter>
+
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Padding" Value="10,0,10,0"></Setter>
+
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Foreground" Value="Black" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#ecf0f1" />
+                    <Setter Property="BorderBrush" Value="{x:Null}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

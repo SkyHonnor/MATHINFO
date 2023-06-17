@@ -1,6 +1,7 @@
 ﻿using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,26 @@ namespace SAE_MATINFO
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click_Categorie(object sender, RoutedEventArgs e)
+        {
+            applicationData.CurrentPageIndex = 0;
+        }
+
+        private void Button_Click_Materiel(object sender, RoutedEventArgs e)
+        {
+            applicationData.CurrentPageIndex = 1;
+        }
+
+        private void Button_Click_Personnel(object sender, RoutedEventArgs e)
+        {
+            applicationData.CurrentPageIndex = 2;
+        }
+
+        private void Button_Click_Attribution(object sender, RoutedEventArgs e)
+        {
+            applicationData.CurrentPageIndex = 3;
         }
     }
 }

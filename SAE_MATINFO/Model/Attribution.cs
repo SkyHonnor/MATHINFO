@@ -38,6 +38,7 @@ namespace SAE_MATINFO.Model
             String requete = $"INSERT INTO appartient (id_personnel, id_materiel, date_attribution, commentaire) VALUES ({FKIdPersonnel}, {FKIdMateriel}, '{FKDateAttribution}', '{Commentaire}')";
 
             accesBD.SetData(requete);
+            this.Read();
         }
 
         public void Delete()
@@ -61,7 +62,7 @@ namespace SAE_MATINFO.Model
             {
                 FKIdPersonnel = (int)data.Rows[0]["id_personnel"];
                 FKIdMateriel = (int)data.Rows[0]["id_materiel"];
-                FKDateAttribution = DateTime.Parse((string) data.Rows[0]["date_attribution"]);
+                FKDateAttribution = (DateTime)data.Rows[0]["date_attribution"];
 
                 Commentaire = (string)data.Rows[0]["commentaire"];
             }
@@ -91,7 +92,7 @@ namespace SAE_MATINFO.Model
                 {
                     Attribution attribution = new Attribution(
                         (int)row["id_personnel"], (int)row["id_materiel"],
-                        DateTime.Parse((string)data.Rows[0]["date_attribution"]),
+                        (DateTime)row["date_attribution"],
                         (string)row["commentaire"]
                     );
 
@@ -117,7 +118,7 @@ namespace SAE_MATINFO.Model
                 {
                     Attribution attribution = new Attribution(
                         (int)row["id_personnel"], (int)row["id_materiel"],
-                        DateTime.Parse((string)data.Rows[0]["date_attribution"]),
+                        (DateTime)row["date_attribution"],
                         (string)row["commentaire"]
                     );
 
