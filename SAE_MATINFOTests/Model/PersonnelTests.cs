@@ -24,6 +24,8 @@ namespace SAE_MATINFO.Model.Tests
             personnel2.Read();
 
             Assert.AreEqual(personnel1, personnel2);
+
+            ClearAll();
         }
 
         [TestMethod()]
@@ -39,6 +41,7 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(0, personnel2.IdPersonnel);
 
+            ClearAll();
         }
 
         [TestMethod()]
@@ -51,6 +54,8 @@ namespace SAE_MATINFO.Model.Tests
             personnel2.Read();
 
             Assert.AreEqual(personnel1, personnel2);
+
+            ClearAll();
         }
 
         [TestMethod()]
@@ -68,6 +73,8 @@ namespace SAE_MATINFO.Model.Tests
             personnel2.Read();
 
             Assert.AreEqual(personnel2, personnel1);
+
+            ClearAll();
         }
 
         [TestMethod()]
@@ -82,14 +89,35 @@ namespace SAE_MATINFO.Model.Tests
 
             ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
             Assert.AreEqual(3, lesPersonnels.Count);
+
+            ClearAll();
         }
 
         [TestMethod()]
         public void FindBySelectionTest()
         {
-            Assert.Fail();
+            Personnel personnel1 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
+            personnel1.Create();
+            Personnel personnel2 = new Personnel("RUAULT", "Maxime", "ruaultmaxime@gmail.com");
+            personnel2.Create();
+            Personnel personnel3 = new Personnel("BATTIG", "Dylan", "dylan@gmail.com");
+            personnel3.Create();
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindBySelection("mail = 'ruaultmaxime@gmail.com'");
+            Assert.AreEqual(1, lesPersonnels.Count);
+
+            ClearAll();
+
         }
 
+        private void ClearAll()
+        {
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
+            foreach(Personnel pers in lesPersonnels)
+            {
+                pers.Delete();
+            }
+        }
         
     }
 }
