@@ -14,6 +14,8 @@ namespace SAE_MATINFO.Model
         public int IdCategorie { get; set; }
         public string NomCategorie { get; set; }
 
+        public ObservableCollection<Materiel> Materiels { get; set; }
+
         public Categorie() { }
 
         public Categorie(int idCategorie, string nomCategorie)
@@ -28,7 +30,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO materiel (nom_categorie) VALUES ('{NomCategorie}')";
+            String requete = $"INSERT INTO categorie_materiel (nom_categorie) VALUES ('{NomCategorie}')";
 
             accesBD.SetData(requete);
             this.Read();
@@ -38,7 +40,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"DELETE FROM materiel WHERE id_categorie = {IdCategorie}";
+            String requete = $"DELETE FROM categorie_materiel WHERE id_categorie = {IdCategorie}";
 
             accesBD.SetData(requete);
         }
@@ -47,7 +49,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"SELECT * FROM categorie WHERE nom_categorie = '{NomCategorie}'";
+            String requete = $"SELECT * FROM categorie_materiel WHERE nom_categorie = '{NomCategorie}'";
 
             DataTable data = accesBD.GetData(requete);
 
@@ -62,7 +64,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"UPDATE categorie SET id_categorie = {IdCategorie}, nom_categorie = '{NomCategorie}' WHERE id_categorie = {IdCategorie}";
+            String requete = $"UPDATE categorie_materiel SET id_categorie = {IdCategorie}, nom_categorie = '{NomCategorie}' WHERE id_categorie = {IdCategorie}";
 
             accesBD.SetData(requete);
         }
@@ -72,7 +74,7 @@ namespace SAE_MATINFO.Model
             ObservableCollection<Categorie> categories = new ObservableCollection<Categorie>();
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"SELECT * FROM categorie";
+            String requete = $"SELECT * FROM categorie_materiel";
 
             DataTable data = accesBD.GetData(requete);
 
@@ -96,7 +98,7 @@ namespace SAE_MATINFO.Model
             ObservableCollection<Categorie> categories = new ObservableCollection<Categorie>();
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"SELECT * FROM categorie WHERE {criteres}";
+            String requete = $"SELECT * FROM categorie_materiel WHERE {criteres}";
 
             DataTable data = accesBD.GetData(requete);
 

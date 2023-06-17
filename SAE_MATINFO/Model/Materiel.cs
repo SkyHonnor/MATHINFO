@@ -18,6 +18,7 @@ namespace SAE_MATINFO.Model
         public string ReferenceConstructeur { get; set; }
 
         public Categorie Categorie { get; set; }
+        public ObservableCollection<Attribution> Attributions { get; set; }
 
         public Materiel() { }
 
