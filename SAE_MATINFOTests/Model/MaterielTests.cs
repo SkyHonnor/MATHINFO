@@ -124,6 +124,16 @@ namespace SAE_MATINFO.Model.Tests
 
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
+            foreach (Categorie categorie in lesCategorie)
+            {
+                categorie.Delete();
+            }
+        }
+
         
     }
 }
