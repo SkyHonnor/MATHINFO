@@ -31,6 +31,7 @@ namespace SAE_MATINFO.Model
             String requete = $"INSERT INTO materiel (nom_categorie) VALUES ('{NomCategorie}')";
 
             accesBD.SetData(requete);
+            this.Read();
         }
 
         public void Delete()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,11 +12,78 @@ namespace SAE_MATINFO.Model
 {
     public class Personnel : Crud<Personnel>
     {
-        public int IdPersonnel { get; set; }
 
-        public string NomPersonnel { get; set; }
-        public string PrenomPersonnel { get; set; }
-        public string MailPersonnel { get; set; }
+        private int idPersonnel;
+        private string nomPersonnel;
+        private string prenomPersonnel;
+        private string mailPersonnel;
+
+        public int IdPersonnel
+        {
+            get
+            {
+                return this.idPersonnel;
+            }
+
+            set
+            {
+                this.idPersonnel = value;
+            }
+        }
+
+        public string NomPersonnel
+        {
+            get
+            {
+                return this.nomPersonnel;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le champs NomPersonnel doit etre sasie");
+
+                this.nomPersonnel = value.ToUpper();
+            }
+        }
+
+        public string PrenomPersonnel
+        {
+            get
+            {
+                return this.prenomPersonnel;
+            }
+
+            set
+            {
+
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le champs PrenomPersonnel doit etre sasie");
+
+                this.prenomPersonnel = value.Substring(0, 1).ToUpper() + value.Substring(1).ToLower();
+            }
+        }
+
+        public string MailPersonnel
+        {
+            get
+            {
+                return this.mailPersonnel;
+            }
+
+            set
+            {
+                bool valid = MailAddress.TryCreate(value, out _);
+                if (!valid)
+                {
+                    throw new ArgumentException("Le champ mail n'est pas valide");
+                }
+
+                this.mailPersonnel = value;
+            }
+        }
+      
+
 
         public Personnel() {}
 
@@ -42,6 +111,7 @@ namespace SAE_MATINFO.Model
             String requete = $"INSERT INTO personnel (nom,prenom,mail) VALUES ('{NomPersonnel}', '{PrenomPersonnel}', '{MailPersonnel}')";
 
             accesBD.SetData(requete);
+            this.Read();
         }
 
         public void Delete()
@@ -51,6 +121,7 @@ namespace SAE_MATINFO.Model
             String requete = $"DELETE FROM personnel WHERE id_personnel = {IdPersonnel}";
 
             accesBD.SetData(requete);
+
         }
 
         public void Read()
@@ -61,7 +132,7 @@ namespace SAE_MATINFO.Model
 
             DataTable data = accesBD.GetData(requetemagique);
 
-            if (data != null)
+            if (data != null & data.Rows.Count > 0)
             {
                 IdPersonnel = (int)data.Rows[0]["id_personnel"];
                 NomPersonnel = (string)data.Rows[0]["nom"];
@@ -128,6 +199,25 @@ namespace SAE_MATINFO.Model
             }
 
             return personnels;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Personnel personnel &&
+                   this.IdPersonnel == personnel.IdPersonnel &&
+                   this.NomPersonnel == personnel.NomPersonnel &&
+                   this.PrenomPersonnel == personnel.PrenomPersonnel &&
+                   this.MailPersonnel == personnel.MailPersonnel;
+        }
+
+        public static bool operator ==(Personnel? left, Personnel? right)
+        {
+            return EqualityComparer<Personnel>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Personnel? left, Personnel? right)
+        {
+            return !(left == right);
         }
     }
 }
