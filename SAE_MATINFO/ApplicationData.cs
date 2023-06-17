@@ -29,7 +29,7 @@ namespace SAE_MATINFO
             Pages = new Page[]
             {
                 new Pages.CategoriePage(this),
-                new Pages.MaterielsPage(this),
+                new Pages.MaterielPage(this),
                 new Pages.PersonnelPage(this),
                 new Pages.AttributionPage(this),
             };

@@ -1,6 +1,7 @@
 ﻿using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,39 +17,41 @@ using System.Windows.Shapes;
 namespace SAE_MATINFO.Windows
 {
     /// <summary>
-    /// Logique d'interaction pour CategorieWindow.xaml
+    /// Logique d'interaction pour MaterielWindow.xaml
     /// </summary>
-    public partial class CategorieWindow : Window
+    public partial class MaterielWindow : Window
     {
         public enum Type { Create, Update };
 
         public Type WindowType { get; private set; }
 
-        public Categorie Categorie { get; set; }
+        public Materiel Materiel { get; set; }
+        public ObservableCollection<Categorie> Categories { get; set; }
 
-        public CategorieWindow(Categorie categorie, Type windowType)
+        public MaterielWindow(Materiel materiel, ObservableCollection<Categorie> categories, Type windowType)
         {
             InitializeComponent();
 
-            Categorie = categorie;
+            Materiel = materiel;
+            Categories = categories;
 
             DataContext = this;
             WindowType = windowType;
 
             if (WindowType == Type.Create)
-                Button.Content = "Créer une catégorie";
+                Button.Content = "Créer un matériel";
 
             if (WindowType == Type.Update)
-                Button.Content = "Modifier une catégorie";
+                Button.Content = "Modifier un matériel";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (WindowType == Type.Create)
-                Categorie.Create();
+                Materiel.Create();
 
             if (WindowType == Type.Update)
-                Categorie.Update();
+                Materiel.Update();
 
             DialogResult = true;
         }
