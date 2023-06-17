@@ -19,7 +19,7 @@ namespace SAE_MATINFO
             {
                 NpgSQLConnect = new NpgsqlConnection
                 {
-                    ConnectionString = "Server=localhost;port=5432;Database=MATINFO2;Search Path=public;uid=postgres;password=postgres;"
+                    ConnectionString = "Server=postgresql-projectdb.alwaysdata.net;port=5432;Database=projectdb_sae201;Search Path=matinfo;uid=projectdb;password=5455aevbTJ3vDR;"
                 };
 
                 NpgSQLConnect.Open();
