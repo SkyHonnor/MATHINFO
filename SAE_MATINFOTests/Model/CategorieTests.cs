@@ -83,7 +83,7 @@ namespace SAE_MATINFO.Model.Tests
             Categorie categorie3 = new Categorie("Informatique");
             categorie3.Create();
 
-            ObservableCollection<Personnel> lesCategorie = new Personnel().FindAll();
+            ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
             Assert.AreEqual(3, lesCategorie.Count);
 
             ClearAll();
