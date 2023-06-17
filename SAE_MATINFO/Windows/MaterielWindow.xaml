@@ -1,0 +1,35 @@
+﻿<Window x:Class="SAE_MATINFO.Windows.MaterielWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAE_MATINFO.Windows"
+        mc:Ignorable="d"
+        Title="MaterielWindow" MinHeight="360" Height="360" MinWidth="260" Width="260" WindowStartupLocation="CenterOwner">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Materiel</Label>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label>Nom matériel</Label>
+            <TextBox Name="NomMateriel" Width="190" Height="20" Text="{Binding Materiel.NomMateriel}"></TextBox>
+
+            <Label>Catégorie</Label>
+            <ComboBox Name="CategorieMateriel" Width="190" Height="20" ItemsSource="{Binding Categories}" SelectedValue="{Binding Materiel.FKIdCategorie}" SelectedItem="{Binding Materiel.Categorie}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie"></ComboBox>
+
+            <Label>Code Barre</Label>
+            <TextBox Name="CodeBarreMateriel" Width="190" Height="20" Text="{Binding Materiel.CodeBarre}"></TextBox>
+
+            <Label>Référence Constructeur</Label>
+            <TextBox Name="ReferenceConstructeur" Width="190" Height="20" Text="{Binding Materiel.ReferenceConstructeur}"></TextBox>
+        </StackPanel>
+
+        <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" Width="150" HorizontalAlignment="Center" Click="Button_Click"></Button>
+    </Grid>
+</Window>

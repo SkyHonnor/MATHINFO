@@ -44,7 +44,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO materiel (nom_materiel, id_categorie, code_barre, reference_constructeur) VALUES ({FKIdCategorie}, '{NomMateriel}', '{CodeBarre}', '{ReferenceConstructeur}')";
+            String requete = $"INSERT INTO materiel (nom_materiel, id_categorie, code_barre, reference_constructeur) VALUES ('{NomMateriel}', {FKIdCategorie}, '{CodeBarre}', '{ReferenceConstructeur}')";
 
             accesBD.SetData(requete);
             this.Read();
