@@ -42,6 +42,16 @@ namespace SAE_MATINFO.Pages
             applicationData.Categories.Add(categorie);
         }
 
+        private void Button_Click_Update(object sender, RoutedEventArgs e)
+        {
+            Categorie categorie = (Categorie)DataGrid.SelectedItem;
+
+            CategorieWindow categorieWindow = new CategorieWindow(categorie, CategorieWindow.Type.Update);
+            categorieWindow.Owner = Window.GetWindow(this);
+
+            categorieWindow.ShowDialog();
+        }
+
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
