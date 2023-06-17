@@ -2,6 +2,7 @@
 using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.PeerToPeer.Collaboration;
 using System.Text;
@@ -12,17 +13,15 @@ namespace SAE_MATINFO.Model.Tests
     [TestClass()]
     public class PersonnelTests
     {
-      
+
         [TestMethod()]
         public void CreateTest()
         {
             Personnel personnel1 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel1.Create();
-            Console.WriteLine(personnel1.IdPersonnel);
 
             Personnel personnel2 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel2.Read();
-            Console.WriteLine(personnel2.IdPersonnel);
 
             Assert.AreEqual(personnel1, personnel2);
         }
@@ -35,7 +34,6 @@ namespace SAE_MATINFO.Model.Tests
 
             personnel1.Delete();
 
-            
             Personnel personnel2 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel2.Read();
 
@@ -46,14 +44,11 @@ namespace SAE_MATINFO.Model.Tests
         [TestMethod()]
         public void ReadTest()
         {
-
             Personnel personnel1 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel1.Create();
-            Console.WriteLine(personnel1.IdPersonnel);
 
             Personnel personnel2 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel2.Read();
-            Console.WriteLine(personnel2.IdPersonnel);
 
             Assert.AreEqual(personnel1, personnel2);
         }
@@ -72,16 +67,21 @@ namespace SAE_MATINFO.Model.Tests
             Personnel personnel2 = new Personnel("BATTIG", "Dylan", "dylanelix@gmail.com");
             personnel2.Read();
 
-            Console.WriteLine(personnel1.IdPersonnel);
-            Console.WriteLine(personnel2.IdPersonnel);
-
             Assert.AreEqual(personnel2, personnel1);
         }
 
         [TestMethod()]
         public void FindAllTest()
         {
-            Assert.Fail();
+            Personnel personnel1 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
+            personnel1.Create();
+            Personnel personnel2 = new Personnel("RUAULT", "Maxime", "ruaultmaxime@gmail.com");
+            personnel2.Create();
+            Personnel personnel3 = new Personnel("BATTIG", "Dylan", "dylan@gmail.com");
+            personnel3.Create();
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
+            Assert.AreEqual(3, lesPersonnels.Count);
         }
 
         [TestMethod()]
@@ -89,5 +89,7 @@ namespace SAE_MATINFO.Model.Tests
         {
             Assert.Fail();
         }
+
+        
     }
 }
