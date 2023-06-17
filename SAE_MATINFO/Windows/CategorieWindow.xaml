@@ -1,0 +1,26 @@
+﻿<Window x:Class="SAE_MATINFO.Windows.CategorieWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAE_MATINFO.Windows"
+        mc:Ignorable="d"
+        Title="CategorieWindow" MinHeight="250" MinWidth="260" Height="250" Width="260" WindowStartupLocation="CenterOwner">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Catégorie</Label>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label>Nom catégorie</Label>
+            <TextBox Width="190" Height="20" Text="{Binding NomCategorie}"></TextBox>
+        </StackPanel>
+
+        <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" Width="150" HorizontalAlignment="Center" Click="Button_Click"></Button>
+    </Grid>
+</Window>
