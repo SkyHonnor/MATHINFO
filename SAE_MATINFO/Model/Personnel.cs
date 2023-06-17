@@ -141,7 +141,7 @@ namespace SAE_MATINFO.Model
 
             DataTable data = accesBD.GetData(requetemagique);
 
-            if (data != null & data.Rows.Count > 0)
+            if (data != null && data.Rows.Count > 0)
             {
                 IdPersonnel = (int)data.Rows[0]["id_personnel"];
                 NomPersonnel = (string)data.Rows[0]["nom"];

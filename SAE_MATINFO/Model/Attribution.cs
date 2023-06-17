@@ -58,7 +58,7 @@ namespace SAE_MATINFO.Model
 
             DataTable data = accesBD.GetData(requete);
 
-            if (data != null)
+            if (data != null && data.Rows.Count > 0)
             {
                 FKIdPersonnel = (int)data.Rows[0]["id_personnel"];
                 FKIdMateriel = (int)data.Rows[0]["id_materiel"];
@@ -127,6 +127,27 @@ namespace SAE_MATINFO.Model
             }
 
             return attributions;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Attribution attribution &&
+                   this.FKIdPersonnel == attribution.FKIdPersonnel &&
+                   this.FKIdMateriel == attribution.FKIdMateriel &&
+                   this.FKDateAttribution == attribution.FKDateAttribution &&
+                   this.Commentaire == attribution.Commentaire &&
+                   EqualityComparer<Personnel>.Default.Equals(this.Personnel, attribution.Personnel) &&
+                   EqualityComparer<Materiel>.Default.Equals(this.Materiel, attribution.Materiel);
+        }
+
+        public static bool operator ==(Attribution? left, Attribution? right)
+        {
+            return EqualityComparer<Attribution>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Attribution? left, Attribution? right)
+        {
+            return !(left == right);
         }
     }
 }
