@@ -104,8 +104,9 @@ namespace SAE_MATINFO.Model.Tests
             Attribution attribution3 = new Attribution(personnel.IdPersonnel, materiel2.IdMateriel, DateTime.Today, "test3");
             attribution3.Create();
 
-            ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
-            Assert.AreEqual(3, lesCategorie.Count);
+            ObservableCollection<Attribution> lesAttribution = new Attribution().FindAll();
+
+            Assert.AreEqual(3, lesAttribution.Count);
 
            
         }
@@ -113,15 +114,15 @@ namespace SAE_MATINFO.Model.Tests
         [TestMethod()]
         public void FindBySelectionTest()
         {
-            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "C'est super");
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "test");
             attribution1.Create();
-            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel1.IdMateriel, DateTime.Today, "C'est nul");
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel1.IdMateriel, DateTime.Today, "test2");
             attribution2.Create();
-            Attribution attribution3 = new Attribution(personnel.IdPersonnel, materiel2.IdMateriel, DateTime.Today, "C'est incompréhensible");
+            Attribution attribution3 = new Attribution(personnel.IdPersonnel, materiel2.IdMateriel, DateTime.Today, "test3");
             attribution3.Create();
 
-            ObservableCollection<Categorie> lesCategorie = new Categorie().FindBySelection("commentaire = 'C'est nul'");
-            Assert.AreEqual(1, lesCategorie.Count);
+            ObservableCollection<Attribution> lesAttribution = new Attribution().FindBySelection("commentaire = 'test2'");
+            Assert.AreEqual(1, lesAttribution.Count);
 
         }
 
