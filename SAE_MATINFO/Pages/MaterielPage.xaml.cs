@@ -74,6 +74,7 @@ namespace SAE_MATINFO.Pages
             if (result)
             {
                 materiel.NomMateriel = materielWindow.Materiel.NomMateriel;
+                materiel.Categorie = materielWindow.Materiel.Categorie;
                 materiel.CodeBarre = materielWindow.Materiel.CodeBarre;
                 materiel.ReferenceConstructeur = materielWindow.Materiel.ReferenceConstructeur;
 
