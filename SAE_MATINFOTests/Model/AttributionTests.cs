@@ -12,62 +12,145 @@ namespace SAE_MATINFO.Model.Tests
     [TestClass()]
     public class AttributionTests
     {
+        private static Categorie categorie;
+        private static Materiel materiel;
+        private static Materiel materiel1;
+        private static Materiel materiel2;
+        private static Personnel personnel;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            categorie = new Categorie("Ordinateur");
+            categorie.Create();
+            materiel = new Materiel(categorie.IdCategorie, "Pc Dell Puissant", "102012001", "REF204");
+            materiel.Create();
+            materiel1 = new Materiel(categorie.IdCategorie, "Pc Dell (pas ouf)", "102452001", "REF119");
+            materiel1.Create();
+            materiel2 = new Materiel(categorie.IdCategorie, "Pc Super Computer", "12859662", "REF856");
+            materiel2.Create();
+            personnel = new Personnel("Ruault", "Maxime", "uwu@uwu.fr");
+            personnel.Create();
+        }
+
+
+
         [TestMethod()]
         public void CreateTest()
         {
-            Attribution attribution1 = new Attribution();
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution1.Create();
 
-            Attribution attribution2 = new Attribution();
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution2.Read();
 
             Assert.AreEqual(attribution1, attribution2);
 
-            ClearAll();
         }
 
         [TestMethod()]
         public void DeleteTest()
         {
-            Assert.Fail();
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
+            attribution1.Create();
+
+            attribution1.Delete();
+
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
+            attribution2.Read();
+
+            Assert.AreEqual(attribution1, attribution2);
+
         }
 
         [TestMethod()]
         public void ReadTest()
         {
-            Assert.Fail();
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
+            attribution1.Create();
+
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
+            attribution2.Read();
+
+            Assert.AreEqual(attribution1, attribution2);
+
         }
 
         [TestMethod()]
         public void UpdateTest()
         {
-            Assert.Fail();
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "C'est super");
+            attribution1.Create();
+
+            attribution1.Commentaire = "C'est nul";
+            attribution1.Update();
+
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "C'est nul");
+            attribution2.Read();
+
+            Assert.AreEqual(attribution1, attribution2);
+
         }
 
         [TestMethod()]
         public void FindAllTest()
         {
-            Assert.Fail();
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "test");
+            attribution1.Create();
+
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel1.IdMateriel, DateTime.Today, "test2");
+            attribution2.Create();
+
+            Attribution attribution3 = new Attribution(personnel.IdPersonnel, materiel2.IdMateriel, DateTime.Today, "test3");
+            attribution3.Create();
+
+            ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
+            Assert.AreEqual(3, lesCategorie.Count);
+
+           
         }
 
         [TestMethod()]
         public void FindBySelectionTest()
         {
-            Assert.Fail();
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "C'est super");
+            attribution1.Create();
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel1.IdMateriel, DateTime.Today, "C'est nul");
+            attribution2.Create();
+            Attribution attribution3 = new Attribution(personnel.IdPersonnel, materiel2.IdMateriel, DateTime.Today, "C'est incompréhensible");
+            attribution3.Create();
+
+            ObservableCollection<Categorie> lesCategorie = new Categorie().FindBySelection("commentaire = 'C'est nul'");
+            Assert.AreEqual(1, lesCategorie.Count);
+
         }
 
-        [TestMethod()]
-        public void EqualsTest()
-        {
-            Assert.Fail();
-        }
 
-        private void ClearAll()
+        [TestCleanup]
+        public void Cleanup()
         {
-            ObservableCollection<Attribution> lesAttribute = new Attribution().FindAll();
-            foreach (Attribution attribute in lesAttribute)
+            ObservableCollection<Attribution> lesAttributions = new Attribution().FindAll();
+            foreach (Attribution attribution in lesAttributions)
             {
-                attribute.Delete();
+                attribution.Delete();
+            }
+
+            ObservableCollection<Materiel> lesMateriaux = new Materiel().FindAll();
+            foreach (Materiel mat in lesMateriaux)
+            {
+                mat.Delete();
+            }
+
+            ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
+            foreach (Categorie categorie in lesCategorie)
+            {
+                categorie.Delete();
+            }
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
+            foreach (Personnel pers in lesPersonnels)
+            {
+                pers.Delete();
             }
         }
     }

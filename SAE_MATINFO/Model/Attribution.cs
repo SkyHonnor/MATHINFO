@@ -35,7 +35,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO appartient (id_personnel, id_materiel, date_attribution, commentaire) VALUES ({FKIdPersonnel}, {FKIdMateriel}, '{FKDateAttribution}', '{Commentaire}')";
+            String requete = $"INSERT INTO appartient (id_personnel, id_materiel, date_attribution, commentaire) VALUES ('{FKIdPersonnel}', '{FKIdMateriel}', '{CastDate(FKDateAttribution)}', '{Commentaire}')";
 
             accesBD.SetData(requete);
             this.Read();
@@ -45,7 +45,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"DELETE FROM appartient WHERE id_personnel = {FKIdPersonnel}, id_materiel = {FKIdMateriel}, date_attribution = '{FKDateAttribution}'";
+            String requete = $"DELETE FROM appartient WHERE id_personnel = {FKIdPersonnel} and id_materiel = {FKIdMateriel} and date_attribution = '{CastDate(FKDateAttribution)}'";
 
             accesBD.SetData(requete);
         }
@@ -54,7 +54,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"SELECT * FROM appartient WHERE id_personnel = {FKIdPersonnel}, id_materiel = {FKIdMateriel}, date_attribution = '{FKDateAttribution}'";
+            String requete = $"SELECT * FROM appartient WHERE id_personnel = {FKIdPersonnel} and id_materiel = {FKIdMateriel} and date_attribution = '{CastDate(FKDateAttribution)}'";
 
             DataTable data = accesBD.GetData(requete);
 
@@ -72,7 +72,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"UPDATE appartient SET commentaire = '{Commentaire}' WHERE id_personnel = {FKIdPersonnel}, id_materiel = {FKIdMateriel}, date_attribution = '{FKDateAttribution}'";
+            String requete = $"UPDATE appartient SET commentaire = '{Commentaire}' WHERE id_personnel = {FKIdPersonnel} and id_materiel = {FKIdMateriel} and date_attribution = '{CastDate(FKDateAttribution)}'";
 
             accesBD.SetData(requete);
         }
@@ -148,6 +148,11 @@ namespace SAE_MATINFO.Model
         public static bool operator !=(Attribution? left, Attribution? right)
         {
             return !(left == right);
+        }
+
+        private string CastDate(DateTime d)
+        {
+            return $"{d.Year}/{d.Month}/{d.Day}";
         }
     }
 }

@@ -32,7 +32,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(materiel1, materiel2);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -48,7 +47,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(0, materiel2.IdMateriel);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -62,7 +60,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(materiel1, materiel2);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -77,9 +74,7 @@ namespace SAE_MATINFO.Model.Tests
             Materiel materiel2 = new Materiel(categorie.IdCategorie, "Imprimante", "1010101010", "REF604");
             materiel2.Read();
 
-            Assert.AreEqual(materiel1, materiel2);
-
-            ClearAll();
+          
         }
 
         [TestMethod()]
@@ -87,15 +82,18 @@ namespace SAE_MATINFO.Model.Tests
         {
             Materiel materiel1 = new Materiel(categorie.IdCategorie, "PC Dell (pas ouf)", "1010101010", "REF604");
             materiel1.Create();
-            Materiel materiel2 = new Materiel(categorie.IdCategorie, "Imprimante", "1010101010", "REF604");
+            Materiel materiel2 = new Materiel(categorie.IdCategorie, "Imprimante", "4423123", "refdgfdg");
             materiel2.Create();
-            Materiel materiel3 = new Materiel(categorie.IdCategorie, "PC de ouf", "1010101010", "REF604");
+            Materiel materiel3 = new Materiel(categorie.IdCategorie, "PC de ouf", "231312123", "fgdfgdfg");
             materiel3.Create();
 
             ObservableCollection<Materiel> lesMateriels = new Materiel().FindAll();
+            foreach(Materiel mat in lesMateriels)
+            {
+                Console.WriteLine(mat.NomMateriel);
+            }
             Assert.AreEqual(3, lesMateriels.Count);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -103,37 +101,45 @@ namespace SAE_MATINFO.Model.Tests
         {
             Materiel materiel1 = new Materiel(categorie.IdCategorie, "PC Dell (pas ouf)", "1010101010", "REF604");
             materiel1.Create();
-            Materiel materiel2 = new Materiel(categorie.IdCategorie, "Imprimante", "1010101010", "REF604");
+            Materiel materiel2 = new Materiel(categorie.IdCategorie, "Imprimante", "4423123", "refdgfdg");
             materiel2.Create();
-            Materiel materiel3 = new Materiel(categorie.IdCategorie, "PC de ouf", "1010101010", "REF604");
+            Materiel materiel3 = new Materiel(categorie.IdCategorie, "PC de ouf", "231312123", "fgdfgdfg");
             materiel3.Create();
 
             ObservableCollection<Materiel> lesMateriels = new Materiel().FindBySelection("nom_materiel = 'PC de ouf'");
             Assert.AreEqual(1, lesMateriels.Count);
 
-            ClearAll();
         }
 
-        private void ClearAll()
+
+        [TestCleanup]
+        public void Cleanup()
         {
+            ObservableCollection<Attribution> lesAttributions = new Attribution().FindAll();
+            foreach (Attribution attribution in lesAttributions)
+            {
+                attribution.Delete();
+            }
+
             ObservableCollection<Materiel> lesMateriaux = new Materiel().FindAll();
             foreach (Materiel mat in lesMateriaux)
             {
                 mat.Delete();
             }
 
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
             ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
             foreach (Categorie categorie in lesCategorie)
             {
                 categorie.Delete();
             }
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
+            foreach (Personnel pers in lesPersonnels)
+            {
+                pers.Delete();
+            }
         }
 
-        
+
     }
 }

@@ -23,7 +23,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(categorie1, categorie2);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -39,7 +38,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(0, categorie2.IdCategorie);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -53,7 +51,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(categorie1, categorie2);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -70,7 +67,6 @@ namespace SAE_MATINFO.Model.Tests
 
             Assert.AreEqual(personnel2, categorie1);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -86,7 +82,6 @@ namespace SAE_MATINFO.Model.Tests
             ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
             Assert.AreEqual(3, lesCategorie.Count);
 
-            ClearAll();
         }
 
         [TestMethod()]
@@ -102,15 +97,33 @@ namespace SAE_MATINFO.Model.Tests
             ObservableCollection<Categorie> lesCategorie = new Categorie().FindBySelection("nom_categorie = 'Imprimante'");
             Assert.AreEqual(1, lesCategorie.Count);
 
-            ClearAll();
         }
 
-        private void ClearAll()
+        [TestCleanup]
+        public void Cleanup()
         {
+            ObservableCollection<Attribution> lesAttributions = new Attribution().FindAll();
+            foreach (Attribution attribution in lesAttributions)
+            {
+                attribution.Delete();
+            }
+
+            ObservableCollection<Materiel> lesMateriaux = new Materiel().FindAll();
+            foreach (Materiel mat in lesMateriaux)
+            {
+                mat.Delete();
+            }
+
             ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
             foreach (Categorie categorie in lesCategorie)
             {
                 categorie.Delete();
+            }
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
+            foreach (Personnel pers in lesPersonnels)
+            {
+                pers.Delete();
             }
         }
     }
