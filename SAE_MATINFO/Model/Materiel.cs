@@ -74,8 +74,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs NomMateriel doit etre sasie");
+
                 this.nomMateriel = value.ToUpper(); ;
             }
         }
@@ -94,8 +95,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs CodeBarre doit etre sasie");
+
                 this.codeBarre = value.ToUpper();
             }
         }
@@ -114,8 +116,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs Reference constructeur doit etre sasie");
+
                 this.referenceConstructeur = value.ToUpper();
             }
         }

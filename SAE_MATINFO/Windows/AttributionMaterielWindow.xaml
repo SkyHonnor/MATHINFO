@@ -21,7 +21,7 @@
             <DatePicker Name="DateAttribution" Width="190" Height="25" SelectedDate="{Binding Attribution.FKDateAttribution, ValidatesOnExceptions=True}"></DatePicker>
 
             <Label>Commentaire</Label>
-            <TextBox Name="Commentaire" Width="190" Height="80" Text="{Binding Attribution.Commentaire, ValidatesOnExceptions=True}"></TextBox>
+            <TextBox Name="Commentaire" Width="190" Height="80" MaxLength="150" TextWrapping="WrapWithOverflow" Text="{Binding Attribution.Commentaire, ValidatesOnExceptions=True}"></TextBox>
         </StackPanel>
 
         <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" Width="150" HorizontalAlignment="Center" Click="Button_Click">Créer un attribution</Button>

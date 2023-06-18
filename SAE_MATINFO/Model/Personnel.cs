@@ -55,7 +55,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs NomPersonnel doit etre sasie");
 
                 this.nomPersonnel = value.ToUpper();
@@ -75,7 +75,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs PrenomPersonnel doit etre sasie");
 
                 this.prenomPersonnel = value.Substring(0, 1).ToUpper() + value.Substring(1).ToLower();

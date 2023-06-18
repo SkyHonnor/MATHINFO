@@ -91,6 +91,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Le champs Commentaire doit etre saisie");
+
                 this.commentaire = value;
             }
         }

@@ -44,7 +44,6 @@ namespace SAE_MATINFO.Pages
 
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
             CategorieWindow categorieWindow = new CategorieWindow((Categorie)categorie.Clone(), CategorieWindow.Type.Update);

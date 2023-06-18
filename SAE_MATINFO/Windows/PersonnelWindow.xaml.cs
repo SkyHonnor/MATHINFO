@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,19 +45,20 @@ namespace SAE_MATINFO.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Personnel.NomPersonnel == null)
+            if (string.IsNullOrWhiteSpace(Personnel.NomPersonnel))
             {
                 MessageBox.Show("Nom personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Personnel.PrenomPersonnel == null)
+            if (string.IsNullOrWhiteSpace(Personnel.PrenomPersonnel))
             {
                 MessageBox.Show("Prénom personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Personnel.MailPersonnel == null)
+            bool mailValid = MailAddress.TryCreate(Personnel.MailPersonnel, out _);
+            if (mailValid)
             {
                 MessageBox.Show("Mail personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

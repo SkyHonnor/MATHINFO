@@ -60,6 +60,13 @@ namespace SAE_MATINFO.Windows
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
             Personnel personnel = (Personnel)DataGridPersonnels.SelectedItem;
+
+            if (personnel == null)
+            {
+                MessageBox.Show("Vous devez selectionner un personnel", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             Attribution attribution = new Attribution(personnel.IdPersonnel, Materiel.IdMateriel, DateTime.Today);
 
             AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Create);

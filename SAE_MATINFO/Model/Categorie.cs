@@ -53,7 +53,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs NomCategorie doit etre sasie");
 
                 this.nomCategorie = value;

@@ -47,19 +47,19 @@ namespace SAE_MATINFO.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Materiel.NomMateriel == null)
+            if (string.IsNullOrWhiteSpace(Materiel.NomMateriel))
             {
                 MessageBox.Show("Nom materiel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Materiel.CodeBarre == null)
+            if (string.IsNullOrWhiteSpace(Materiel.CodeBarre))
             {
                 MessageBox.Show("Code barre n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Materiel.ReferenceConstructeur == null)
+            if (string.IsNullOrWhiteSpace(Materiel.ReferenceConstructeur))
             {
                 MessageBox.Show("Reference constructeur n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
