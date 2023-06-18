@@ -42,7 +42,7 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Créer un matériel";
 
             if (WindowType == Type.Update)
-                Button.Content = "Modifier un matériel";
+                Button.Content = "Modifier le matériel";
         }
 
 
@@ -56,6 +56,24 @@ namespace SAE_MATINFO.Windows
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Materiel.NomMateriel))
+            {
+                MessageBox.Show("Nom materiel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Materiel.CodeBarre))
+            {
+                MessageBox.Show("Code barre n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Materiel.ReferenceConstructeur))
+            {
+                MessageBox.Show("Reference constructeur n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (WindowType == Type.Create)
                 Materiel.Create();
 

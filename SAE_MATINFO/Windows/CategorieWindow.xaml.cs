@@ -39,7 +39,7 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Créer une catégorie";
 
             if (WindowType == Type.Update)
-                Button.Content = "Modifier une catégorie";
+                Button.Content = "Modifier la catégorie";
         }
 
         /// <summary>
@@ -52,6 +52,12 @@ namespace SAE_MATINFO.Windows
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Categorie.NomCategorie))
+            {
+                MessageBox.Show("Nom catégorie n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (WindowType == Type.Create)
                 Categorie.Create();
 

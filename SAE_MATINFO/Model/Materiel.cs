@@ -15,7 +15,7 @@ namespace SAE_MATINFO.Model
     /// 1 categorie : la categorie du materiel.
     /// 1 observable collection : liste des attributions du materiel.
     /// </summary> 
-    public class Materiel : Crud<Materiel>
+    public class Materiel : Crud<Materiel>, ICloneable
     {
         private int idMateriel;
         private int fKIdCategorie;
@@ -74,8 +74,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs NomMateriel doit etre sasie");
+
                 this.nomMateriel = value.ToUpper(); ;
             }
         }
@@ -94,8 +95,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs CodeBarre doit etre sasie");
+
                 this.codeBarre = value.ToUpper();
             }
         }
@@ -114,8 +116,9 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs Reference constructeur doit etre sasie");
+
                 this.referenceConstructeur = value.ToUpper();
             }
         }
@@ -133,6 +136,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
+                this.FKIdCategorie = value.IdCategorie;
                 this.categorie = value;
             }
         }
@@ -177,6 +181,8 @@ namespace SAE_MATINFO.Model
             NomMateriel = nomMateriel;
             CodeBarre = codeBarre;
             ReferenceConstructeur = referenceConstructeur;
+
+            Attributions = new ObservableCollection<Attribution>();
         }
 
         public Materiel(int fkIdCategorie, string nomMateriel, string codeBarre, string referenceConstructeur) 
@@ -324,5 +330,11 @@ namespace SAE_MATINFO.Model
         {
             return !(left == right);
         }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
     }
 }

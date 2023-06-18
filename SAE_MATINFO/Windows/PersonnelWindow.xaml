@@ -1,11 +1,11 @@
-﻿<Window x:Class="SAE_MATINFO.Windows.CategorieWindow"
+﻿<Window x:Class="SAE_MATINFO.Windows.PersonnelWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_MATINFO.Windows"
         mc:Ignorable="d"
-        Title="MatINFO" MinHeight="250" MinWidth="260" Height="250" Width="260" WindowStartupLocation="CenterOwner" Icon="/matinfo.png">
+        Title="MatINFO" MinHeight="320" MinWidth="260" Height="320" Width="260" WindowStartupLocation="CenterOwner" Icon="/matinfo.png">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -14,11 +14,17 @@
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Catégorie</Label>
+        <Label Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center">Personnel</Label>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label>Nom catégorie</Label>
-            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Categorie.NomCategorie, ValidatesOnExceptions=True}"></TextBox>
+            <Label>Nom</Label>
+            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.NomPersonnel, ValidatesOnExceptions=True}"></TextBox>
+
+            <Label>Prénom</Label>
+            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.PrenomPersonnel, ValidatesOnExceptions=True}"></TextBox>
+
+            <Label>Adresse mail</Label>
+            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.MailPersonnel, ValidatesOnExceptions=True}"></TextBox>
         </StackPanel>
 
         <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" Width="150" HorizontalAlignment="Center" Click="Button_Click"></Button>

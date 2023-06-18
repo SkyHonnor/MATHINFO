@@ -1,0 +1,59 @@
+﻿<Window x:Class="SAE_MATINFO.Windows.AttributionFromMaterielWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAE_MATINFO.Windows"
+        mc:Ignorable="d"
+        Title="MatINFO" Height="450" Width="1000" WindowStartupLocation="CenterOwner" Icon="/matinfo.png">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Content="Attributions"></Label>
+
+        <Grid Grid.Row="1" Margin="10,0,0,0">
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Click="Button_Click_Create">
+                <Label Foreground="#FFFFFF">Ajouter une attribution</Label>
+            </Button>
+        </Grid>
+
+        <DataGrid Name="DataGridPersonnels" Grid.Row="2" Grid.Column="0" Margin="10,0,10,10" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" SelectionChanged="DataGridPersonnels_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom catégorie" Width="*" Binding="{Binding NomPersonnel}"/>
+                <DataGridTextColumn Header="Prénom catégorie" Width="*" Binding="{Binding PrenomPersonnel}"/>
+                <DataGridTextColumn Header="Adresse mail" Width="*" Binding="{Binding MailPersonnel}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Name="DataGridAttributions" Grid.Row="2" Grid.Column="1" Margin="10,0,10,10" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Attributions}" MouseDoubleClick="DataGridAttributions_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding FKDateAttribution}"/>
+                <DataGridTextColumn Header="Commentaire" Width="*" Binding="{Binding Commentaire}"/>
+
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Delete">
+                                Supprimer
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

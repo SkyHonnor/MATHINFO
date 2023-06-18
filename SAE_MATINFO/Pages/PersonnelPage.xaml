@@ -18,12 +18,12 @@
         <Label Grid.Row="0" FontSize="20" VerticalAlignment="Center" Content="{Binding Personnels.Count}" ContentStringFormat="Liste de personnels ({0})"></Label>
 
         <Grid Grid.Row="1">
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left">
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Click="Button_Click_Create">
                 <Label Foreground="#FFFFFF">Ajouter un personnel</Label>
             </Button>
         </Grid>
 
-        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}">
+        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" MouseDoubleClick="Button_Click_Update">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding NomPersonnel}"/>
                 <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding PrenomPersonnel}"/>
@@ -32,8 +32,8 @@
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                Modifier
+                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Attributions">
+                                Attributions
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
