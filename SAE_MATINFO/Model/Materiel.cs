@@ -10,15 +10,104 @@ namespace SAE_MATINFO.Model
 {
     public class Materiel : Crud<Materiel>
     {
-        public int IdMateriel { get; set; }
-        public int FKIdCategorie { get; set; }
+        private int idMateriel;
+        private int fkIdCategorie;
+        private string nomMateriel;
+        private string codeBarre;
+        private string referenceConstructeur;
+        private Categorie categorie;
+        private ObservableCollection<Attribution> attributions;
 
-        public string NomMateriel { get; set; }
-        public string CodeBarre { get; set; }
-        public string ReferenceConstructeur { get; set; }
+        public int IdMateriel
+        {
+            get
+            {
+                return this.idMateriel;
+            }
 
-        public Categorie Categorie { get; set; }
-        public ObservableCollection<Attribution> Attributions { get; set; }
+            set
+            {
+                this.idMateriel = value;
+            }
+        }
+
+        public int FKIdCategorie
+        {
+            get
+            {
+                return this.fkIdCategorie;
+            }
+
+            set
+            {
+                this.fkIdCategorie = value;
+            }
+        }
+
+        public string NomMateriel
+        {
+            get
+            {
+                return this.nomMateriel;
+            }
+
+            set
+            {
+                this.nomMateriel = value;
+            }
+        }
+
+        public string CodeBarre
+        {
+            get
+            {
+                return this.codeBarre;
+            }
+
+            set
+            {
+                this.codeBarre = value;
+            }
+        }
+
+        public string ReferenceConstructeur
+        {
+            get
+            {
+                return this.referenceConstructeur;
+            }
+
+            set
+            {
+                this.referenceConstructeur = value;
+            }
+        }
+
+        public Categorie Categorie
+        {
+            get
+            {
+                return this.categorie;
+            }
+
+            set
+            {
+                this.categorie = value;
+            }
+        }
+
+        public ObservableCollection<Attribution> Attributions
+        {
+            get
+            {
+                return this.attributions;
+            }
+
+            set
+            {
+                this.attributions = value;
+            }
+        }
 
         public Materiel() { }
 

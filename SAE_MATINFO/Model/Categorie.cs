@@ -11,10 +11,48 @@ namespace SAE_MATINFO.Model
 {
     public class Categorie : Crud<Categorie>
     {
-        public int IdCategorie { get; set; }
-        public string NomCategorie { get; set; }
+        private int idCategorie;
+        private string nomCategorie;
+        private ObservableCollection<Materiel> materiels;
 
-        public ObservableCollection<Materiel> Materiels { get; set; }
+        public int IdCategorie
+        {
+            get
+            {
+                return this.idCategorie;
+            }
+
+            set
+            {
+                this.idCategorie = value;
+            }
+        }
+
+        public string NomCategorie
+        {
+            get
+            {
+                return this.nomCategorie;
+            }
+
+            set
+            {
+                this.nomCategorie = value;
+            }
+        }
+
+        public ObservableCollection<Materiel> Materiels
+        {
+            get
+            {
+                return this.materiels;
+            }
+
+            set
+            {
+                this.materiels = value;
+            }
+        }
 
         public Categorie() { }
 

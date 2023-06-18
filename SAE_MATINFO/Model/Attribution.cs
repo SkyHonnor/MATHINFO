@@ -5,19 +5,99 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Xml;
 
 namespace SAE_MATINFO.Model
 {
     public class Attribution : Crud<Attribution>
     {
-        public int FKIdPersonnel { get; private set; }
-        public int FKIdMateriel { get; private set; }
-        public DateTime FKDateAttribution { get; private set; }
+        
 
-        public string Commentaire { get; set; }
+        private int fkIdPersonnel;
+        private int fkIdMateriel;
+        private DateTime fkDateAttribution;
+        private string commentaire;
+        private Personnel personnel;
+        private Materiel materiel;
 
-        public Personnel Personnel { get; set; }
-        public Materiel Materiel { get; set; }
+        public int FKIdPersonnel
+        {
+            get
+            {
+                return this.fkIdPersonnel;
+            }
+
+            private set
+            {
+                this.fkIdPersonnel = value;
+            }
+        }
+
+        public int FKIdMateriel
+        {
+            get
+            {
+                return this.fkIdMateriel;
+            }
+
+            private set
+            {
+                this.fkIdMateriel = value;
+            }
+        }
+
+        public DateTime FKDateAttribution
+        {
+            get
+            {
+                return this.fkDateAttribution;
+            }
+
+            private set
+            {
+                this.fkDateAttribution = value;
+            }
+        }
+
+        public string Commentaire
+        {
+            get
+            {
+                return this.commentaire;
+            }
+
+            set
+            {
+                this.commentaire = value;
+            }
+        }
+
+        public Personnel Personnel
+        {
+            get
+            {
+                return this.personnel;
+            }
+
+            set
+            {
+                this.personnel = value;
+            }
+        }
+
+        public Materiel Materiel
+        {
+            get
+            {
+                return this.materiel;
+            }
+
+            set
+            {
+                this.materiel = value;
+            }
+        }
 
         public Attribution() { }
 
