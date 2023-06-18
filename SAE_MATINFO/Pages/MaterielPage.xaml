@@ -25,7 +25,7 @@
             <ComboBox Name="Filtre" Style="{StaticResource MainComboBox}" ItemsSource="{Binding Categories}" HorizontalAlignment="Right" SelectedIndex="0" DisplayMemberPath="NomCategorie"></ComboBox>
         </Grid>
 
-        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" DataContext="{Binding SelectedItem, ElementName=Filtre}" ItemsSource="{Binding Materiels}">
+        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" DataContext="{Binding SelectedItem, ElementName=Filtre}" ItemsSource="{Binding Materiels}" MouseDoubleClick="DataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom materiel" Width="*" Binding="{Binding NomMateriel}"/>
                 <DataGridTextColumn Header="Catégorie" Width="*" Binding="{Binding Categorie.NomCategorie}"/>

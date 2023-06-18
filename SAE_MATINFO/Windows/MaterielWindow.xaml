@@ -18,16 +18,16 @@
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label>Nom matériel</Label>
-            <TextBox Name="NomMateriel" Width="190" Height="20" Text="{Binding Materiel.NomMateriel}"></TextBox>
+            <TextBox Name="NomMateriel" Width="190" Height="20" Text="{Binding Materiel.NomMateriel, ValidatesOnExceptions=True}"></TextBox>
 
             <Label>Catégorie</Label>
             <ComboBox Name="CategorieMateriel" Width="190" Height="20" ItemsSource="{Binding Categories}" SelectedValue="{Binding Materiel.FKIdCategorie}" SelectedItem="{Binding Materiel.Categorie}" DisplayMemberPath="NomCategorie" SelectedValuePath="IdCategorie"></ComboBox>
 
             <Label>Code Barre</Label>
-            <TextBox Name="CodeBarreMateriel" Width="190" Height="20" Text="{Binding Materiel.CodeBarre}"></TextBox>
+            <TextBox Name="CodeBarreMateriel" Width="190" Height="20" Text="{Binding Materiel.CodeBarre, ValidatesOnExceptions=True}"></TextBox>
 
             <Label>Référence Constructeur</Label>
-            <TextBox Name="ReferenceConstructeur" Width="190" Height="20" Text="{Binding Materiel.ReferenceConstructeur}"></TextBox>
+            <TextBox Name="ReferenceConstructeur" Width="190" Height="20" Text="{Binding Materiel.ReferenceConstructeur, ValidatesOnExceptions=True}"></TextBox>
         </StackPanel>
 
         <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" Width="150" HorizontalAlignment="Center" Click="Button_Click"></Button>

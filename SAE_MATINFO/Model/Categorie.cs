@@ -16,10 +16,11 @@ namespace SAE_MATINFO.Model
     /// 1 string : le nom de la categorie
     /// 1 Observable Collection: liste de materiels
     /// </summary> 
-    public class Categorie : Crud<Categorie>
+    public class Categorie : Crud<Categorie>, ICloneable
     {
         private int idCategorie;
         private string nomCategorie;
+
         private ObservableCollection<Materiel> materiels;
 
 
@@ -54,6 +55,7 @@ namespace SAE_MATINFO.Model
             {
                 if (string.IsNullOrEmpty(value))
                     throw new ArgumentException("Le champs NomCategorie doit etre sasie");
+
                 this.nomCategorie = value;
             }
         }
@@ -85,6 +87,8 @@ namespace SAE_MATINFO.Model
         {
             IdCategorie = idCategorie;
             NomCategorie = nomCategorie;
+
+            Materiels = new ObservableCollection<Materiel>();
         }
 
         public Categorie(string nomCategorie) : this(0, nomCategorie) {}
@@ -221,6 +225,11 @@ namespace SAE_MATINFO.Model
         public static bool operator !=(Categorie? left, Categorie? right)
         {
             return !(left == right);
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

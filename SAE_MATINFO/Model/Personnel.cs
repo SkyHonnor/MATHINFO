@@ -16,7 +16,7 @@ namespace SAE_MATINFO.Model
     /// 1 entier : l'ID du personnel
     /// 3 string : le nom, le prenom et le mail du personnel
     /// </summary> 
-    public class Personnel : Crud<Personnel>
+    public class Personnel : Crud<Personnel>, ICloneable
     {
         private int idPersonnel;
         private string nomPersonnel;
@@ -142,6 +142,7 @@ namespace SAE_MATINFO.Model
             PrenomPersonnel = prenomPersonnel;
             MailPersonnel = mailPersonnel;
 
+            Attributions = new ObservableCollection<Attribution>();
         }
         public Personnel(string nomPersonnel, string prenomPersonnel, string mailPersonnel)
         : this(0, nomPersonnel, prenomPersonnel, mailPersonnel) { }
@@ -287,7 +288,6 @@ namespace SAE_MATINFO.Model
                    this.MailPersonnel == personnel.MailPersonnel;
         }
 
-
         /// <summary>
         /// Indique si deux objets sont égaux.
         /// </summary>
@@ -311,6 +311,11 @@ namespace SAE_MATINFO.Model
         public static bool operator !=(Personnel? left, Personnel? right)
         {
             return !(left == right);
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

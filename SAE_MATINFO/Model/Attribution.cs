@@ -73,7 +73,7 @@ namespace SAE_MATINFO.Model
                 return this.fKDateAttribution;
             }
 
-            private set
+            set
             {
                 this.fKDateAttribution = value;
             }
@@ -107,6 +107,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
+                this.FKIdPersonnel = value.IdPersonnel;
                 this.personnel = value;
             }
         }
@@ -123,6 +124,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
+                this.FKIdMateriel = value.IdMateriel;
                 this.materiel = value;
             }
         }

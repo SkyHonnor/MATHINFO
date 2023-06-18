@@ -1,6 +1,7 @@
 ﻿using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,45 +17,45 @@ using System.Windows.Shapes;
 namespace SAE_MATINFO.Windows
 {
     /// <summary>
-    /// Logique d'interaction pour CategorieWindow.xaml
+    /// Logique d'interaction pour AttributionMaterielWindow.xaml
     /// </summary>
-    public partial class CategorieWindow : Window
+    public partial class AttributionMaterielWindow : Window
     {
         public enum Type { Create, Update };
 
         public Type WindowType { get; private set; }
 
-        public Categorie Categorie { get; set; }
+        public Attribution Attribution { get; set; }
 
-        public CategorieWindow(Categorie categorie, Type windowType)
+        public AttributionMaterielWindow(Attribution attribution, Type windowType)
         {
             InitializeComponent();
 
-            Categorie = categorie;
+            Attribution = attribution;
 
             DataContext = this;
             WindowType = windowType;
 
             if (WindowType == Type.Create)
-                Button.Content = "Créer une catégorie";
+                Button.Content = "Créer une attribution";
 
             if (WindowType == Type.Update)
-                Button.Content = "Modifier la catégorie";
+                Button.Content = "Modifier l'attribution";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Categorie.NomCategorie == null)
+            if (Attribution.Commentaire == null)
             {
-                MessageBox.Show("Nom catégorie n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Commentaire n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (WindowType == Type.Create)
-                Categorie.Create();
+                Attribution.Create();
 
             if (WindowType == Type.Update)
-                Categorie.Update();
+                Attribution.Update();
 
             DialogResult = true;
         }

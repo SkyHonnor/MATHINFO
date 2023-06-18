@@ -32,28 +32,38 @@ namespace SAE_MATINFO.Pages
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
-
             Materiel materiel = new Materiel();
 
             MaterielWindow materielWindow = new MaterielWindow(materiel, applicationData.Categories, MaterielWindow.Type.Create);
             materielWindow.Owner = Window.GetWindow(this);
 
-            materielWindow.ShowDialog();
+            bool result = (bool)materielWindow.ShowDialog();
 
-            applicationData.Materiels.Add(materiel);
-            applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Add(materiel);
+            if (result)
+            {
+                applicationData.Materiels.Add(materiel);
+                applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Add(materiel);
+            }
         }
 
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
-
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
-            MaterielWindow materielWindow = new MaterielWindow(materiel, applicationData.Categories, MaterielWindow.Type.Create);
+            MaterielWindow materielWindow = new MaterielWindow((Materiel)materiel.Clone(), applicationData.Categories, MaterielWindow.Type.Create);
             materielWindow.Owner = Window.GetWindow(this);
 
-            materielWindow.ShowDialog();
+            bool result = (bool)materielWindow.ShowDialog();
+
+            if (result)
+            {
+                materiel.NomMateriel = materielWindow.Materiel.NomMateriel;
+                materiel.CodeBarre = materielWindow.Materiel.CodeBarre;
+                materiel.ReferenceConstructeur = materielWindow.Materiel.ReferenceConstructeur;
+
+                DataGrid.Items.Refresh();
+            }
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
@@ -64,6 +74,17 @@ namespace SAE_MATINFO.Pages
             materiel.Delete();
 
             applicationData.Materiels.Remove(materiel);
+        }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationData applicationData = (ApplicationData)DataContext;
+            Materiel materiel = (Materiel)DataGrid.SelectedItem;
+
+            AttributionFromMaterielWindow attributionFromMaterielWindow = new AttributionFromMaterielWindow(materiel, applicationData);
+            attributionFromMaterielWindow.Owner = Window.GetWindow(this);
+
+            attributionFromMaterielWindow.ShowDialog();
         }
     }
 }
