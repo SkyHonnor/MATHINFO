@@ -23,19 +23,9 @@
             </Button>
         </Grid>
 
-        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Categories}">
+        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Categories}" MouseDoubleClick="Button_Click_Update">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom catégorie" Width="*" Binding="{Binding NomCategorie}"/>
-
-                <DataGridTemplateColumn Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Update" >
-                                Modifier
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
 
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
