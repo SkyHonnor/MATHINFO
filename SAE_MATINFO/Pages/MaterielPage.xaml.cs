@@ -73,11 +73,18 @@ namespace SAE_MATINFO.Pages
 
             if (result)
             {
+                if (materiel.FKIdCategorie != materielWindow.Materiel.FKIdCategorie)
+                {
+                    applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.Categorie.IdCategorie).Materiels.Remove(materiel);
+                    applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materielWindow.Materiel.Categorie.IdCategorie).Materiels.Add(materielWindow.Materiel);
+                }
+
                 materiel.NomMateriel = materielWindow.Materiel.NomMateriel;
                 materiel.Categorie = materielWindow.Materiel.Categorie;
                 materiel.CodeBarre = materielWindow.Materiel.CodeBarre;
                 materiel.ReferenceConstructeur = materielWindow.Materiel.ReferenceConstructeur;
 
+                Filtre.Items.Refresh();
                 DataGrid.Items.Refresh();
             }
         }
