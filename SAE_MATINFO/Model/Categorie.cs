@@ -125,7 +125,7 @@ namespace SAE_MATINFO.Model
 
             DataTable data = accesBD.GetData(requete);
 
-            if (data != null)
+            if (data != null && data.Rows.Count > 0)
             {
                 IdCategorie = (int)data.Rows[0]["id_categorie"];
                 NomCategorie = (string)data.Rows[0]["nom_categorie"];
@@ -203,6 +203,24 @@ namespace SAE_MATINFO.Model
             }
 
             return categories;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Categorie categorie &&
+                   this.IdCategorie == categorie.IdCategorie &&
+                   this.NomCategorie == categorie.NomCategorie &&
+                   EqualityComparer<ObservableCollection<Materiel>>.Default.Equals(this.Materiels, categorie.Materiels);
+        }
+
+        public static bool operator ==(Categorie? left, Categorie? right)
+        {
+            return EqualityComparer<Categorie>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Categorie? left, Categorie? right)
+        {
+            return !(left == right);
         }
     }
 }

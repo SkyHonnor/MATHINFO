@@ -190,7 +190,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO materiel (nom_materiel, id_categorie, code_barre, reference_constructeur) VALUES ({FKIdCategorie}, '{NomMateriel}', '{CodeBarre}', '{ReferenceConstructeur}')";
+            String requete = $"INSERT INTO materiel (nom_materiel, id_categorie, code_barre, reference_constructeur) VALUES ('{NomMateriel}', {FKIdCategorie}, '{CodeBarre}', '{ReferenceConstructeur}')";
 
             accesBD.SetData(requete);
             this.Read();
@@ -220,7 +220,7 @@ namespace SAE_MATINFO.Model
 
             DataTable data = accesBD.GetData(requete);
 
-            if (data != null)
+            if (data != null && data.Rows.Count > 0)
             {
                 IdMateriel = (int)data.Rows[0]["id_materiel"];
                 FKIdCategorie = (int)data.Rows[0]["id_categorie"];
@@ -301,6 +301,28 @@ namespace SAE_MATINFO.Model
             }
 
             return materiels;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Materiel materiel &&
+                   this.IdMateriel == materiel.IdMateriel &&
+                   this.FKIdCategorie == materiel.FKIdCategorie &&
+                   this.NomMateriel == materiel.NomMateriel &&
+                   this.CodeBarre == materiel.CodeBarre &&
+                   this.ReferenceConstructeur == materiel.ReferenceConstructeur &&
+                   EqualityComparer<Categorie>.Default.Equals(this.Categorie, materiel.Categorie) &&
+                   EqualityComparer<ObservableCollection<Attribution>>.Default.Equals(this.Attributions, materiel.Attributions);
+        }
+
+        public static bool operator ==(Materiel? left, Materiel? right)
+        {
+            return EqualityComparer<Materiel>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Materiel? left, Materiel? right)
+        {
+            return !(left == right);
         }
     }
 }

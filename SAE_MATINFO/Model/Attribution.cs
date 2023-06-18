@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Xml;
 
 namespace SAE_MATINFO.Model
 {
@@ -152,7 +154,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"INSERT INTO appartient (id_personnel, id_materiel, date_attribution, commentaire) VALUES ({FKIdPersonnel}, {FKIdMateriel}, '{FKDateAttribution}', '{Commentaire}')";
+            String requete = $"INSERT INTO appartient (id_personnel, id_materiel, date_attribution, commentaire) VALUES ('{FKIdPersonnel}', '{FKIdMateriel}', '{CastDate(FKDateAttribution)}', '{Commentaire}')";
 
             accesBD.SetData(requete);
             this.Read();
@@ -166,7 +168,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"DELETE FROM appartient WHERE id_personnel = {FKIdPersonnel}, id_materiel = {FKIdMateriel}, date_attribution = '{FKDateAttribution}'";
+            String requete = $"DELETE FROM appartient WHERE id_personnel = {FKIdPersonnel} and id_materiel = {FKIdMateriel} and date_attribution = '{CastDate(FKDateAttribution)}'";
 
             accesBD.SetData(requete);
         }
@@ -178,11 +180,11 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"SELECT * FROM appartient WHERE id_personnel = {FKIdPersonnel}, id_materiel = {FKIdMateriel}, date_attribution = '{FKDateAttribution}'";
+            String requete = $"SELECT * FROM appartient WHERE id_personnel = {FKIdPersonnel} and id_materiel = {FKIdMateriel} and date_attribution = '{CastDate(FKDateAttribution)}'";
 
             DataTable data = accesBD.GetData(requete);
 
-            if (data != null)
+            if (data != null && data.Rows.Count > 0)
             {
                 FKIdPersonnel = (int)data.Rows[0]["id_personnel"];
                 FKIdMateriel = (int)data.Rows[0]["id_materiel"];
@@ -199,7 +201,7 @@ namespace SAE_MATINFO.Model
         {
             DataAccess accesBD = new DataAccess();
 
-            String requete = $"UPDATE appartient SET commentaire = '{Commentaire}' WHERE id_personnel = {FKIdPersonnel}, id_materiel = {FKIdMateriel}, date_attribution = '{FKDateAttribution}'";
+            String requete = $"UPDATE appartient SET commentaire = '{Commentaire}' WHERE id_personnel = {FKIdPersonnel} and id_materiel = {FKIdMateriel} and date_attribution = '{CastDate(FKDateAttribution)}'";
 
             accesBD.SetData(requete);
         }
@@ -265,6 +267,32 @@ namespace SAE_MATINFO.Model
             }
 
             return attributions;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Attribution attribution &&
+                   this.FKIdPersonnel == attribution.FKIdPersonnel &&
+                   this.FKIdMateriel == attribution.FKIdMateriel &&
+                   this.FKDateAttribution == attribution.FKDateAttribution &&
+                   this.Commentaire == attribution.Commentaire &&
+                   EqualityComparer<Personnel>.Default.Equals(this.Personnel, attribution.Personnel) &&
+                   EqualityComparer<Materiel>.Default.Equals(this.Materiel, attribution.Materiel);
+        }
+
+        public static bool operator ==(Attribution? left, Attribution? right)
+        {
+            return EqualityComparer<Attribution>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Attribution? left, Attribution? right)
+        {
+            return !(left == right);
+        }
+
+        private string CastDate(DateTime d)
+        {
+            return $"{d.Year}/{d.Month}/{d.Day}";
         }
     }
 }

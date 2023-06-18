@@ -100,8 +100,10 @@ namespace SAE_MATINFO
                 else
                     return 0;
             }
-            catch 
-            {                
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.ToString());
+
                 CloseConnection();
                 return 0;
             }

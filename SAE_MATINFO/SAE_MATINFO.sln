@@ -5,7 +5,12 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAE_MATINFO", "SAE_MATINFO.csproj", "{49097668-497D-4068-904B-DBFFD6531C79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAE_MATINFOTests", "..\SAE_MATINFOTests\SAE_MATINFOTests.csproj", "{4F5941C1-0B65-49F2-8CAC-F6E42B7854BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAE_MATINFOTests", "..\SAE_MATINFOTests\SAE_MATINFOTests.csproj", "{4F5941C1-0B65-49F2-8CAC-F6E42B7854BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{FF1031B7-6BD5-4AE7-B897-8038ED3EF778}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\teamr\Desktop\.editorconfig = C:\Users\teamr\Desktop\.editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

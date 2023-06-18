@@ -24,6 +24,7 @@ namespace SAE_MATINFO.Model.Tests
             personnel2.Read();
 
             Assert.AreEqual(personnel1, personnel2);
+
         }
 
         [TestMethod()]
@@ -51,6 +52,7 @@ namespace SAE_MATINFO.Model.Tests
             personnel2.Read();
 
             Assert.AreEqual(personnel1, personnel2);
+
         }
 
         [TestMethod()]
@@ -68,6 +70,7 @@ namespace SAE_MATINFO.Model.Tests
             personnel2.Read();
 
             Assert.AreEqual(personnel2, personnel1);
+
         }
 
         [TestMethod()]
@@ -82,14 +85,52 @@ namespace SAE_MATINFO.Model.Tests
 
             ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
             Assert.AreEqual(3, lesPersonnels.Count);
+
         }
 
         [TestMethod()]
         public void FindBySelectionTest()
         {
-            Assert.Fail();
+            Personnel personnel1 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
+            personnel1.Create();
+            Personnel personnel2 = new Personnel("RUAULT", "Maxime", "ruaultmaxime@gmail.com");
+            personnel2.Create();
+            Personnel personnel3 = new Personnel("BATTIG", "Dylan", "dylan@gmail.com");
+            personnel3.Create();
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindBySelection("mail = 'ruaultmaxime@gmail.com'");
+            Assert.AreEqual(1, lesPersonnels.Count);
+
+
         }
 
-        
+        [TestCleanup]
+        public void Cleanup()
+        {
+            ObservableCollection<Attribution> lesAttributions = new Attribution().FindAll();
+            foreach (Attribution attribution in lesAttributions)
+            {
+                attribution.Delete();
+            }
+
+            ObservableCollection<Materiel> lesMateriaux = new Materiel().FindAll();
+            foreach (Materiel mat in lesMateriaux)
+            {
+                mat.Delete();
+            }
+
+            ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
+            foreach (Categorie categorie in lesCategorie)
+            {
+                categorie.Delete();
+            }
+
+            ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
+            foreach (Personnel pers in lesPersonnels)
+            {
+                pers.Delete();
+            }
+        }
+
     }
 }
