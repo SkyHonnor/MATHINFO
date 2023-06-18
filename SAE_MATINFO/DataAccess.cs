@@ -102,7 +102,7 @@ namespace SAE_MATINFO
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.ToString());
+                MessageBox.Show(e.ToString());
 
                 CloseConnection();
                 return 0;

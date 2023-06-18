@@ -1,7 +1,6 @@
 ﻿using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,59 +16,57 @@ using System.Windows.Shapes;
 namespace SAE_MATINFO.Windows
 {
     /// <summary>
-    /// Logique d'interaction pour MaterielWindow.xaml
+    /// Logique d'interaction pour PersonnelWindow.xaml
     /// </summary>
-    public partial class MaterielWindow : Window
+    public partial class PersonnelWindow : Window
     {
         public enum Type { Create, Update };
 
         public Type WindowType { get; private set; }
 
-        public Materiel Materiel { get; set; }
-        public ObservableCollection<Categorie> Categories { get; set; }
+        public Personnel Personnel { get; set; }
 
-        public MaterielWindow(Materiel materiel, ObservableCollection<Categorie> categories, Type windowType)
+        public PersonnelWindow(Personnel personnel, Type windowType)
         {
             InitializeComponent();
 
-            Materiel = materiel;
-            Categories = categories;
+            Personnel = personnel;
 
             DataContext = this;
             WindowType = windowType;
 
             if (WindowType == Type.Create)
-                Button.Content = "Créer un matériel";
+                Button.Content = "Créer un personnel";
 
             if (WindowType == Type.Update)
-                Button.Content = "Modifier le matériel";
+                Button.Content = "Modifier le personnel";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Materiel.NomMateriel == null)
+            if (Personnel.NomPersonnel == null)
             {
-                MessageBox.Show("Nom materiel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Nom personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Materiel.CodeBarre == null)
+            if (Personnel.PrenomPersonnel == null)
             {
-                MessageBox.Show("Code barre n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Prénom personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Materiel.ReferenceConstructeur == null)
+            if (Personnel.MailPersonnel == null)
             {
-                MessageBox.Show("Reference constructeur n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Mail personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (WindowType == Type.Create)
-                Materiel.Create();
+                Personnel.Create();
 
             if (WindowType == Type.Update)
-                Materiel.Update();
+                Personnel.Update();
 
             DialogResult = true;
         }

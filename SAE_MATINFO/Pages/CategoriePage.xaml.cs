@@ -31,25 +31,32 @@ namespace SAE_MATINFO.Pages
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
-
             Categorie categorie = new Categorie();
 
             CategorieWindow categorieWindow = new CategorieWindow(categorie, CategorieWindow.Type.Create);
             categorieWindow.Owner = Window.GetWindow(this);
 
-            categorieWindow.ShowDialog();
+            bool result = (bool)categorieWindow.ShowDialog();
 
-            applicationData.Categories.Add(categorie);
+            if (result)
+                applicationData.Categories.Add(categorie);
         }
 
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
+            ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
-            CategorieWindow categorieWindow = new CategorieWindow(categorie, CategorieWindow.Type.Update);
+            CategorieWindow categorieWindow = new CategorieWindow((Categorie)categorie.Clone(), CategorieWindow.Type.Update);
             categorieWindow.Owner = Window.GetWindow(this);
 
-            categorieWindow.ShowDialog();
+            bool result = (bool)categorieWindow.ShowDialog();
+
+            if (result)
+            {
+                categorie.NomCategorie = categorieWindow.Categorie.NomCategorie;
+                DataGrid.Items.Refresh();
+            }
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
