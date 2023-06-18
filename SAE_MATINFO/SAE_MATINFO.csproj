@@ -24,4 +24,10 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="matinfo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
