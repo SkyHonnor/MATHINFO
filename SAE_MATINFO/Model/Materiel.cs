@@ -8,17 +8,150 @@ using System.Threading.Tasks;
 
 namespace SAE_MATINFO.Model
 {
+    /// <summary>
+    /// Stocke 7 informations :
+    /// 2 entier : l'ID du materiel et la FKidCategorie.
+    /// 3 string : le nom, le code barre du materie et la reference du constructeur.
+    /// 1 categorie : la categorie du materiel.
+    /// 1 observable collection : liste des attributions du materiel.
+    /// </summary> 
     public class Materiel : Crud<Materiel>
     {
-        public int IdMateriel { get; set; }
-        public int FKIdCategorie { get; set; }
+        private int idMateriel;
+        private int fKIdCategorie;
 
-        public string NomMateriel { get; set; }
-        public string CodeBarre { get; set; }
-        public string ReferenceConstructeur { get; set; }
+        private string nomMateriel;
+        private string codeBarre;
+        private string referenceConstructeur;
 
-        public Categorie Categorie { get; set; }
-        public ObservableCollection<Attribution> Attributions { get; set; }
+        private Categorie categorie;
+        private ObservableCollection<Attribution> attributions;
+
+
+        /// <summary>
+        /// L'ID est unique et definit le materiel
+        /// </summary>
+        public int IdMateriel
+        {
+            get
+            {
+                return this.idMateriel;
+            }
+
+            set
+            {
+                this.idMateriel = value;
+            }
+        }
+
+        /// <summary>
+        /// La FKIdCategorie definit la clé etrangere relié à l'Id categorie
+        /// </summary>
+        public int FKIdCategorie
+        {
+            get
+            {
+                return this.fKIdCategorie;
+            }
+
+            set
+            {
+                this.fKIdCategorie = value;
+            }
+        }
+
+
+        /// <summary>
+        /// Définit le nom du materiel. 
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si le nom du materiel n'est pas saisie. 
+        public string NomMateriel
+        {
+            get
+            {
+                return this.nomMateriel;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le champs NomMateriel doit etre sasie");
+                this.nomMateriel = value.ToUpper(); ;
+            }
+        }
+
+
+        /// <summary>
+        /// Le code barre est unique à chaque materiel. 
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si le code barre du materiel n'est pas saisie.
+        public string CodeBarre
+        {
+            get
+            {
+                return this.codeBarre;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le champs CodeBarre doit etre sasie");
+                this.codeBarre = value.ToUpper();
+            }
+        }
+
+
+        /// <summary>
+        /// Définit la reference du constructeur du materiel.
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si la reference du constructeur du materiel n'est pas saisie.
+        public string ReferenceConstructeur
+        {
+            get
+            {
+                return this.referenceConstructeur;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le champs Reference constructeur doit etre sasie");
+                this.referenceConstructeur = value.ToUpper();
+            }
+        }
+
+
+        /// <summary>
+        /// Définit la categorie du materiel
+        /// </summary>
+        public Categorie Categorie
+        {
+            get
+            {
+                return this.categorie;
+            }
+
+            set
+            {
+                this.categorie = value;
+            }
+        }
+
+        /// <summary>
+        /// Définit une liste d'attributions
+        /// </summary>
+        public ObservableCollection<Attribution> Attributions
+        {
+            get
+            {
+                return this.attributions;
+            }
+
+            set
+            {
+                this.attributions = value;
+            }
+        }
 
         public Materiel() { }
 
@@ -27,6 +160,15 @@ namespace SAE_MATINFO.Model
             IdMateriel = idMateriel;
         }
 
+        /// <summary>
+        /// Constructeur de la classe Materiel.
+        /// </summary>
+        /// <param name="idMateriel">L'ID du materiel.</param>
+        /// <param name="fkIdCategorie">La fkIdcategorie du materiel.</param>
+        /// <param name="nomMateriel">Le nom du materiel.</param>
+        /// <param name="codeBarre">Le code barre du materiel.</param>
+        /// <param name="referenceConstructeur">La reference constructeur du materiel.</param>
+        /// <remarks>Ce constructeur initialise les propriétés idMateriel, fkIdCategorie, nomMateriel, codeBarre et referenceConstructeur de l'objet Materiel.</remarks>
         public Materiel(int idMateriel, int fkIdCategorie, string nomMateriel, string codeBarre, string referenceConstructeur)
         {
             IdMateriel = idMateriel;
@@ -40,6 +182,10 @@ namespace SAE_MATINFO.Model
         public Materiel(int fkIdCategorie, string nomMateriel, string codeBarre, string referenceConstructeur) 
         : this(0, fkIdCategorie, nomMateriel, codeBarre, referenceConstructeur) {}
 
+
+        /// <summary>
+        /// Permet la creation d'un Materiel dans la base de données.
+        /// </summary>
         public void Create()
         {
             DataAccess accesBD = new DataAccess();
@@ -50,6 +196,9 @@ namespace SAE_MATINFO.Model
             this.Read();
         }
 
+        /// <summary>
+        /// Permet la suppression d'un Materiel de la base de données.
+        /// </summary>
         public void Delete()
         {
             DataAccess accesBD = new DataAccess();
@@ -59,6 +208,10 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+
+        /// <summary>
+        /// Permet de chercher le Materiel dans la base de données. 
+        /// </summary>
         public void Read()
         {
             DataAccess accesBD = new DataAccess();
@@ -78,6 +231,9 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Permet de modifier les champs du Materiel dans la base données grace à son ID.
+        /// </summary>
         public void Update()
         {
             DataAccess accesBD = new DataAccess();
@@ -87,6 +243,10 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+        /// <summary>
+        /// Permet de trouver tous les Materiels qui ont était crée dans la base de données.
+        /// </summary>
+        /// <returns>La methode FindAll renvoie une liste contentant tout les Materiels crées.</returns>
         public ObservableCollection<Materiel> FindAll()
         {
             ObservableCollection<Materiel> materiels = new ObservableCollection<Materiel>();
@@ -112,6 +272,12 @@ namespace SAE_MATINFO.Model
             return materiels;
         }
 
+
+        /// <summary>
+        /// Permet de trouver les materiels avec des criteres specifiques.
+        /// </summary>
+        /// <param name="criteres">Un des champs representant le Materiel</param>
+        /// <returns>Renvoie une liste de tous les materiels qui possedent le critere introduit comme parametre</returns>
         public ObservableCollection<Materiel> FindBySelection(string criteres)
         {
             ObservableCollection<Materiel> materiels = new ObservableCollection<Materiel>();

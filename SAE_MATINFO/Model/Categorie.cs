@@ -9,15 +9,78 @@ using System.Windows.Media.Media3D;
 
 namespace SAE_MATINFO.Model
 {
+
+    /// <summary>
+    /// Stocke 3 informations :
+    /// 1 entier : l'ID de la categorie
+    /// 1 string : le nom de la categorie
+    /// 1 Observable Collection: liste de materiels
+    /// </summary> 
     public class Categorie : Crud<Categorie>
     {
-        public int IdCategorie { get; set; }
-        public string NomCategorie { get; set; }
+        private int idCategorie;
+        private string nomCategorie;
+        private ObservableCollection<Materiel> materiels;
 
-        public ObservableCollection<Materiel> Materiels { get; set; }
+
+        /// <summary>
+        /// L'IdCategorie est unique et definit la categorie
+        /// </summary>
+        public int IdCategorie
+        {
+            get
+            {
+                return this.idCategorie;
+            }
+
+            set
+            {
+                this.idCategorie = value;
+            }
+        }
+
+        /// <summary>
+        /// Obtient ou définit le nom de la categorie. 
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si le nom de la categorie n'est pas saisie. 
+        public string NomCategorie
+        {
+            get
+            {
+                return this.nomCategorie;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    throw new ArgumentException("Le champs NomCategorie doit etre sasie");
+                this.nomCategorie = value;
+            }
+        }
+
+        /// <summary>
+        /// Définit une liste de materiels
+        /// </summary>
+        public ObservableCollection<Materiel> Materiels
+        {
+            get
+            {
+                return this.materiels;
+            }
+
+            set
+            {
+                this.materiels = value;
+            }
+        }
 
         public Categorie() { }
 
+        /// <summary>
+        /// Constructeur de la classe Categorie.
+        /// </summary>
+        /// <param name="idCategorie">L'ID de la categorie</param>
+        /// <param name="nomCategorie">Le nom de la cateogie</param>
         public Categorie(int idCategorie, string nomCategorie)
         {
             IdCategorie = idCategorie;
@@ -26,6 +89,9 @@ namespace SAE_MATINFO.Model
 
         public Categorie(string nomCategorie) : this(0, nomCategorie) {}
 
+        /// <summary>
+        /// Permet la creation d'une categorie dans la base de données.
+        /// </summary>
         public void Create()
         {
             DataAccess accesBD = new DataAccess();
@@ -36,6 +102,9 @@ namespace SAE_MATINFO.Model
             this.Read();
         }
 
+        /// <summary>
+        /// Permet la suppression d'une categorie de la base de données.
+        /// </summary>
         public void Delete()
         {
             DataAccess accesBD = new DataAccess();
@@ -45,6 +114,9 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+        /// <summary>
+        /// Permet de chercher la categorie dans la base de données. 
+        /// </summary>
         public void Read()
         {
             DataAccess accesBD = new DataAccess();
@@ -60,6 +132,9 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Permet de modifier les champs de la categorie dans la base données grace à son ID.
+        /// </summary>
         public void Update()
         {
             DataAccess accesBD = new DataAccess();
@@ -69,6 +144,12 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+
+
+        /// <summary>
+        /// Permet de trouver tous les categories qui ont était crée dans la base de données.
+        /// </summary>
+        /// <returns>La methode FindAll renvoie une liste contentant tout les categories créees.</returns>
         public ObservableCollection<Categorie> FindAll()
         {
             ObservableCollection<Categorie> categories = new ObservableCollection<Categorie>();
@@ -93,6 +174,13 @@ namespace SAE_MATINFO.Model
             return categories;
         }
 
+
+
+        /// <summary>
+        /// Permet de trouver les categories avec des criteres specifiques.
+        /// </summary>
+        /// <param name="criteres">Un des champs representant la categorie</param>
+        /// <returns>Renvoie une liste de tous les categories qui possedent le critere introduit comme parametre</returns>
         public ObservableCollection<Categorie> FindBySelection(string criteres)
         {
             ObservableCollection<Categorie> categories = new ObservableCollection<Categorie>();

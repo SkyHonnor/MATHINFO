@@ -10,6 +10,12 @@ using System.Threading.Tasks;
 
 namespace SAE_MATINFO.Model
 {
+
+    /// <summary>
+    /// Stocke 4 informations :
+    /// 1 entier : l'ID du personnel
+    /// 3 string : le nom, le prenom et le mail du personnel
+    /// </summary> 
     public class Personnel : Crud<Personnel>
     {
         private int idPersonnel;
@@ -19,6 +25,10 @@ namespace SAE_MATINFO.Model
 
         private ObservableCollection<Attribution> attributions;
 
+
+        /// <summary>
+        /// L'IDPersonnel est unique et definit le personnel
+        /// </summary>
         public int IdPersonnel
         {
             get
@@ -32,6 +42,10 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le nom du personnel. 
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si le nom du personnel n'est pas saisie. 
         public string NomPersonnel
         {
             get
@@ -48,6 +62,10 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le prenom du personnel. 
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si le prenom du personnel n'est pas saisie. 
         public string PrenomPersonnel
         {
             get
@@ -64,6 +82,10 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Obtient ou définit le mail du personnel. 
+        /// </summary>
+        /// <exception cref="ArgumentException"> Envoyée si le mail du personnel n'est pas valide 
         public string MailPersonnel
         {
             get
@@ -81,6 +103,9 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Définit une liste d'attributions
+        /// </summary>
         public ObservableCollection<Attribution> Attributions
         {
             get
@@ -101,6 +126,15 @@ namespace SAE_MATINFO.Model
             IdPersonnel = idPersonnel;
         }
 
+
+        /// <summary>
+        /// Constructeur de la classe Personnel.
+        /// </summary>
+        /// <param name="idPersonnel">L'ID du personnel.</param>
+        /// <param name="nomPersonnel">Le nom du personnel.</param>
+        /// <param name="prenomPersonnel">Le prenom du personnel.</param>
+        /// <param name="mailPersonnel">Le mail du personnel.</param>
+        /// <remarks>Ce constructeur initialise les propriétés IdPersonnel, NomPersonnel, PrenomPersonnel et MailPersonnel de l'objet Personnel.</remarks>
         public Personnel(int idPersonnel, string nomPersonnel, string prenomPersonnel, string mailPersonnel)
         {
             IdPersonnel = idPersonnel;
@@ -113,6 +147,10 @@ namespace SAE_MATINFO.Model
         : this(0, nomPersonnel, prenomPersonnel, mailPersonnel) { }
 
 
+
+        /// <summary>
+        /// Permet la creation d'un Personnel dans la base de données.
+        /// </summary>
         public void Create()
         {
             DataAccess accesBD = new DataAccess();
@@ -123,6 +161,10 @@ namespace SAE_MATINFO.Model
             this.Read();
         }
 
+
+        /// <summary>
+        /// Permet la suppression d'un Personnel de la base de données.
+        /// </summary>
         public void Delete()
         {
             DataAccess accesBD = new DataAccess();
@@ -133,6 +175,10 @@ namespace SAE_MATINFO.Model
 
         }
 
+
+        /// <summary>
+        /// Permet de chercher le Personnel dans la base de données. 
+        /// </summary>
         public void Read()
         {
             DataAccess accesBD = new DataAccess();
@@ -150,6 +196,10 @@ namespace SAE_MATINFO.Model
             }
         }
 
+
+        /// <summary>
+        /// Permet de modifier les champs du Personnel dans la base données grace à son ID.
+        /// </summary>
         public void Update()
         {
             DataAccess accesBD = new DataAccess();
@@ -159,6 +209,11 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+
+        /// <summary>
+        /// Permet de trouver tous les personnels qui ont était crée dans la base de données.
+        /// </summary>
+        /// <returns>La methode FindAll renvoie une liste contentant tout les personnels crées.</returns>
         public ObservableCollection<Personnel> FindAll()
         {
             ObservableCollection<Personnel> personnels = new ObservableCollection<Personnel>();
@@ -184,6 +239,11 @@ namespace SAE_MATINFO.Model
             return personnels;
         }
 
+        /// <summary>
+        /// Permet de trouver les personnels avec des criteres specifiques.
+        /// </summary>
+        /// <param name="criteres">Un des champs representant le personnel</param>
+        /// <returns>Renvoie une liste de tous les personnels qui possedent le critere introduit comme parametre</returns>
         public ObservableCollection<Personnel> FindBySelection(string criteres)
         {
             ObservableCollection<Personnel> personnels = new ObservableCollection<Personnel>();
@@ -210,6 +270,14 @@ namespace SAE_MATINFO.Model
             return personnels;
         }
 
+
+        /// <summary>
+        /// Indique si l'objet actuel est égal à un autre objet du même type.
+        /// </summary>
+        /// <param name="obj">Objet à comparer à cet objet..</param>
+        /// <returns>
+        ///   <c>true</c> si l'objet spécifié est égal à l'objet actuel ; sinon, <c>false</c>.
+        /// </returns>
         public override bool Equals(object? obj)
         {
             return obj is Personnel personnel &&
@@ -219,11 +287,27 @@ namespace SAE_MATINFO.Model
                    this.MailPersonnel == personnel.MailPersonnel;
         }
 
+
+        /// <summary>
+        /// Indique si deux objets sont égaux.
+        /// </summary>
+        /// <param name="left">Le premier objet à comparer.</param>
+        /// <param name="right">Le deuxième objet à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets sont égaux ; sinon, <c>false</c>.
         public static bool operator ==(Personnel? left, Personnel? right)
         {
             return EqualityComparer<Personnel>.Default.Equals(left, right);
         }
 
+        /// <summary>
+        /// Indique si deux objets ne sont pas égaux.
+        /// </summary>
+        /// <param name="left">Le premier objet à comparer.</param>
+        /// <param name="right">Le deuxième objet à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets ne sont pas égaux ; sinon, <c>false</c>.
+        /// </returns>   
         public static bool operator !=(Personnel? left, Personnel? right)
         {
             return !(left == right);

@@ -10,17 +10,131 @@ namespace SAE_MATINFO.Model
 {
     public class Attribution : Crud<Attribution>
     {
-        public int FKIdPersonnel { get; private set; }
-        public int FKIdMateriel { get; private set; }
-        public DateTime FKDateAttribution { get; private set; }
+        /// <summary>
+        /// Stocke 6 informations :
+        /// 2 entiers : la fkIdPersonnel et la fkIdMateriel
+        /// 1 datetime : la fkIdMateriel
+        /// 1 string : le commentaire de l'attribution
+        /// 1 Personnel: un personnel
+        /// 1 Materiel: un materiel
+        /// </summary> 
 
-        public string Commentaire { get; set; }
+        private int fKIdPersonnel;
+        private int fKIdMateriel;
+        private DateTime fKDateAttribution;
 
-        public Personnel Personnel { get; set; }
-        public Materiel Materiel { get; set; }
+        private string commentaire;
 
+        private Personnel personnel;
+        private Materiel materiel;
+
+
+        /// <summary>
+        /// La FKIdPersonnel definit la clé etrangere relié à l'Id Personnel
+        /// </summary>
+        public int FKIdPersonnel
+        {
+            get
+            {
+                return this.fKIdPersonnel;
+            }
+
+            private set
+            {
+                this.fKIdPersonnel = value;
+            }
+        }
+
+        /// <summary>
+        /// La FKIdMateriel definit la clé etrangere relié à l'Id Materiel
+        /// </summary>
+        public int FKIdMateriel
+        {
+            get
+            {
+                return this.fKIdMateriel;
+            }
+
+            private set
+            {
+                this.fKIdMateriel = value;
+            }
+        }
+
+        /// <summary>
+        /// La FKDateAttribution definit la clé etrangere relié à la date attribution
+        /// </summary>
+        public DateTime FKDateAttribution
+        {
+            get
+            {
+                return this.fKDateAttribution;
+            }
+
+            private set
+            {
+                this.fKDateAttribution = value;
+            }
+        }
+
+        /// <summary>
+        /// Definit le commentaire de l'attribution
+        /// </summary>
+        public string Commentaire
+        {
+            get
+            {
+                return this.commentaire;
+            }
+
+            set
+            {
+                this.commentaire = value;
+            }
+        }
+
+        /// <summary>
+        /// Définit le Personnel relié à l'attribution
+        /// </summary>
+        public Personnel Personnel
+        {
+            get
+            {
+                return this.personnel;
+            }
+
+            set
+            {
+                this.personnel = value;
+            }
+        }
+
+        /// <summary>
+        /// Définit le Materiel relié à l'attribution
+        /// </summary>
+        public Materiel Materiel
+        {
+            get
+            {
+                return this.materiel;
+            }
+
+            set
+            {
+                this.materiel = value;
+            }
+        }
         public Attribution() { }
 
+
+        /// <summary>
+        /// Constructeur de la classe Attribution.
+        /// </summary>
+        /// <param name="fkIdPersonnel">La fkIdPersonnel de l'attribution.</param>
+        /// <param name="fkIdMateriel">La fkIdMateriel de l'attribution.</param>
+        /// <param name="fkDateAttribution">La fkDateAttribution de l'attribution..</param>
+        /// <param name="commentaire">Le commentaire de l'attribution.</param>
+        /// <remarks>Ce constructeur initialise les propriétés fkIdPersonnel, fkIdMateriel, fkDateAttribution et commentaire de l'objet Attribution.</remarks>
         public Attribution(int fkIdPersonnel, int fkIdMateriel, DateTime fkDateAttribution, string commentaire)
         {
             FKIdPersonnel= fkIdPersonnel;
@@ -31,6 +145,9 @@ namespace SAE_MATINFO.Model
 
         public Attribution(int fkIdPersonnel, int fkIdMateriel, DateTime fkDateAttribution) : this(fkIdPersonnel, fkIdMateriel, fkDateAttribution, "") {}
 
+        /// <summary>
+        /// Permet la creation d'une Attribution dans la base de données.
+        /// </summary>
         public void Create()
         {
             DataAccess accesBD = new DataAccess();
@@ -41,6 +158,10 @@ namespace SAE_MATINFO.Model
             this.Read();
         }
 
+
+        /// <summary>
+        /// Permet la suppression d'une Attribution de la base de données.
+        /// </summary>
         public void Delete()
         {
             DataAccess accesBD = new DataAccess();
@@ -50,6 +171,9 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+        /// <summary>
+        /// Permet de chercher l' Attribution dans la base de données. 
+        /// </summary>
         public void Read()
         {
             DataAccess accesBD = new DataAccess();
@@ -68,6 +192,9 @@ namespace SAE_MATINFO.Model
             }
         }
 
+        /// <summary>
+        /// Permet de modifier les champs de l'Attribution dans la base données grace à son ID.
+        /// </summary>
         public void Update()
         {
             DataAccess accesBD = new DataAccess();
@@ -77,6 +204,11 @@ namespace SAE_MATINFO.Model
             accesBD.SetData(requete);
         }
 
+
+        /// <summary>
+        /// Permet de trouver tous les attributions qui ont était crée dans la base de données.
+        /// </summary>
+        /// <returns>La methode FindAll renvoie une liste contentant tout les attributions crées.</returns>
         public ObservableCollection<Attribution> FindAll()
         {
             ObservableCollection<Attribution> attributions = new ObservableCollection<Attribution>();
@@ -103,6 +235,12 @@ namespace SAE_MATINFO.Model
             return attributions;
         }
 
+
+        /// <summary>
+        /// Permet de trouver les attributions avec des criteres specifiques.
+        /// </summary>
+        /// <param name="criteres">Un des champs representant l' Attribution</param>
+        /// <returns>Renvoie une liste de tous les attributions qui possedent le critere introduit comme parametre</returns>
         public ObservableCollection<Attribution> FindBySelection(string criteres)
         {
             ObservableCollection<Attribution> attributions = new ObservableCollection<Attribution>();
