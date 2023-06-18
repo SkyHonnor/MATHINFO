@@ -79,13 +79,13 @@ namespace SAE_MATINFO.Model.Tests
         [TestMethod()]
         public void UpdateTest()
         {
-            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "C'est super");
+            Attribution attribution1 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution1.Create();
 
-            attribution1.Commentaire = "C'est nul";
+            attribution1.FKDateAttribution = DateTime.Today.AddDays(1);
             attribution1.Update();
 
-            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today, "C'est nul");
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution2.Read();
 
             Assert.AreEqual(attribution1, attribution2);

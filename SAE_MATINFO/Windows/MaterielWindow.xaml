@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_MATINFO.Windows"
         mc:Ignorable="d"
-        Title="MaterielWindow" MinHeight="360" Height="360" MinWidth="260" Width="260" WindowStartupLocation="CenterOwner">
+        Title="MatINFO" MinHeight="360" Height="360" MinWidth="260" Width="260" WindowStartupLocation="CenterOwner">
 
     <Grid>
         <Grid.RowDefinitions>
