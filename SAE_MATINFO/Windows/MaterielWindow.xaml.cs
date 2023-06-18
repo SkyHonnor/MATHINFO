@@ -45,6 +45,15 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Modifier un matériel";
         }
 
+
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton.
+        /// Si le type de la fenetre est "Create", on appelle la methode Create() de la classe Materiel.
+        /// Si le type de la fenetre est "Update", on appelle la methode Update() de la classe Materiel.
+        /// On definit le DialogResult comme true pour confirmer que l'operation a eu succes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (WindowType == Type.Create)

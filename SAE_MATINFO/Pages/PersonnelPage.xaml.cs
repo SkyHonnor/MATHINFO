@@ -27,6 +27,14 @@ namespace SAE_MATINFO.Pages
             DataContext = dataContext;
         }
 
+
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Supprimer".
+        /// Supprime le personnel selectionné dans le datagrid et
+        /// appelle la mehode Delete() pour supprimer le personnel pour ensuite l'enlever da la liste des personnels de l'application. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;

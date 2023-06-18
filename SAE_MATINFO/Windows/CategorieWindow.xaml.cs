@@ -42,6 +42,14 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Modifier une catégorie";
         }
 
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Supprimer".
+        /// Si le type de la fenetre est "Create", on appelle la methode Create() de la classe Categorie.
+        /// Si le type de la fenetre est "Update", on appelle la methode Update() de la classe Categorie.
+        /// On definit le DialogResult comme true pour confirmer que l'operation a eu succes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (WindowType == Type.Create)

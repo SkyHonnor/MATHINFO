@@ -29,6 +29,14 @@ namespace SAE_MATINFO.Pages
             DataContext = dataContext;
         }
 
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Ajouter un materiel" et
+        /// va creer un nouvel objet Materiel, ouvre une fenêtre de Materiel pour la creation
+        /// en fournissant les catégories disponibles  que l'utilisateur devra choisir Une fois le Materiel cree, ce dernier va s'ajouter
+        /// à la liste des Materiels de l'application et à la liste des Materiels de la catégorie correspondante.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
@@ -44,6 +52,13 @@ namespace SAE_MATINFO.Pages
             applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Add(materiel);
         }
 
+
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Modifier".
+        /// Recupere la categorie selectionneé dans le datagrid. Ouvre une fenetre de categorie pour la modification.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
@@ -56,6 +71,13 @@ namespace SAE_MATINFO.Pages
             materielWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Supprimer".
+        /// Supprime le materiel selectionné dans le datagrid et
+        /// appelle la mehode Delete() pour supprimer le materiel pour ensuite l'enlever da la liste des materiels de l'application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
