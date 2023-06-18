@@ -46,7 +46,7 @@ namespace SAE_MATINFO.Pages
             }
         }
 
-        private void Button_Click_Update(object sender, RoutedEventArgs e)
+        private void Button_Click_Update(object sender, MouseButtonEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
@@ -76,7 +76,7 @@ namespace SAE_MATINFO.Pages
             applicationData.Materiels.Remove(materiel);
         }
 
-        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Show_Attributions(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;

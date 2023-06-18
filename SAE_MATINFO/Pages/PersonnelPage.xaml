@@ -23,7 +23,7 @@
             </Button>
         </Grid>
 
-        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" MouseDoubleClick="DataGrid_MouseDoubleClick">
+        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" MouseDoubleClick="Button_Click_Update">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding NomPersonnel}"/>
                 <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding PrenomPersonnel}"/>
@@ -32,8 +32,8 @@
                 <DataGridTemplateColumn Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Update">
-                                Modifier
+                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Attributions">
+                                Attributions
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

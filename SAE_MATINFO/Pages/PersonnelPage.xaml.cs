@@ -43,7 +43,7 @@ namespace SAE_MATINFO.Pages
                 applicationData.Personnels.Add(personnel);
         }
 
-        private void Button_Click_Update(object sender, RoutedEventArgs e)
+        private void Button_Click_Update(object sender, MouseButtonEventArgs e)
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
@@ -72,7 +72,7 @@ namespace SAE_MATINFO.Pages
             applicationData.Personnels.Remove(personnel);
         }
 
-        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Show_Attributions(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
