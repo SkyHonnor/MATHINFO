@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_MATINFO.Windows"
         mc:Ignorable="d"
-        Title="MatINFO" MinHeight="250" MinWidth="260" Height="250" Width="260" WindowStartupLocation="CenterOwner">
+        Title="MatINFO" MinHeight="250" MinWidth="260" Height="250" Width="260" WindowStartupLocation="CenterOwner" Icon="/matinfo.png">
     
     <Grid>
         <Grid.RowDefinitions>

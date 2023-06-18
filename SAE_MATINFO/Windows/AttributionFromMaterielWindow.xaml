@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE_MATINFO.Windows"
         mc:Ignorable="d"
-        Title="MatINFO" Height="450" Width="1000" WindowStartupLocation="CenterOwner">
+        Title="MatINFO" Height="450" Width="1000" WindowStartupLocation="CenterOwner" Icon="/matinfo.png">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
