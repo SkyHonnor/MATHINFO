@@ -47,7 +47,7 @@ namespace SAE_MATINFO.Pages
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
-            PersonnelWindow personnelWindow = new PersonnelWindow((Personnel)personnel.Clone(), PersonnelWindow.Type.Create);
+            PersonnelWindow personnelWindow = new PersonnelWindow((Personnel)personnel.Clone(), PersonnelWindow.Type.Update);
             personnelWindow.Owner = Window.GetWindow(this);
 
             bool result = (bool)personnelWindow.ShowDialog();
