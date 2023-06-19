@@ -30,7 +30,7 @@ namespace SAE_MATINFO.Model.Tests
             Materiel materiel2 = new Materiel(categorie.IdCategorie, "PC Dell (pas ouf)", "1010101010", "REF604");
             materiel2.Read();
 
-            Assert.AreEqual(materiel1, materiel2);
+            Assert.AreEqual(materiel1, materiel2, "Test de creation d'un Materiel");
 
         }
 
@@ -45,7 +45,7 @@ namespace SAE_MATINFO.Model.Tests
             Materiel materiel2 = new Materiel(categorie.IdCategorie, "PC Dell (pas ouf)", "1010101010", "REF604");
             materiel2.Read();
 
-            Assert.AreEqual(0, materiel2.IdMateriel);
+            Assert.AreEqual(0, materiel2.IdMateriel, "Test de suppression d'un Materiel");
 
         }
 
@@ -58,7 +58,7 @@ namespace SAE_MATINFO.Model.Tests
             Materiel materiel2 = new Materiel(categorie.IdCategorie, "PC Dell (pas ouf)", "1010101010", "REF604");
             materiel2.Read();
 
-            Assert.AreEqual(materiel1, materiel2);
+            Assert.AreEqual(materiel1, materiel2, "Test de lecture d'un Materiel");
 
         }
 
@@ -74,7 +74,7 @@ namespace SAE_MATINFO.Model.Tests
             Materiel materiel2 = new Materiel(categorie.IdCategorie, "Imprimante", "1010101010", "REF604");
             materiel2.Read();
 
-          
+            Assert.AreEqual(materiel1, materiel2, "Test de mise à jour d'un Materiel");
         }
 
         [TestMethod()]
@@ -92,7 +92,7 @@ namespace SAE_MATINFO.Model.Tests
             {
                 Console.WriteLine(mat.NomMateriel);
             }
-            Assert.AreEqual(3, lesMateriels.Count);
+            Assert.AreEqual(3, lesMateriels.Count, "Test de récuperation de tout les Materiel");
 
         }
 
@@ -107,7 +107,7 @@ namespace SAE_MATINFO.Model.Tests
             materiel3.Create();
 
             ObservableCollection<Materiel> lesMateriels = new Materiel().FindBySelection("nom_materiel = 'PC de ouf'");
-            Assert.AreEqual(1, lesMateriels.Count);
+            Assert.AreEqual(1, lesMateriels.Count, "Test de récuperation d'un Materiel avec un/des critère(s) spécifique(s)");
 
         }
 

@@ -44,7 +44,7 @@ namespace SAE_MATINFO.Model.Tests
             Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution2.Read();
 
-            Assert.AreEqual(attribution1, attribution2);
+            Assert.AreEqual(attribution1, attribution2, "Test de creation d'une Attribution");
 
         }
 
@@ -59,7 +59,7 @@ namespace SAE_MATINFO.Model.Tests
             Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution2.Read();
 
-            Assert.AreEqual(attribution1, attribution2);
+            Assert.AreEqual(attribution1, attribution2, "Test de suppression d'une Attribution");
 
         }
 
@@ -72,7 +72,7 @@ namespace SAE_MATINFO.Model.Tests
             Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution2.Read();
 
-            Assert.AreEqual(attribution1, attribution2);
+            Assert.AreEqual(attribution1, attribution2, "Test de lecture d'une Attribution");
 
         }
 
@@ -88,7 +88,7 @@ namespace SAE_MATINFO.Model.Tests
             Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
             attribution2.Read();
 
-            Assert.AreEqual(attribution1, attribution2);
+            Assert.AreEqual(attribution1, attribution2, "Test de mise à jour d'une Attribution");
 
         }
 
@@ -106,9 +106,9 @@ namespace SAE_MATINFO.Model.Tests
 
             ObservableCollection<Attribution> lesAttribution = new Attribution().FindAll();
 
-            Assert.AreEqual(3, lesAttribution.Count);
+            Assert.AreEqual(3, lesAttribution.Count, "Test de récuperation de toute les Attribution");
 
-           
+
         }
 
         [TestMethod()]
@@ -122,7 +122,7 @@ namespace SAE_MATINFO.Model.Tests
             attribution3.Create();
 
             ObservableCollection<Attribution> lesAttribution = new Attribution().FindBySelection("commentaire = 'test2'");
-            Assert.AreEqual(1, lesAttribution.Count);
+            Assert.AreEqual(1, lesAttribution.Count, "Test de récuperation d'une Attribution avec un/des critère(s) spécifique(s)");
 
         }
 
