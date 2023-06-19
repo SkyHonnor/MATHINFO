@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace SAE_MATINFO.Windows
@@ -25,12 +26,16 @@ namespace SAE_MATINFO.Windows
 
         public Type WindowType { get; private set; }
 
+        public ApplicationData ApplicationData { get; private set; }
+
         public Attribution CurrentAttribution { get; set; }
         public Attribution Attribution { get; set; }
 
-        public AttributionMaterielWindow(Attribution attribution, Type windowType)
+        public AttributionMaterielWindow(ApplicationData applicationData, Attribution attribution, Type windowType)
         {
             InitializeComponent();
+
+            ApplicationData = applicationData;
 
             CurrentAttribution = attribution;
             Attribution = attribution;
@@ -57,14 +62,14 @@ namespace SAE_MATINFO.Windows
             }
 
             if (WindowType == Type.Create)
-                Attribution.Create();
+                CreateAttribution();
 
             if (WindowType == Type.Update)
             {
                 if (CurrentAttribution.FKDateAttribution != Attribution.FKDateAttribution)
                 {
                     CurrentAttribution.Delete();
-                    Attribution.Create();
+                    CreateAttribution();
                 }
                 else
                     Attribution.Update();
@@ -72,6 +77,22 @@ namespace SAE_MATINFO.Windows
                 
 
             DialogResult = true;
+        }
+
+        private void CreateAttribution()
+        {
+            Attribution.Create();
+
+            Attribution.Personnel = ApplicationData.Personnels.ToList().Find(personnel => personnel.IdPersonnel == Attribution.FKIdPersonnel);
+            Attribution.Materiel = ApplicationData.Materiels.ToList().Find(materiel => materiel.IdMateriel == Attribution.FKIdMateriel);
+
+            foreach (Personnel personnel in ApplicationData.Personnels)
+                if (personnel.IdPersonnel == Attribution.FKIdPersonnel)
+                    personnel.Attributions.Add(Attribution);
+
+            foreach (Materiel materiel in ApplicationData.Materiels)
+                if (materiel.IdMateriel == Attribution.FKIdMateriel)
+                    materiel.Attributions.Add(Attribution);
         }
     }
 }

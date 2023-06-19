@@ -9,6 +9,77 @@
       Title="AttributionPage">
 
     <Grid>
-        <Label FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center">ATTRIBUTION PAGE</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" FontSize="20" VerticalAlignment="Center" Content="{Binding Attributions.Count}" ContentStringFormat="Liste de catégories ({0})"></Label>
+
+        <Grid Grid.Row="1">
+            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Click="Button_Click_Create">
+                <Label Foreground="#FFFFFF">Ajouter une attribution</Label>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <Label>Recherchez par mail</Label>
+                    <TextBox Name="RecherchePersonnel" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="RecherchePersonnel_TextChanged"></TextBox>
+                </StackPanel>
+
+                <DataGrid Name="DataGridPersonnels" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" SelectionChanged="UpdateFilter">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding NomPersonnel}"/>
+                        <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding PrenomPersonnel}"/>
+                        <DataGridTextColumn Header="Adresse mail" Width="*" Binding="{Binding MailPersonnel}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <Label>Recherchez par code barre</Label>
+                    <TextBox Name="RechercheMateriel" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="RechercheMateriel_TextChanged"></TextBox>
+                </StackPanel>
+
+                <DataGrid Name="DataGridMateriels" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Materiels}" SelectionChanged="UpdateFilter">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nom materiel" Width="*" Binding="{Binding NomMateriel}"/>
+                        <DataGridTextColumn Header="Catégorie" Width="*" Binding="{Binding Categorie.NomCategorie}"/>
+                        <DataGridTextColumn Header="Code barre" Width="*" Binding="{Binding CodeBarre}"/>
+                        <DataGridTextColumn Header="Référence constructeur" Width="*" Binding="{Binding ReferenceConstructeur}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+
+        <DataGrid Name="DataGrid" Grid.Row="3" Margin="0,20,0,0" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Attributions}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date d'attribution" Width="*" Binding="{Binding FKDateAttribution}"/>
+                <DataGridTextColumn Header="Commentaire" Width="*" Binding="{Binding Commentaire}"/>
+                <DataGridTextColumn Header="Mail personnel" Width="*" Binding="{Binding Personnel.MailPersonnel}"/>
+                <DataGridTextColumn Header="Code barre materiel" Width="*" Binding="{Binding Materiel.CodeBarre}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

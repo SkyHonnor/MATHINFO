@@ -1,6 +1,7 @@
 ﻿using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -76,7 +77,11 @@ namespace SAE_MATINFO.Windows
             }
 
             if (WindowType == Type.Create)
+            {
                 Personnel.Create();
+
+                Personnel.Attributions = new ObservableCollection<Attribution>(ApplicationData.Attributions.ToList().FindAll(attribution => attribution.FKIdMateriel == Personnel.IdPersonnel));
+            }
 
             if (WindowType == Type.Update)
                 Personnel.Update();

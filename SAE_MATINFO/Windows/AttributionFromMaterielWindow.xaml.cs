@@ -39,8 +39,11 @@ namespace SAE_MATINFO.Windows
             Materiel = materiel;
 
             Personnels = applicationData.Personnels;
-            Attributions = CollectionViewSource.GetDefaultView(applicationData.Attributions);
 
+            CollectionViewSource attributionsView = new CollectionViewSource();
+            attributionsView.Source = ApplicationData.Attributions;
+
+            Attributions = attributionsView.View;
             Attributions.Filter = o =>
             {
                 Attribution attribution = (Attribution)o;
@@ -50,6 +53,8 @@ namespace SAE_MATINFO.Windows
             };
 
             DataContext = this;
+
+            Title.Content = $"Attribution(s) de {Materiel.NomMateriel} ({Materiel.CodeBarre})";
         }
 
         private void DataGridPersonnels_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,7 +74,7 @@ namespace SAE_MATINFO.Windows
 
             Attribution attribution = new Attribution(personnel.IdPersonnel, Materiel.IdMateriel, DateTime.Today);
 
-            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Create);
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(ApplicationData, attribution, AttributionMaterielWindow.Type.Create);
             attributionMaterielWindow.Owner = this;
 
             bool result = attributionMaterielWindow.ShowDialog().Value;
@@ -89,7 +94,7 @@ namespace SAE_MATINFO.Windows
         {
             Attribution attribution = (Attribution)DataGridAttributions.SelectedItem;
 
-            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Update);
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(ApplicationData, attribution, AttributionMaterielWindow.Type.Update);
             attributionMaterielWindow.Owner = this;
 
             bool result = attributionMaterielWindow.ShowDialog().Value;

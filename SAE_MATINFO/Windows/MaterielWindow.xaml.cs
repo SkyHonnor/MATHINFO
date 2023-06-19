@@ -89,7 +89,16 @@ namespace SAE_MATINFO.Windows
             }
 
             if (WindowType == Type.Create)
+            {
                 Materiel.Create();
+
+                Materiel.Categorie = ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == Materiel.FKIdCategorie);
+                Materiel.Attributions = new ObservableCollection<Attribution>(ApplicationData.Attributions.ToList().FindAll(attribution => attribution.FKIdMateriel == Materiel.IdMateriel));
+
+                foreach (Categorie categorie in ApplicationData.Categories)
+                    if (categorie.IdCategorie == Materiel.FKIdCategorie)
+                        categorie.Materiels.Add(Materiel);
+            }
 
             if (WindowType == Type.Update)
                 Materiel.Update();

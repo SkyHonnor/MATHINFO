@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="MatINFO" Height="450" Width="1000" WindowStartupLocation="CenterOwner" Icon="/matinfo.png">
 
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    </Window.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
@@ -23,7 +19,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Content="Attributions"></Label>
+        <Label Name="Title" Grid.Row="0" Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Content="Attributions"></Label>
 
         <Grid Grid.Row="1" Margin="10,0,0,0">
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Click="Button_Click_Create">

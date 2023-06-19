@@ -27,8 +27,8 @@ namespace SAE_MATINFO.Windows
 
         public Personnel Personnel { get; set; }
 
-        public ObservableCollection<Materiel> Materiels { get; set; }
         public ICollectionView Attributions { get; set; }
+        public ObservableCollection<Materiel> Materiels { get; set; }
 
         public AttributionFromPersonnelWindow(ApplicationData applicationData, Personnel personnel)
         {
@@ -38,9 +38,10 @@ namespace SAE_MATINFO.Windows
 
             Personnel = personnel;
 
-            Materiels = applicationData.Materiels;
-            Attributions = CollectionViewSource.GetDefaultView(applicationData.Attributions);
+            CollectionViewSource attributionsView = new CollectionViewSource();
+            attributionsView.Source = ApplicationData.Attributions;
 
+            Attributions = attributionsView.View;
             Attributions.Filter = o =>
             {
                 Attribution attribution = (Attribution)o;
@@ -49,7 +50,11 @@ namespace SAE_MATINFO.Windows
                 return attribution.FKIdPersonnel == Personnel.IdPersonnel && materiel != null && attribution.FKIdMateriel == materiel.IdMateriel;
             };
 
+            Materiels = applicationData.Materiels;
+
             DataContext = this;
+
+            Title.Content = $"Attribution(s) de {Personnel.NomPersonnel} {Personnel.PrenomPersonnel} ({Personnel.MailPersonnel})";
         }
 
         private void DataGridMateriels_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,7 +74,7 @@ namespace SAE_MATINFO.Windows
 
             Attribution attribution = new Attribution(Personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
 
-            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Create);
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(ApplicationData, attribution, AttributionMaterielWindow.Type.Create);
             attributionMaterielWindow.Owner = this;
 
             bool result = attributionMaterielWindow.ShowDialog().Value;
@@ -89,7 +94,7 @@ namespace SAE_MATINFO.Windows
         {
             Attribution attribution = (Attribution)DataGridAttributions.SelectedItem;
 
-            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Update);
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(ApplicationData, attribution, AttributionMaterielWindow.Type.Update);
             attributionMaterielWindow.Owner = this;
 
             bool result = attributionMaterielWindow.ShowDialog().Value;

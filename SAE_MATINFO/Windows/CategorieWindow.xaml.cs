@@ -1,6 +1,7 @@
 ﻿using SAE_MATINFO.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +72,11 @@ namespace SAE_MATINFO.Windows
             }
 
             if (WindowType == Type.Create)
+            {
                 Categorie.Create();
+
+                Categorie.Materiels = new ObservableCollection<Materiel>(ApplicationData.Materiels.ToList().FindAll(materiel => materiel.FKIdCategorie == Categorie.IdCategorie));
+            }
 
             if (WindowType == Type.Update)
                 Categorie.Update();
