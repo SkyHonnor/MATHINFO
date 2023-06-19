@@ -45,7 +45,7 @@ namespace SAE_MATINFO.Pages
             MaterielWindow materielWindow = new MaterielWindow(materiel, applicationData.Categories, MaterielWindow.Type.Create);
             materielWindow.Owner = Window.GetWindow(this);
 
-            bool result = (bool)materielWindow.ShowDialog();
+            bool result = materielWindow.ShowDialog().Value;
 
             if (result)
             {
@@ -69,7 +69,7 @@ namespace SAE_MATINFO.Pages
             MaterielWindow materielWindow = new MaterielWindow((Materiel)materiel.Clone(), applicationData.Categories, MaterielWindow.Type.Update);
             materielWindow.Owner = Window.GetWindow(this);
 
-            bool result = (bool)materielWindow.ShowDialog();
+            bool result = materielWindow.ShowDialog().Value;
 
             if (result)
             {
@@ -101,10 +101,15 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
-            materiel.Delete();
+            MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {materiel.NomMateriel} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            applicationData.Materiels.Remove(materiel);
-            applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Remove(materiel);
+            if (result == MessageBoxResult.Yes)
+            {
+                materiel.Delete();
+                applicationData.Materiels.Remove(materiel);
+
+                applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Remove(materiel);
+            }
         }
 
         private void Show_Attributions(object sender, RoutedEventArgs e)

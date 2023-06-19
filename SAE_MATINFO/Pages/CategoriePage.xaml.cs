@@ -43,7 +43,7 @@ namespace SAE_MATINFO.Pages
             CategorieWindow categorieWindow = new CategorieWindow(categorie, CategorieWindow.Type.Create);
             categorieWindow.Owner = Window.GetWindow(this);
 
-            bool result = (bool)categorieWindow.ShowDialog();
+            bool result = categorieWindow.ShowDialog().Value;
 
             if (result)
                 applicationData.Categories.Add(categorie);
@@ -63,7 +63,7 @@ namespace SAE_MATINFO.Pages
             CategorieWindow categorieWindow = new CategorieWindow((Categorie)categorie.Clone(), CategorieWindow.Type.Update);
             categorieWindow.Owner = Window.GetWindow(this);
 
-            bool result = (bool)categorieWindow.ShowDialog();
+            bool result = categorieWindow.ShowDialog().Value;
 
             if (result)
             {
@@ -75,7 +75,8 @@ namespace SAE_MATINFO.Pages
         /// <summary>
         /// Gere l'evenement de clic sur le bouton "Supprimer".
         /// Supprime la categorie selectionneé dans le datagrid et
-        /// appelle la mehode Delete() pour supprimer la categorie pour ensuite l'enlever da la liste des categories de l'application.        /// </summary>
+        /// appelle la mehode Delete() pour supprimer la categorie pour ensuite l'enlever da la liste des categories de l'application.
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
@@ -83,9 +84,13 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
-            categorie.Delete();
+            MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {categorie.NomCategorie} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            applicationData.Categories.Remove(categorie);
+            if (result == MessageBoxResult.Yes)
+            {
+                categorie.Delete();
+                applicationData.Categories.Remove(categorie);
+            }
         }
     }
 }

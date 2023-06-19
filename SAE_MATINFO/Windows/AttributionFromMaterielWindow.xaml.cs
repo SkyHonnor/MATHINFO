@@ -72,7 +72,7 @@ namespace SAE_MATINFO.Windows
             AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Create);
             attributionMaterielWindow.Owner = this;
 
-            bool result = (bool)attributionMaterielWindow.ShowDialog();
+            bool result = attributionMaterielWindow.ShowDialog().Value;
 
             if (result)
             {
@@ -92,20 +92,26 @@ namespace SAE_MATINFO.Windows
             AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Update);
             attributionMaterielWindow.Owner = this;
 
-            bool result = (bool)attributionMaterielWindow.ShowDialog();
+            attributionMaterielWindow.ShowDialog();
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             Attribution attribution = (Attribution)DataGridAttributions.SelectedItem;
-            attribution.Delete();
 
-            ApplicationData.Attributions.Remove(attribution);
+            MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            ApplicationData.Materiels.ToList().Find(materiel => materiel.IdMateriel == attribution.FKIdMateriel).Attributions.Remove(attribution);
-            ApplicationData.Personnels.ToList().Find(personnel => personnel.IdPersonnel == attribution.FKIdPersonnel).Attributions.Remove(attribution);
+            if (result == MessageBoxResult.Yes)
+            {
+                attribution.Delete();
 
-            Attributions.Refresh();
+                ApplicationData.Attributions.Remove(attribution);
+
+                ApplicationData.Materiels.ToList().Find(materiel => materiel.IdMateriel == attribution.FKIdMateriel).Attributions.Remove(attribution);
+                ApplicationData.Personnels.ToList().Find(personnel => personnel.IdPersonnel == attribution.FKIdPersonnel).Attributions.Remove(attribution);
+
+                Attributions.Refresh();
+            }
         }
     }
 }

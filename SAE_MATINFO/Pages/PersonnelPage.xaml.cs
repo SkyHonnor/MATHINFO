@@ -37,7 +37,7 @@ namespace SAE_MATINFO.Pages
             PersonnelWindow personnelWindow = new PersonnelWindow(personnel, PersonnelWindow.Type.Create);
             personnelWindow.Owner = Window.GetWindow(this);
 
-            bool result = (bool)personnelWindow.ShowDialog();
+            bool result = personnelWindow.ShowDialog().Value;
 
             if (result)
                 applicationData.Personnels.Add(personnel);
@@ -50,7 +50,7 @@ namespace SAE_MATINFO.Pages
             PersonnelWindow personnelWindow = new PersonnelWindow((Personnel)personnel.Clone(), PersonnelWindow.Type.Update);
             personnelWindow.Owner = Window.GetWindow(this);
 
-            bool result = (bool)personnelWindow.ShowDialog();
+            bool result = personnelWindow.ShowDialog().Value;
 
             if (result)
             {
@@ -75,9 +75,13 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
-            personnel.Delete();
+            MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {personnel.NomPersonnel} {personnel.PrenomPersonnel} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            applicationData.Personnels.Remove(personnel);
+            if (result == MessageBoxResult.Yes)
+            {
+                personnel.Delete();
+                applicationData.Personnels.Remove(personnel);
+            }
         }
 
         private void Show_Attributions(object sender, RoutedEventArgs e)
