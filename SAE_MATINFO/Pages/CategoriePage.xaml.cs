@@ -28,6 +28,13 @@ namespace SAE_MATINFO.Pages
             DataContext = dataContext;
         }
 
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Ajouter une categorie" et
+        /// va creer une nouvelle categorie à partir des données de l'application
+        /// Ouvre une fenêtre de categorie pour la creation et ajoute la catégorie créée à la liste des categories.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
@@ -42,6 +49,13 @@ namespace SAE_MATINFO.Pages
                 applicationData.Categories.Add(categorie);
         }
 
+
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Modifier".
+        /// Recupere la categorie selectionneé dans le datagrid. Ouvre une fenetre de categorie pour la modification.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
@@ -58,6 +72,12 @@ namespace SAE_MATINFO.Pages
             }
         }
 
+        /// <summary>
+        /// Gere l'evenement de clic sur le bouton "Supprimer".
+        /// Supprime la categorie selectionneé dans le datagrid et
+        /// appelle la mehode Delete() pour supprimer la categorie pour ensuite l'enlever da la liste des categories de l'application.        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
