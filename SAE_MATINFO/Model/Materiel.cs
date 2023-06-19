@@ -334,5 +334,9 @@ namespace SAE_MATINFO.Model
             return this.MemberwiseClone();
         }
 
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.IdMateriel, this.FKIdCategorie, this.NomMateriel, this.CodeBarre, this.ReferenceConstructeur);
+        }
     }
 }

@@ -297,5 +297,10 @@ namespace SAE_MATINFO.Model
         {
             return $"{d.Year}/{d.Month}/{d.Day}";
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.FKIdPersonnel, this.FKIdMateriel, this.FKDateAttribution, this.Commentaire);
+        }
     }
 }

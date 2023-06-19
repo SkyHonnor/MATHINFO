@@ -25,7 +25,6 @@ namespace SAE_MATINFO.Model
 
         private ObservableCollection<Attribution> attributions = new ObservableCollection<Attribution>();
 
-
         /// <summary>
         /// L'IDPersonnel est unique et definit le personnel
         /// </summary>
@@ -311,6 +310,11 @@ namespace SAE_MATINFO.Model
         public object Clone()
         {
             return this.MemberwiseClone();
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.IdPersonnel, this.NomPersonnel, this.PrenomPersonnel, this.MailPersonnel);
         }
     }
 }
