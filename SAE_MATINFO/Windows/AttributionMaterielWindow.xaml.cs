@@ -45,7 +45,7 @@ namespace SAE_MATINFO.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Attribution.Commentaire != null)
+            if (Attribution.Commentaire == null)
             {
                 MessageBox.Show("Commentaire n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

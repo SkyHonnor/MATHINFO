@@ -89,10 +89,18 @@ namespace SAE_MATINFO.Windows
         {
             Attribution attribution = (Attribution)DataGridAttributions.SelectedItem;
 
-            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Update);
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow((Attribution)attribution.Clone(), AttributionMaterielWindow.Type.Update);
             attributionMaterielWindow.Owner = this;
 
-            attributionMaterielWindow.ShowDialog();
+            bool result = attributionMaterielWindow.ShowDialog().Value;
+
+            if (result)
+            {
+                attribution.FKDateAttribution = attributionMaterielWindow.Attribution.FKDateAttribution;
+                attribution.Commentaire = attributionMaterielWindow.Attribution.Commentaire;
+
+                DataGridAttributions.Items.Refresh();
+            }
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)

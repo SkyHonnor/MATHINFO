@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace SAE_MATINFO.Model
 {
-    public class Attribution : Crud<Attribution>
+    public class Attribution : Crud<Attribution>, ICloneable
     {
         /// <summary>
         /// Stocke 6 informations :
@@ -296,6 +296,11 @@ namespace SAE_MATINFO.Model
         private string CastDate(DateTime d)
         {
             return $"{d.Year}/{d.Month}/{d.Day}";
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
         public override int GetHashCode()
