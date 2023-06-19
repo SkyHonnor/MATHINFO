@@ -25,12 +25,14 @@ namespace SAE_MATINFO.Windows
 
         public Type WindowType { get; private set; }
 
+        public Attribution CurrentAttribution { get; set; }
         public Attribution Attribution { get; set; }
 
         public AttributionMaterielWindow(Attribution attribution, Type windowType)
         {
             InitializeComponent();
 
+            CurrentAttribution = attribution;
             Attribution = attribution;
 
             DataContext = this;
@@ -40,7 +42,10 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Créer une attribution";
 
             if (WindowType == Type.Update)
+            {
                 Button.Content = "Modifier l'attribution";
+                Attribution = (Attribution)Attribution.Clone();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,7 +60,16 @@ namespace SAE_MATINFO.Windows
                 Attribution.Create();
 
             if (WindowType == Type.Update)
-                Attribution.Update();
+            {
+                if (CurrentAttribution.FKDateAttribution != Attribution.FKDateAttribution)
+                {
+                    CurrentAttribution.Delete();
+                    Attribution.Create();
+                }
+                else
+                    Attribution.Update();
+            }
+                
 
             DialogResult = true;
         }

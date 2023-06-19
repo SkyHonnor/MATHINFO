@@ -24,13 +24,15 @@ namespace SAE_MATINFO.Windows
         public enum Type { Create, Update };
 
         public Type WindowType { get; private set; }
-
+        
+        public ApplicationData ApplicationData { get; set; }
         public Personnel Personnel { get; set; }
 
-        public PersonnelWindow(Personnel personnel, Type windowType)
+        public PersonnelWindow(ApplicationData applicationData, Personnel personnel, Type windowType)
         {
             InitializeComponent();
 
+            ApplicationData = applicationData;
             Personnel = personnel;
 
             DataContext = this;
@@ -40,7 +42,10 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Créer un personnel";
 
             if (WindowType == Type.Update)
+            {
                 Button.Content = "Modifier le personnel";
+                Personnel = (Personnel)Personnel.Clone();
+            }    
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -60,6 +65,13 @@ namespace SAE_MATINFO.Windows
             if (Personnel.MailPersonnel == null || !MailAddress.TryCreate(Personnel.MailPersonnel, out _))
             {
                 MessageBox.Show("Mail personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            bool find = ApplicationData.Personnels.ToList().Find(personnel => personnel.MailPersonnel == Personnel.MailPersonnel) != null;
+            if (WindowType == Type.Create && find)
+            {
+                MessageBox.Show("Mail personnel existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

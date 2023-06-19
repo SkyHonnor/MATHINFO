@@ -34,7 +34,7 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = new Personnel();
 
-            PersonnelWindow personnelWindow = new PersonnelWindow(personnel, PersonnelWindow.Type.Create);
+            PersonnelWindow personnelWindow = new PersonnelWindow(applicationData, personnel, PersonnelWindow.Type.Create);
             personnelWindow.Owner = Window.GetWindow(this);
 
             bool result = personnelWindow.ShowDialog().Value;
@@ -45,9 +45,10 @@ namespace SAE_MATINFO.Pages
 
         private void Button_Click_Update(object sender, MouseButtonEventArgs e)
         {
+            ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
-            PersonnelWindow personnelWindow = new PersonnelWindow((Personnel)personnel.Clone(), PersonnelWindow.Type.Update);
+            PersonnelWindow personnelWindow = new PersonnelWindow(applicationData, personnel, PersonnelWindow.Type.Update);
             personnelWindow.Owner = Window.GetWindow(this);
 
             bool result = personnelWindow.ShowDialog().Value;
@@ -89,7 +90,7 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
-            AttributionFromPersonnelWindow attributionFromPersonnelWindow = new AttributionFromPersonnelWindow(personnel, applicationData);
+            AttributionFromPersonnelWindow attributionFromPersonnelWindow = new AttributionFromPersonnelWindow(applicationData, personnel);
             attributionFromPersonnelWindow.Owner = Window.GetWindow(this);
 
             attributionFromPersonnelWindow.ShowDialog();

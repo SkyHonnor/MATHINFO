@@ -24,12 +24,14 @@ namespace SAE_MATINFO.Windows
 
         public Type WindowType { get; private set; }
 
+        public ApplicationData ApplicationData { get; private set; }
         public Categorie Categorie { get; set; }
 
-        public CategorieWindow(Categorie categorie, Type windowType)
+        public CategorieWindow(ApplicationData applicationData, Categorie categorie, Type windowType)
         {
             InitializeComponent();
 
+            ApplicationData = applicationData;
             Categorie = categorie;
 
             DataContext = this;
@@ -39,7 +41,10 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Créer une catégorie";
 
             if (WindowType == Type.Update)
+            {
                 Button.Content = "Modifier la catégorie";
+                Categorie = (Categorie)Categorie.Clone();
+            }
         }
 
         /// <summary>
@@ -55,6 +60,13 @@ namespace SAE_MATINFO.Windows
             if (string.IsNullOrWhiteSpace(Categorie.NomCategorie))
             {
                 MessageBox.Show("Nom catégorie n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            bool find = ApplicationData.Categories.ToList().Find(categorie => categorie.NomCategorie == Categorie.NomCategorie) != null;
+            if (WindowType == Type.Create && find)
+            {
+                MessageBox.Show("Nom catégorie existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

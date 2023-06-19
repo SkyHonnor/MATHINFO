@@ -41,7 +41,7 @@
 
         <DataGrid Name="DataGridAttributions" Grid.Row="2" Grid.Column="1" Margin="10,0,10,10" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Attributions}" MouseDoubleClick="DataGridAttributions_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding FKDateAttribution}"/>
+                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding FKDateAttribution, StringFormat=d}"/>
                 <DataGridTextColumn Header="Commentaire" Width="*" Binding="{Binding Commentaire}"/>
 
                 <DataGridTemplateColumn Width="100">

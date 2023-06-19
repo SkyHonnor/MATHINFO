@@ -42,7 +42,7 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = new Materiel();
 
-            MaterielWindow materielWindow = new MaterielWindow(materiel, applicationData.Categories, MaterielWindow.Type.Create);
+            MaterielWindow materielWindow = new MaterielWindow(applicationData, materiel, MaterielWindow.Type.Create);
             materielWindow.Owner = Window.GetWindow(this);
 
             bool result = materielWindow.ShowDialog().Value;
@@ -66,7 +66,7 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
-            MaterielWindow materielWindow = new MaterielWindow((Materiel)materiel.Clone(), applicationData.Categories, MaterielWindow.Type.Update);
+            MaterielWindow materielWindow = new MaterielWindow(applicationData, materiel, MaterielWindow.Type.Update);
             materielWindow.Owner = Window.GetWindow(this);
 
             bool result = materielWindow.ShowDialog().Value;
@@ -117,7 +117,7 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
-            AttributionFromMaterielWindow attributionFromMaterielWindow = new AttributionFromMaterielWindow(materiel, applicationData);
+            AttributionFromMaterielWindow attributionFromMaterielWindow = new AttributionFromMaterielWindow(applicationData, materiel);
             attributionFromMaterielWindow.Owner = Window.GetWindow(this);
 
             attributionFromMaterielWindow.ShowDialog();

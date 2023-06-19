@@ -25,15 +25,19 @@ namespace SAE_MATINFO.Windows
 
         public Type WindowType { get; private set; }
 
+        public ApplicationData ApplicationData { get; private set; }
+
         public Materiel Materiel { get; set; }
         public ObservableCollection<Categorie> Categories { get; set; }
 
-        public MaterielWindow(Materiel materiel, ObservableCollection<Categorie> categories, Type windowType)
+        public MaterielWindow(ApplicationData applicationData, Materiel materiel, Type windowType)
         {
             InitializeComponent();
 
+            ApplicationData = applicationData;
+
             Materiel = materiel;
-            Categories = categories;
+            Categories = ApplicationData.Categories;
 
             DataContext = this;
             WindowType = windowType;
@@ -42,7 +46,10 @@ namespace SAE_MATINFO.Windows
                 Button.Content = "Créer un matériel";
 
             if (WindowType == Type.Update)
+            {
                 Button.Content = "Modifier le matériel";
+                Materiel = (Materiel)Materiel.Clone();
+            }
         }
 
 
@@ -71,6 +78,13 @@ namespace SAE_MATINFO.Windows
             if (string.IsNullOrWhiteSpace(Materiel.ReferenceConstructeur))
             {
                 MessageBox.Show("Reference constructeur n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            bool find = ApplicationData.Materiels.ToList().Find(materiel => materiel.CodeBarre == Materiel.CodeBarre) != null;
+            if (WindowType == Type.Create && find)
+            {
+                MessageBox.Show("Code barre existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

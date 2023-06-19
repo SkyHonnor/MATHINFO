@@ -30,7 +30,7 @@ namespace SAE_MATINFO.Windows
         public ObservableCollection<Personnel> Personnels { get; set; }
         public ICollectionView Attributions { get; set; }
 
-        public AttributionFromMaterielWindow(Materiel materiel, ApplicationData applicationData)
+        public AttributionFromMaterielWindow(ApplicationData applicationData, Materiel materiel)
         {
             InitializeComponent();
 
@@ -89,7 +89,7 @@ namespace SAE_MATINFO.Windows
         {
             Attribution attribution = (Attribution)DataGridAttributions.SelectedItem;
 
-            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow((Attribution)attribution.Clone(), AttributionMaterielWindow.Type.Update);
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(attribution, AttributionMaterielWindow.Type.Update);
             attributionMaterielWindow.Owner = this;
 
             bool result = attributionMaterielWindow.ShowDialog().Value;

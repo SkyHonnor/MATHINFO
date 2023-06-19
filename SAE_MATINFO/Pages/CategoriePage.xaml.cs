@@ -40,7 +40,7 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = new Categorie();
 
-            CategorieWindow categorieWindow = new CategorieWindow(categorie, CategorieWindow.Type.Create);
+            CategorieWindow categorieWindow = new CategorieWindow(applicationData, categorie, CategorieWindow.Type.Create);
             categorieWindow.Owner = Window.GetWindow(this);
 
             bool result = categorieWindow.ShowDialog().Value;
@@ -58,9 +58,10 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
+            ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
-            CategorieWindow categorieWindow = new CategorieWindow((Categorie)categorie.Clone(), CategorieWindow.Type.Update);
+            CategorieWindow categorieWindow = new CategorieWindow(applicationData, categorie, CategorieWindow.Type.Update);
             categorieWindow.Owner = Window.GetWindow(this);
 
             bool result = categorieWindow.ShowDialog().Value;
