@@ -25,33 +25,45 @@
             <ComboBox Name="Filtre" Style="{StaticResource MainComboBox}" ItemsSource="{Binding Categories}" HorizontalAlignment="Right" SelectedIndex="0" DisplayMemberPath="NomCategorie"></ComboBox>
         </Grid>
 
-        <DataGrid Name="DataGrid" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" DataContext="{Binding SelectedItem, ElementName=Filtre}" ItemsSource="{Binding Materiels}" MouseDoubleClick="Button_Click_Update">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom materiel" Width="*" Binding="{Binding NomMateriel}"/>
-                <DataGridTextColumn Header="Catégorie" Width="*" Binding="{Binding Categorie.NomCategorie}"/>
-                <DataGridTextColumn Header="Code barre" Width="*" Binding="{Binding CodeBarre}"/>
-                <DataGridTextColumn Header="Référence constructeur" Width="*" Binding="{Binding ReferenceConstructeur}"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
-                <DataGridTemplateColumn Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Attributions">
-                                Attributions
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+            <StackPanel Grid.Row="0">
+                <Label>Recherchez par code barre</Label>
+                <TextBox Name="Recherche" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="Recherche_TextChanged"></TextBox>
+            </StackPanel>
 
-                <DataGridTemplateColumn Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Delete">
-                                Supprimer
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+            <DataGrid Name="DataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" DataContext="{Binding SelectedItem, ElementName=Filtre}" ItemsSource="{Binding Materiels}" MouseDoubleClick="Button_Click_Update">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom materiel" Width="*" Binding="{Binding NomMateriel}"/>
+                    <DataGridTextColumn Header="Catégorie" Width="*" Binding="{Binding Categorie.NomCategorie}"/>
+                    <DataGridTextColumn Header="Code barre" Width="*" Binding="{Binding CodeBarre}"/>
+                    <DataGridTextColumn Header="Référence constructeur" Width="*" Binding="{Binding ReferenceConstructeur}"/>
+
+                    <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Attributions">
+                                    Attributions
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Delete">
+                                    Supprimer
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Page>

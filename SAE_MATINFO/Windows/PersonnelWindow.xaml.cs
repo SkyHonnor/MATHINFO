@@ -25,7 +25,7 @@ namespace SAE_MATINFO.Windows
 
         public Type WindowType { get; private set; }
         
-        public ApplicationData ApplicationData { get; set; }
+        public ApplicationData ApplicationData { get; private set; }
         public Personnel Personnel { get; set; }
 
         public PersonnelWindow(ApplicationData applicationData, Personnel personnel, Type windowType)

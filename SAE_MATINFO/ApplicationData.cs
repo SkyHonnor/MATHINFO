@@ -26,16 +26,6 @@ namespace SAE_MATINFO
 
         public ApplicationData()
         {
-            Pages = new Page[]
-            {
-                new Pages.CategoriePage(this),
-                new Pages.MaterielPage(this),
-                new Pages.PersonnelPage(this),
-                new Pages.AttributionPage(this),
-            };
-
-            CurrentPageIndex = 0;
-
             //--------------------------------------------------
 
             Categorie categorieRead = new Categorie();
@@ -75,6 +65,16 @@ namespace SAE_MATINFO
                 materiel.Attributions = new ObservableCollection<Attribution>(Attributions.ToList().FindAll(attribution => attribution.FKIdMateriel == materiel.IdMateriel));
 
             //--------------------------------------------------
+
+            Pages = new Page[]
+            {
+                new Pages.CategoriePage(this),
+                new Pages.MaterielPage(this),
+                new Pages.PersonnelPage(this),
+                new Pages.AttributionPage(this),
+            };
+
+            CurrentPageIndex = 0;
         }
 
         public int CurrentPageIndex

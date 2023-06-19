@@ -2,6 +2,8 @@
 using SAE_MATINFO.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +25,27 @@ namespace SAE_MATINFO.Pages
     /// </summary>
     public partial class MaterielPage : Page
     {
-        public MaterielPage(object dataContext)
+        public ApplicationData ApplicationData { get; private set; }
+
+        public ICollectionView Materiels { get; set; }
+        public ObservableCollection<Categorie> Categories { get; set; }
+
+        public MaterielPage(ApplicationData applicationData)
         {
             InitializeComponent();
-            DataContext = dataContext;
+
+            ApplicationData = applicationData;
+
+            Materiels = CollectionViewSource.GetDefaultView(ApplicationData.Materiels);
+            Materiels.Filter = o =>
+            {
+                Materiel materiel = (Materiel)o;
+                return materiel.CodeBarre.IndexOf(Recherche.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+            };
+
+            Categories = ApplicationData.Categories;
+
+            DataContext = this;
         }
 
         /// <summary>
@@ -121,6 +140,11 @@ namespace SAE_MATINFO.Pages
             attributionFromMaterielWindow.Owner = Window.GetWindow(this);
 
             attributionFromMaterielWindow.ShowDialog();
+        }
+
+        private void Recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Materiels.Refresh();
         }
     }
 }

@@ -2,6 +2,7 @@
 using SAE_MATINFO.Windows;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -22,10 +24,24 @@ namespace SAE_MATINFO.Pages
     /// </summary>
     public partial class CategoriePage : Page
     {
-        public CategoriePage(object dataContext)
+        public ApplicationData ApplicationData { get; private set; }
+
+        public ICollectionView Categories { get; set; }
+
+        public CategoriePage(ApplicationData applicationData)
         {
             InitializeComponent();
-            DataContext = dataContext;
+
+            ApplicationData = applicationData;
+
+            Categories = CollectionViewSource.GetDefaultView(ApplicationData.Categories);
+            Categories.Filter = o =>
+            {
+                Categorie categorie = (Categorie)o;
+                return categorie.NomCategorie.IndexOf(Recherche.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+            };
+
+            DataContext = this;
         }
 
         /// <summary>
@@ -92,6 +108,11 @@ namespace SAE_MATINFO.Pages
                 categorie.Delete();
                 applicationData.Categories.Remove(categorie);
             }
+        }
+
+        private void Recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Categories.Refresh();
         }
     }
 }

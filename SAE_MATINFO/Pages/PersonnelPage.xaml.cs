@@ -2,6 +2,7 @@
 using SAE_MATINFO.Windows;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,32 +24,43 @@ namespace SAE_MATINFO.Pages
     /// </summary>
     public partial class PersonnelPage : Page
     {
-        public PersonnelPage(object dataContext)
+        public ApplicationData ApplicationData { get; private set; }
+        public ICollectionView Personnels { get; set; }
+
+        public PersonnelPage(ApplicationData applicationData)
         {
             InitializeComponent();
-            DataContext = dataContext;
+
+            ApplicationData = applicationData;
+
+            Personnels = CollectionViewSource.GetDefaultView(ApplicationData.Personnels);
+            Personnels.Filter = o =>
+            {
+                Personnel personnel = (Personnel)o;
+                return personnel.MailPersonnel.IndexOf(Recherche.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+            };
+
+            DataContext = this;
         }
 
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = new Personnel();
 
-            PersonnelWindow personnelWindow = new PersonnelWindow(applicationData, personnel, PersonnelWindow.Type.Create);
+            PersonnelWindow personnelWindow = new PersonnelWindow(ApplicationData, personnel, PersonnelWindow.Type.Create);
             personnelWindow.Owner = Window.GetWindow(this);
 
             bool result = personnelWindow.ShowDialog().Value;
 
             if (result)
-                applicationData.Personnels.Add(personnel);
+                ApplicationData.Personnels.Add(personnel);
         }
 
         private void Button_Click_Update(object sender, MouseButtonEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
-            PersonnelWindow personnelWindow = new PersonnelWindow(applicationData, personnel, PersonnelWindow.Type.Update);
+            PersonnelWindow personnelWindow = new PersonnelWindow(ApplicationData, personnel, PersonnelWindow.Type.Update);
             personnelWindow.Owner = Window.GetWindow(this);
 
             bool result = personnelWindow.ShowDialog().Value;
@@ -73,7 +85,6 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
             MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {personnel.NomPersonnel} {personnel.PrenomPersonnel} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -81,19 +92,23 @@ namespace SAE_MATINFO.Pages
             if (result == MessageBoxResult.Yes)
             {
                 personnel.Delete();
-                applicationData.Personnels.Remove(personnel);
+                ApplicationData.Personnels.Remove(personnel);
             }
         }
 
         private void Show_Attributions(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
-            AttributionFromPersonnelWindow attributionFromPersonnelWindow = new AttributionFromPersonnelWindow(applicationData, personnel);
+            AttributionFromPersonnelWindow attributionFromPersonnelWindow = new AttributionFromPersonnelWindow(ApplicationData, personnel);
             attributionFromPersonnelWindow.Owner = Window.GetWindow(this);
 
             attributionFromPersonnelWindow.ShowDialog();
+        }
+
+        private void Recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Personnels.Refresh();
         }
     }
 }
