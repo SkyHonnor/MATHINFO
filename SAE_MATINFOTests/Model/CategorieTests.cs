@@ -21,10 +21,8 @@ namespace SAE_MATINFO.Model.Tests
             Categorie categorie2 = new Categorie("Ordinateur");
             categorie2.Read();
 
-            Console.WriteLine(categorie1.NomCategorie);
-            Console.WriteLine(categorie2.NomCategorie);
+            Assert.AreEqual(categorie1, categorie2, "Test de creation d'une Categorie");
 
-            Assert.AreEqual(categorie1, categorie2);
         }
 
         [TestMethod()]
@@ -38,7 +36,7 @@ namespace SAE_MATINFO.Model.Tests
             Categorie categorie2 = new Categorie("Ordinateur");
             categorie2.Read();
 
-            Assert.AreEqual(0, categorie2.IdCategorie);
+            Assert.AreEqual(0, categorie2.IdCategorie, "Test de suppression d'une Categorie");
 
         }
 
@@ -51,7 +49,7 @@ namespace SAE_MATINFO.Model.Tests
             Categorie categorie2 = new Categorie("Ordinateur");
             categorie2.Read();
 
-            Assert.AreEqual(categorie1, categorie2);
+            Assert.AreEqual(categorie1, categorie2, "Test de lecture d'une Categorie");
 
         }
 
@@ -67,7 +65,7 @@ namespace SAE_MATINFO.Model.Tests
             Categorie personnel2 = new Categorie("Imprimante");
             personnel2.Read();
 
-            Assert.AreEqual(personnel2, categorie1);
+            Assert.AreEqual(personnel2, categorie1, "Test de mise à jour d'une Categorie");
 
         }
 
@@ -82,7 +80,7 @@ namespace SAE_MATINFO.Model.Tests
             categorie3.Create();
 
             ObservableCollection<Categorie> lesCategorie = new Categorie().FindAll();
-            Assert.AreEqual(3, lesCategorie.Count);
+            Assert.AreEqual(3, lesCategorie.Count, "Test de récuperation de toute les Categorie");
 
         }
 
@@ -97,7 +95,7 @@ namespace SAE_MATINFO.Model.Tests
             categorie3.Create();
 
             ObservableCollection<Categorie> lesCategorie = new Categorie().FindBySelection("nom_categorie = 'Imprimante'");
-            Assert.AreEqual(1, lesCategorie.Count);
+            Assert.AreEqual(1, lesCategorie.Count, "Test de récuperation d'une Categorie avec un/des critère(s) spécifique(s)");
 
         }
 

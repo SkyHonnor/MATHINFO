@@ -23,7 +23,7 @@ namespace SAE_MATINFO.Model.Tests
             Personnel personnel2 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel2.Read();
 
-            Assert.AreEqual(personnel1, personnel2);
+            Assert.AreEqual(personnel1, personnel2, "Test de creation d'un Personnel");
 
         }
 
@@ -38,7 +38,7 @@ namespace SAE_MATINFO.Model.Tests
             Personnel personnel2 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel2.Read();
 
-            Assert.AreEqual(0, personnel2.IdPersonnel);
+            Assert.AreEqual(0, personnel2.IdPersonnel, "Test de suppression d'un Personnel");
 
         }
 
@@ -51,7 +51,7 @@ namespace SAE_MATINFO.Model.Tests
             Personnel personnel2 = new Personnel("HIDRI", "Imene", "hidri@gmail.com");
             personnel2.Read();
 
-            Assert.AreEqual(personnel1, personnel2);
+            Assert.AreEqual(personnel1, personnel2, "Test de lecture d'un Personnel");
 
         }
 
@@ -69,7 +69,7 @@ namespace SAE_MATINFO.Model.Tests
             Personnel personnel2 = new Personnel("BATTIG", "Dylan", "dylanelix@gmail.com");
             personnel2.Read();
 
-            Assert.AreEqual(personnel2, personnel1);
+            Assert.AreEqual(personnel2, personnel1, "Test de mise à jour d'un Personnel");
 
         }
 
@@ -84,7 +84,7 @@ namespace SAE_MATINFO.Model.Tests
             personnel3.Create();
 
             ObservableCollection<Personnel> lesPersonnels = new Personnel().FindAll();
-            Assert.AreEqual(3, lesPersonnels.Count);
+            Assert.AreEqual(3, lesPersonnels.Count, "Test de récuperation de tout les Personnel");
 
         }
 
@@ -99,7 +99,7 @@ namespace SAE_MATINFO.Model.Tests
             personnel3.Create();
 
             ObservableCollection<Personnel> lesPersonnels = new Personnel().FindBySelection("mail = 'ruaultmaxime@gmail.com'");
-            Assert.AreEqual(1, lesPersonnels.Count);
+            Assert.AreEqual(1, lesPersonnels.Count, "Test de récuperation d'un  Personnel avec un/des critère(s) spécifique(s)");
 
 
         }
