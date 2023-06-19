@@ -23,7 +23,7 @@ namespace SAE_MATINFO.Model
         private string prenomPersonnel;
         private string mailPersonnel;
 
-        private ObservableCollection<Attribution> attributions;
+        private ObservableCollection<Attribution> attributions = new ObservableCollection<Attribution>();
 
 
         /// <summary>
@@ -95,8 +95,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                bool valid = MailAddress.TryCreate(value, out _);
-                if (!valid)
+                if (string.IsNullOrEmpty(value) || !MailAddress.TryCreate(value, out _))
                     throw new ArgumentException("Le champ mail n'est pas valide");
 
                 this.mailPersonnel = value;
@@ -126,7 +125,6 @@ namespace SAE_MATINFO.Model
             IdPersonnel = idPersonnel;
         }
 
-
         /// <summary>
         /// Constructeur de la classe Personnel.
         /// </summary>
@@ -141,13 +139,10 @@ namespace SAE_MATINFO.Model
             NomPersonnel = nomPersonnel;
             PrenomPersonnel = prenomPersonnel;
             MailPersonnel = mailPersonnel;
-
-            Attributions = new ObservableCollection<Attribution>();
         }
+
         public Personnel(string nomPersonnel, string prenomPersonnel, string mailPersonnel)
         : this(0, nomPersonnel, prenomPersonnel, mailPersonnel) { }
-
-
 
         /// <summary>
         /// Permet la creation d'un Personnel dans la base de données.

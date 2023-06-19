@@ -21,7 +21,7 @@ namespace SAE_MATINFO.Model
         private int idCategorie;
         private string nomCategorie;
 
-        private ObservableCollection<Materiel> materiels;
+        private ObservableCollection<Materiel> materiels = new ObservableCollection<Materiel>();
 
 
         /// <summary>
@@ -87,8 +87,6 @@ namespace SAE_MATINFO.Model
         {
             IdCategorie = idCategorie;
             NomCategorie = nomCategorie;
-
-            Materiels = new ObservableCollection<Materiel>();
         }
 
         public Categorie(string nomCategorie) : this(0, nomCategorie) {}
@@ -213,8 +211,7 @@ namespace SAE_MATINFO.Model
         {
             return obj is Categorie categorie &&
                    this.IdCategorie == categorie.IdCategorie &&
-                   this.NomCategorie == categorie.NomCategorie &&
-                   EqualityComparer<ObservableCollection<Materiel>>.Default.Equals(this.Materiels, categorie.Materiels);
+                   this.NomCategorie == categorie.NomCategorie;
         }
 
         public static bool operator ==(Categorie? left, Categorie? right)

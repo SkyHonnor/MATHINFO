@@ -57,8 +57,7 @@ namespace SAE_MATINFO.Windows
                 return;
             }
 
-            bool mailValid = MailAddress.TryCreate(Personnel.MailPersonnel, out _);
-            if (mailValid)
+            if (Personnel.MailPersonnel == null || !MailAddress.TryCreate(Personnel.MailPersonnel, out _))
             {
                 MessageBox.Show("Mail personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

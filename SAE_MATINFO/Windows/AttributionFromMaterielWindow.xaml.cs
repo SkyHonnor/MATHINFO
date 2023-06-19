@@ -102,6 +102,9 @@ namespace SAE_MATINFO.Windows
 
             ApplicationData.Attributions.Remove(attribution);
 
+            ApplicationData.Materiels.ToList().Find(materiel => materiel.IdMateriel == attribution.FKIdMateriel).Attributions.Remove(attribution);
+            ApplicationData.Personnels.ToList().Find(personnel => personnel.IdPersonnel == attribution.FKIdPersonnel).Attributions.Remove(attribution);
+
             Attributions.Refresh();
         }
     }

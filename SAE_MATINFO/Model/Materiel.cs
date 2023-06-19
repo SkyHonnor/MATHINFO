@@ -25,7 +25,7 @@ namespace SAE_MATINFO.Model
         private string referenceConstructeur;
 
         private Categorie categorie;
-        private ObservableCollection<Attribution> attributions;
+        private ObservableCollection<Attribution> attributions = new ObservableCollection<Attribution>();
 
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace SAE_MATINFO.Model
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Le champs NomMateriel doit etre sasie");
 
-                this.nomMateriel = value.ToUpper(); ;
+                this.nomMateriel = value;
             }
         }
 
@@ -181,8 +181,6 @@ namespace SAE_MATINFO.Model
             NomMateriel = nomMateriel;
             CodeBarre = codeBarre;
             ReferenceConstructeur = referenceConstructeur;
-
-            Attributions = new ObservableCollection<Attribution>();
         }
 
         public Materiel(int fkIdCategorie, string nomMateriel, string codeBarre, string referenceConstructeur) 
@@ -295,6 +293,8 @@ namespace SAE_MATINFO.Model
 
             if (data != null)
             {
+                Console.WriteLine(data.Rows.Count);
+
                 foreach (DataRow row in data.Rows)
                 {
                     Materiel materiel = new Materiel(
@@ -316,9 +316,7 @@ namespace SAE_MATINFO.Model
                    this.FKIdCategorie == materiel.FKIdCategorie &&
                    this.NomMateriel == materiel.NomMateriel &&
                    this.CodeBarre == materiel.CodeBarre &&
-                   this.ReferenceConstructeur == materiel.ReferenceConstructeur &&
-                   EqualityComparer<Categorie>.Default.Equals(this.Categorie, materiel.Categorie) &&
-                   EqualityComparer<ObservableCollection<Attribution>>.Default.Equals(this.Attributions, materiel.Attributions);
+                   this.ReferenceConstructeur == materiel.ReferenceConstructeur;
         }
 
         public static bool operator ==(Materiel? left, Materiel? right)

@@ -104,6 +104,7 @@ namespace SAE_MATINFO.Pages
             materiel.Delete();
 
             applicationData.Materiels.Remove(materiel);
+            applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Remove(materiel);
         }
 
         private void Show_Attributions(object sender, RoutedEventArgs e)

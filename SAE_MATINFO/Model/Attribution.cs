@@ -91,7 +91,7 @@ namespace SAE_MATINFO.Model
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value == null)
                     throw new ArgumentException("Le champs Commentaire doit etre saisie");
 
                 this.commentaire = value;
@@ -280,9 +280,7 @@ namespace SAE_MATINFO.Model
                    this.FKIdPersonnel == attribution.FKIdPersonnel &&
                    this.FKIdMateriel == attribution.FKIdMateriel &&
                    this.FKDateAttribution == attribution.FKDateAttribution &&
-                   this.Commentaire == attribution.Commentaire &&
-                   EqualityComparer<Personnel>.Default.Equals(this.Personnel, attribution.Personnel) &&
-                   EqualityComparer<Materiel>.Default.Equals(this.Materiel, attribution.Materiel);
+                   this.Commentaire == attribution.Commentaire;
         }
 
         public static bool operator ==(Attribution? left, Attribution? right)
