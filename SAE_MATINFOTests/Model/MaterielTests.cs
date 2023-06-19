@@ -107,8 +107,8 @@ namespace SAE_MATINFO.Model.Tests
             materiel3.Create();
 
             ObservableCollection<Materiel> lesMateriels = new Materiel().FindBySelection("nom_materiel = 'PC de ouf'");
-            Assert.AreEqual(1, lesMateriels.Count, "Test de récuperation d'un Materiel avec un/des critère(s) spécifique(s)");
 
+            Assert.AreEqual(1, lesMateriels.Count, "Test de récuperation d'un Materiel avec un/des critère(s) spécifique(s)");
         }
 
 
