@@ -21,8 +21,10 @@ namespace SAE_MATINFO.Model.Tests
             Categorie categorie2 = new Categorie("Ordinateur");
             categorie2.Read();
 
-            Assert.AreEqual(categorie1, categorie2);
+            Console.WriteLine(categorie1.NomCategorie);
+            Console.WriteLine(categorie2.NomCategorie);
 
+            Assert.AreEqual(categorie1, categorie2);
         }
 
         [TestMethod()]

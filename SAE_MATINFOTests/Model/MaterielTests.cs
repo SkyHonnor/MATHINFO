@@ -108,7 +108,6 @@ namespace SAE_MATINFO.Model.Tests
 
             ObservableCollection<Materiel> lesMateriels = new Materiel().FindBySelection("nom_materiel = 'PC de ouf'");
             Assert.AreEqual(1, lesMateriels.Count);
-
         }
 
 

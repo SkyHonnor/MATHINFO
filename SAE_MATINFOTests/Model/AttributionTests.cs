@@ -85,7 +85,7 @@ namespace SAE_MATINFO.Model.Tests
             attribution1.FKDateAttribution = DateTime.Today.AddDays(1);
             attribution1.Update();
 
-            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today);
+            Attribution attribution2 = new Attribution(personnel.IdPersonnel, materiel.IdMateriel, DateTime.Today.AddDays(1));
             attribution2.Read();
 
             Assert.AreEqual(attribution1, attribution2);
