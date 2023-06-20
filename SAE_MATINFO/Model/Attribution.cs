@@ -10,17 +10,16 @@ using System.Xml;
 
 namespace SAE_MATINFO.Model
 {
-    /// <summary>
-    /// Stocke 6 informations :
-    /// 2 entiers : la fkIdPersonnel et la fkIdMateriel
-    /// 1 datetime : la fkIdMateriel
-    /// 1 string : le commentaire de l'attribution
-    /// 1 Personnel: un personnel
-    /// 1 Materiel: un materiel
-    /// </summary> 
     public class Attribution : Crud<Attribution>, ICloneable
     {
-        
+        /// <summary>
+        /// Stocke 6 informations :
+        /// 2 entiers : la fkIdPersonnel et la fkIdMateriel
+        /// 1 datetime : la fkIdMateriel
+        /// 1 string : le commentaire de l'attribution
+        /// 1 Personnel: un personnel
+        /// 1 Materiel: un materiel
+        /// </summary> 
 
         private int fKIdPersonnel;
         private int fKIdMateriel;
