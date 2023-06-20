@@ -77,6 +77,9 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
+            if (categorie == null)
+                return;
+
             CategorieWindow categorieWindow = new CategorieWindow(applicationData, categorie, CategorieWindow.Type.Update);
             categorieWindow.Owner = Window.GetWindow(this);
 
@@ -100,6 +103,9 @@ namespace SAE_MATINFO.Pages
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
+
+            if (categorie == null)
+                return;
 
             MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {categorie.NomCategorie} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

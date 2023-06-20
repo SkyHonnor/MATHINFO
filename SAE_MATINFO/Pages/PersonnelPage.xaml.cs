@@ -60,6 +60,9 @@ namespace SAE_MATINFO.Pages
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
+            if (personnel == null)
+                return;
+
             PersonnelWindow personnelWindow = new PersonnelWindow(ApplicationData, personnel, PersonnelWindow.Type.Update);
             personnelWindow.Owner = Window.GetWindow(this);
 
@@ -87,6 +90,9 @@ namespace SAE_MATINFO.Pages
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
+            if (personnel == null)
+                return;
+
             MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {personnel.NomPersonnel} {personnel.PrenomPersonnel} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
@@ -99,6 +105,9 @@ namespace SAE_MATINFO.Pages
         private void Show_Attributions(object sender, RoutedEventArgs e)
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
+
+            if (personnel == null)
+                return;
 
             AttributionFromPersonnelWindow attributionFromPersonnelWindow = new AttributionFromPersonnelWindow(ApplicationData, personnel);
             attributionFromPersonnelWindow.Owner = Window.GetWindow(this);

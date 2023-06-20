@@ -85,6 +85,9 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
+            if (materiel == null)
+                return;
+
             MaterielWindow materielWindow = new MaterielWindow(applicationData, materiel, MaterielWindow.Type.Update);
             materielWindow.Owner = Window.GetWindow(this);
 
@@ -120,6 +123,9 @@ namespace SAE_MATINFO.Pages
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
+            if (materiel == null)
+                return;
+
             MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer {materiel.NomMateriel} ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
@@ -135,6 +141,9 @@ namespace SAE_MATINFO.Pages
         {
             ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
+
+            if (materiel == null)
+                return;
 
             AttributionFromMaterielWindow attributionFromMaterielWindow = new AttributionFromMaterielWindow(applicationData, materiel);
             attributionFromMaterielWindow.Owner = Window.GetWindow(this);
