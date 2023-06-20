@@ -5,10 +5,16 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>matinfo.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="matinfo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="matinfo.ico" />
   </ItemGroup>
 
   <ItemGroup>
