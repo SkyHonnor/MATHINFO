@@ -58,18 +58,17 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = new Materiel();
 
-            MaterielWindow materielWindow = new MaterielWindow(applicationData, materiel, MaterielWindow.Type.Create);
+            MaterielWindow materielWindow = new MaterielWindow(ApplicationData, materiel, MaterielWindow.Type.Create);
             materielWindow.Owner = Window.GetWindow(this);
 
             bool result = materielWindow.ShowDialog().Value;
 
             if (result)
             {
-                applicationData.Materiels.Add(materiel);
-                applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Add(materiel);
+                ApplicationData.Materiels.Add(materiel);
+                ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Add(materiel);
             }
         }
 
@@ -82,13 +81,12 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
             if (materiel == null)
                 return;
 
-            MaterielWindow materielWindow = new MaterielWindow(applicationData, materiel, MaterielWindow.Type.Update);
+            MaterielWindow materielWindow = new MaterielWindow(ApplicationData, materiel, MaterielWindow.Type.Update);
             materielWindow.Owner = Window.GetWindow(this);
 
             bool result = materielWindow.ShowDialog().Value;
@@ -97,8 +95,8 @@ namespace SAE_MATINFO.Pages
             {
                 if (materiel.FKIdCategorie != materielWindow.Materiel.FKIdCategorie)
                 {
-                    applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.Categorie.IdCategorie).Materiels.Remove(materiel);
-                    applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materielWindow.Materiel.Categorie.IdCategorie).Materiels.Add(materielWindow.Materiel);
+                    ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.Categorie.IdCategorie).Materiels.Remove(materiel);
+                    ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materielWindow.Materiel.Categorie.IdCategorie).Materiels.Add(materielWindow.Materiel);
                 }
 
                 materiel.NomMateriel = materielWindow.Materiel.NomMateriel;
@@ -120,7 +118,6 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
             if (materiel == null)
@@ -131,21 +128,20 @@ namespace SAE_MATINFO.Pages
             if (result == MessageBoxResult.Yes)
             {
                 materiel.Delete();
-                applicationData.Materiels.Remove(materiel);
+                ApplicationData.Materiels.Remove(materiel);
 
-                applicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Remove(materiel);
+                ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Remove(materiel);
             }
         }
 
         private void Show_Attributions(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
             if (materiel == null)
                 return;
 
-            AttributionFromMaterielWindow attributionFromMaterielWindow = new AttributionFromMaterielWindow(applicationData, materiel);
+            AttributionFromMaterielWindow attributionFromMaterielWindow = new AttributionFromMaterielWindow(ApplicationData, materiel);
             attributionFromMaterielWindow.Owner = Window.GetWindow(this);
 
             attributionFromMaterielWindow.ShowDialog();

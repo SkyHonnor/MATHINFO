@@ -53,16 +53,15 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Create(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = new Categorie();
 
-            CategorieWindow categorieWindow = new CategorieWindow(applicationData, categorie, CategorieWindow.Type.Create);
+            CategorieWindow categorieWindow = new CategorieWindow(ApplicationData, categorie, CategorieWindow.Type.Create);
             categorieWindow.Owner = Window.GetWindow(this);
 
             bool result = categorieWindow.ShowDialog().Value;
 
             if (result)
-                applicationData.Categories.Add(categorie);
+                ApplicationData.Categories.Add(categorie);
         }
 
 
@@ -74,13 +73,12 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
             if (categorie == null)
                 return;
 
-            CategorieWindow categorieWindow = new CategorieWindow(applicationData, categorie, CategorieWindow.Type.Update);
+            CategorieWindow categorieWindow = new CategorieWindow(ApplicationData, categorie, CategorieWindow.Type.Update);
             categorieWindow.Owner = Window.GetWindow(this);
 
             bool result = categorieWindow.ShowDialog().Value;
@@ -101,7 +99,6 @@ namespace SAE_MATINFO.Pages
         /// <param name="e"></param>
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-            ApplicationData applicationData = (ApplicationData)DataContext;
             Categorie categorie = (Categorie)DataGrid.SelectedItem;
 
             if (categorie == null)
@@ -112,7 +109,7 @@ namespace SAE_MATINFO.Pages
             if (result == MessageBoxResult.Yes)
             {
                 categorie.Delete();
-                applicationData.Categories.Remove(categorie);
+                ApplicationData.Categories.Remove(categorie);
             }
         }
 
