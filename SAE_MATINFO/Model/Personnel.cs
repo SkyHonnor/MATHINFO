@@ -269,7 +269,7 @@ namespace SAE_MATINFO.Model
         /// <summary>
         /// Indique si l'objet actuel est égal à un autre objet du même type.
         /// </summary>
-        /// <param name="obj">Objet à comparer à cet objet..</param>
+        /// <param name="obj">Objet à comparer à cet objet</param>
         /// <returns>
         ///   <c>true</c> si l'objet spécifié est égal à l'objet actuel ; sinon, <c>false</c>.
         /// </returns>
@@ -283,10 +283,10 @@ namespace SAE_MATINFO.Model
         }
 
         /// <summary>
-        /// Indique si deux objets sont égaux.
+        /// Indique si deux objets Personnel sont égaux.
         /// </summary>
-        /// <param name="left">Le premier objet à comparer.</param>
-        /// <param name="right">Le deuxième objet à comparer.</param>
+        /// <param name="left">Le premier Personnel à comparer.</param>
+        /// <param name="right">Le deuxième Personnel à comparer.</param>
         /// <returns>
         ///   <c>true</c> si les objets sont égaux ; sinon, <c>false</c>.
         public static bool operator ==(Personnel? left, Personnel? right)
@@ -295,10 +295,10 @@ namespace SAE_MATINFO.Model
         }
 
         /// <summary>
-        /// Indique si deux objets ne sont pas égaux.
+        /// Indique si deux Personnel ne sont pas égaux.
         /// </summary>
-        /// <param name="left">Le premier objet à comparer.</param>
-        /// <param name="right">Le deuxième objet à comparer.</param>
+        /// <param name="left">Le premier Personnel à comparer.</param>
+        /// <param name="right">Le deuxième Personnel à comparer.</param>
         /// <returns>
         ///   <c>true</c> si les objets ne sont pas égaux ; sinon, <c>false</c>.
         /// </returns>   
@@ -312,6 +312,10 @@ namespace SAE_MATINFO.Model
             return this.MemberwiseClone();
         }
 
+        /// <summary>
+        /// Retourne le code de hachage pour cette structure Personnel.
+        /// </summary>
+        /// <returns>Entier qui représente le code de hachage pour ce Personnel.</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(this.IdPersonnel, this.NomPersonnel, this.PrenomPersonnel, this.MailPersonnel);

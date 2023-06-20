@@ -309,6 +309,15 @@ namespace SAE_MATINFO.Model
             return materiels;
         }
 
+
+
+        /// <summary>
+        /// Indique si l'objet actuel est égal à un autre objet du même type.
+        /// </summary>
+        /// <param name="obj">Objet à comparer à cet objet</param>
+        /// <returns>
+        ///   <c>true</c> si l'objet spécifié est égal à l'objet actuel ; sinon, <c>false</c>.
+        /// </returns>
         public override bool Equals(object? obj)
         {
             return obj is Materiel materiel &&
@@ -319,11 +328,26 @@ namespace SAE_MATINFO.Model
                    this.ReferenceConstructeur == materiel.ReferenceConstructeur;
         }
 
+        /// <summary>
+        /// Indique si deux objets Materiel sont égaux.
+        /// </summary>
+        /// <param name="left">Le premier Materiel à comparer.</param>
+        /// <param name="right">Le deuxième Materieel à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets sont égaux ; sinon, <c>false</c>.
         public static bool operator ==(Materiel? left, Materiel? right)
         {
             return EqualityComparer<Materiel>.Default.Equals(left, right);
         }
 
+        /// <summary>
+        /// Indique si deux Materiel ne sont pas égaux.
+        /// </summary>
+        /// <param name="left">Le premier Materiel à comparer.</param>
+        /// <param name="right">Le deuxième Materiel à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets ne sont pas égaux ; sinon, <c>false</c>.
+        /// </returns>   
         public static bool operator !=(Materiel? left, Materiel? right)
         {
             return !(left == right);
@@ -334,6 +358,11 @@ namespace SAE_MATINFO.Model
             return this.MemberwiseClone();
         }
 
+
+        /// <summary>
+        /// Retourne le code de hachage pour cette structure Materiel.
+        /// </summary>
+        /// <returns>Entier qui représente le code de hachage pour ce Materiel.</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(this.IdMateriel, this.FKIdCategorie, this.NomMateriel, this.CodeBarre, this.ReferenceConstructeur);

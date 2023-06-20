@@ -207,6 +207,14 @@ namespace SAE_MATINFO.Model
             return categories;
         }
 
+
+        /// <summary>
+        /// Indique si l'objet actuel est égal à un autre objet du même type.
+        /// </summary>
+        /// <param name="obj">Objet à comparer à cet objet</param>
+        /// <returns>
+        ///   <c>true</c> si l'objet spécifié est égal à l'objet actuel ; sinon, <c>false</c>.
+        /// </returns>
         public override bool Equals(object? obj)
         {
             return obj is Categorie categorie &&
@@ -214,11 +222,26 @@ namespace SAE_MATINFO.Model
                    this.NomCategorie == categorie.NomCategorie;
         }
 
+        /// <summary>
+        /// Indique si deux objets Categorie sont égaux.
+        /// </summary>
+        /// <param name="left">La premiere Categorie à comparer.</param>
+        /// <param name="right">La deuxième Categorie à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets sont égaux ; sinon, <c>false</c>.
         public static bool operator ==(Categorie? left, Categorie? right)
         {
             return EqualityComparer<Categorie>.Default.Equals(left, right);
         }
 
+        /// <summary>
+        /// Indique si deux Catgorie ne sont pas égaux.
+        /// </summary>
+        /// <param name="left">La premiere Categorie à comparer.</param>
+        /// <param name="right">La deuxième Categorie à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets ne sont pas égaux ; sinon, <c>false</c>.
+        /// </returns>   
         public static bool operator !=(Categorie? left, Categorie? right)
         {
             return !(left == right);
@@ -229,6 +252,11 @@ namespace SAE_MATINFO.Model
             return this.MemberwiseClone();
         }
 
+
+        /// <summary>
+        /// Retourne le code de hachage pour cette structure Categorie.
+        /// </summary>
+        /// <returns>Entier qui représente le code de hachage pour cette Categorie.</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(this.IdCategorie, this.NomCategorie);

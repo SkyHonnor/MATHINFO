@@ -10,16 +10,17 @@ using System.Xml;
 
 namespace SAE_MATINFO.Model
 {
+    /// <summary>
+    /// Stocke 6 informations :
+    /// 2 entiers : la fkIdPersonnel et la fkIdMateriel
+    /// 1 datetime : la fkIdMateriel
+    /// 1 string : le commentaire de l'attribution
+    /// 1 Personnel: un personnel
+    /// 1 Materiel: un materiel
+    /// </summary> 
     public class Attribution : Crud<Attribution>, ICloneable
     {
-        /// <summary>
-        /// Stocke 6 informations :
-        /// 2 entiers : la fkIdPersonnel et la fkIdMateriel
-        /// 1 datetime : la fkIdMateriel
-        /// 1 string : le commentaire de l'attribution
-        /// 1 Personnel: un personnel
-        /// 1 Materiel: un materiel
-        /// </summary> 
+        
 
         private int fKIdPersonnel;
         private int fKIdMateriel;
@@ -274,6 +275,14 @@ namespace SAE_MATINFO.Model
             return attributions;
         }
 
+
+        /// <summary>
+        /// Indique si l'objet actuel est égal à un autre objet du même type.
+        /// </summary>
+        /// <param name="obj">Objet à comparer à cet objet</param>
+        /// <returns>
+        ///   <c>true</c> si l'objet spécifié est égal à l'objet actuel ; sinon, <c>false</c>.
+        /// </returns>
         public override bool Equals(object? obj)
         {
             return obj is Attribution attribution &&
@@ -283,11 +292,28 @@ namespace SAE_MATINFO.Model
                    this.Commentaire == attribution.Commentaire;
         }
 
+
+        /// <summary>
+        /// Indique si deux Attribution sont égaux.
+        /// </summary>
+        /// <param name="left">La premier Attribution à comparer.</param>
+        /// <param name="right">La deuxième Attribution à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets sont égaux ; sinon, <c>false</c>.
         public static bool operator ==(Attribution? left, Attribution? right)
         {
             return EqualityComparer<Attribution>.Default.Equals(left, right);
         }
 
+
+        /// <summary>
+        /// Indique si deux Attribution ne sont pas égaux.
+        /// </summary>
+        /// <param name="left">Le premier Attribution à comparer.</param>
+        /// <param name="right">Le deuxième Attribution à comparer.</param>
+        /// <returns>
+        ///   <c>true</c> si les objets ne sont pas égaux ; sinon, <c>false</c>.
+        /// </returns>  
         public static bool operator !=(Attribution? left, Attribution? right)
         {
             return !(left == right);
@@ -298,11 +324,19 @@ namespace SAE_MATINFO.Model
             return $"{d.Year}/{d.Month}/{d.Day}";
         }
 
+        /// <summary>
+        /// Clone l'objet appellé
+        /// </summary>
+        /// <returns>Une attribution</returns>
         public object Clone()
         {
             return this.MemberwiseClone();
         }
 
+        /// <summary>
+        /// Retourne le code de hachage pour cette structure Attribution.
+        /// </summary>
+        /// <returns>Entier qui représente le code de hachage pour cette Attribution.</returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(this.FKIdPersonnel, this.FKIdMateriel, this.FKDateAttribution, this.Commentaire);
