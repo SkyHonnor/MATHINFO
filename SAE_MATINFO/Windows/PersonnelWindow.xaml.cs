@@ -63,7 +63,6 @@ namespace SAE_MATINFO.Windows
                 return;
             }
 
-            MessageBox.Show((!MailAddress.TryCreate(Personnel.MailPersonnel, out _)).ToString());
 
             if (Validation.GetHasError((DependencyObject)MailPersonnel))
             {
