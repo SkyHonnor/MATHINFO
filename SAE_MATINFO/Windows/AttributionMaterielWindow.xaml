@@ -24,6 +24,6 @@
             <TextBox Name="Commentaire" Width="190" Height="80" MaxLength="150" TextWrapping="Wrap" Text="{Binding Attribution.Commentaire, ValidatesOnExceptions=True}"></TextBox>
         </StackPanel>
 
-        <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" IsDefault="True" Width="150" HorizontalAlignment="Center" Click="Button_Click">Créer un attribution</Button>
+        <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" IsDefault="False" Width="150" HorizontalAlignment="Center" Click="Button_Click">Créer un attribution</Button>
     </Grid>
 </Window>
