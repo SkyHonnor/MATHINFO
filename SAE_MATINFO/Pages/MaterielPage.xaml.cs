@@ -156,7 +156,7 @@ namespace SAE_MATINFO.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Filtre.Items.Refresh();
-            Filtre.SelectedIndex = 0;
+            Filtre.SelectedIndex = -1;
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
