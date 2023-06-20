@@ -34,7 +34,7 @@
                 <TextBox Name="Recherche" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="Recherche_TextChanged"></TextBox>
             </StackPanel>
 
-            <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">Double clique pour créer une attributions</Label>
+            <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">Double clique pour créer une attribution</Label>
             
             <DataGrid Name="DataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" MouseDoubleClick="Show_Attributions">
                 <DataGrid.Columns>
