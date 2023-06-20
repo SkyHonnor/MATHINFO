@@ -18,15 +18,15 @@
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label>Nom</Label>
-            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.NomPersonnel, ValidatesOnExceptions=True}"></TextBox>
+            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.NomPersonnel, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"></TextBox>
 
             <Label>Prénom</Label>
-            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.PrenomPersonnel, ValidatesOnExceptions=True}"></TextBox>
+            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.PrenomPersonnel, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"></TextBox>
 
             <Label>Adresse mail</Label>
-            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.MailPersonnel, ValidatesOnExceptions=True}"></TextBox>
+            <TextBox Width="190" Height="20" MaxLength="50" Text="{Binding Personnel.MailPersonnel, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"></TextBox>
         </StackPanel>
 
-        <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" Width="150" HorizontalAlignment="Center" Click="Button_Click"></Button>
+        <Button Name="Button" Grid.Row="2" Style="{StaticResource MainButton}" IsDefault="True" Width="150" HorizontalAlignment="Center" Click="Button_Click"></Button>
     </Grid>
 </Window>

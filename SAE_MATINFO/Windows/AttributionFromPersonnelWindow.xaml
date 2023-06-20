@@ -22,7 +22,7 @@
         <Label Name="Title" Grid.Row="0" Grid.ColumnSpan="2" Margin="10,0,0,0" FontSize="20" VerticalAlignment="Center" Content="Attributions"></Label>
 
         <Grid Grid.Row="1" Margin="10,0,0,0">
-            <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Click="Button_Click_Create">
+            <Button Style="{StaticResource MainButton}" IsDefault="True" HorizontalAlignment="Left" Click="Button_Click_Create">
                 <Label Foreground="#FFFFFF">Ajouter une attribution</Label>
             </Button>
         </Grid>
