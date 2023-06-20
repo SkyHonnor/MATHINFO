@@ -81,8 +81,8 @@ namespace SAE_MATINFO.Windows
                 return;
             }
 
-            bool find = ApplicationData.Materiels.ToList().Find(materiel => materiel.CodeBarre == Materiel.CodeBarre) != null;
-            if (WindowType == Type.Create && find)
+            bool find = ApplicationData.Materiels.ToList().Find(materiel => materiel.CodeBarre == Materiel.CodeBarre && materiel.IdMateriel != Materiel.IdMateriel) != null;
+            if (find)
             {
                 MessageBox.Show("Code barre existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

@@ -64,8 +64,8 @@ namespace SAE_MATINFO.Windows
                 return;
             }
 
-            bool find = ApplicationData.Categories.ToList().Find(categorie => categorie.NomCategorie == Categorie.NomCategorie) != null;
-            if (WindowType == Type.Create && find)
+            bool find = ApplicationData.Categories.ToList().Find(categorie => categorie.NomCategorie == Categorie.NomCategorie && categorie.IdCategorie != Categorie.IdCategorie) != null;
+            if (find)
             {
                 MessageBox.Show("Nom catégorie existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

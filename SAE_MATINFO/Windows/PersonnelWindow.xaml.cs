@@ -69,8 +69,8 @@ namespace SAE_MATINFO.Windows
                 return;
             }
 
-            bool find = ApplicationData.Personnels.ToList().Find(personnel => personnel.MailPersonnel == Personnel.MailPersonnel) != null;
-            if (WindowType == Type.Create && find)
+            bool find = ApplicationData.Personnels.ToList().Find(personnel => personnel.MailPersonnel == Personnel.MailPersonnel && personnel.IdPersonnel != Personnel.IdPersonnel) != null;
+            if (find)
             {
                 MessageBox.Show("Mail personnel existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

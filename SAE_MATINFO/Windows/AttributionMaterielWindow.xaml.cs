@@ -67,7 +67,7 @@ namespace SAE_MATINFO.Windows
                 attribution.FKDateAttribution == Attribution.FKDateAttribution
             ) != null;
 
-            if (find)
+            if (WindowType == Type.Create && find)
             {
                 MessageBox.Show("Cette attribution existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -80,6 +80,12 @@ namespace SAE_MATINFO.Windows
             {
                 if (CurrentAttribution.FKDateAttribution != Attribution.FKDateAttribution)
                 {
+                    if (find)
+                    {
+                        MessageBox.Show("Cette attribution existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
                     CurrentAttribution.Delete();
                     CreateAttribution();
                 }
