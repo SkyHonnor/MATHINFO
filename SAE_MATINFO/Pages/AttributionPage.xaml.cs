@@ -1,4 +1,5 @@
 ﻿using SAE_MATINFO.Model;
+using SAE_MATINFO.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -78,9 +79,54 @@ namespace SAE_MATINFO.Pages
             DataContext = this;
         }
 
-        private void Button_Click_Create(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            DataGridPersonnels.SelectedIndex = -1;
+            DataGridMateriels.SelectedIndex = -1;
 
+            Personnels.Refresh();
+            Materiels.Refresh();
+        }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Attribution attribution = (Attribution)DataGrid.SelectedItem;
+
+            AttributionMaterielWindow attributionMaterielWindow = new AttributionMaterielWindow(ApplicationData, attribution, AttributionMaterielWindow.Type.Update);
+            attributionMaterielWindow.Owner = Window.GetWindow(this);
+
+            bool result = attributionMaterielWindow.ShowDialog().Value;
+
+            if (result)
+            {
+                DataGrid.SelectedItem = null;
+
+                attribution.FKDateAttribution = attributionMaterielWindow.Attribution.FKDateAttribution;
+                attribution.Commentaire = attributionMaterielWindow.Attribution.Commentaire;
+
+                DataGrid.SelectedItem = attribution;
+
+                DataGrid.Items.Refresh();
+            }
+        }
+
+        private void Button_Click_Delete(object sender, RoutedEventArgs e)
+        {
+            Attribution attribution = (Attribution)DataGrid.SelectedItem;
+
+            MessageBoxResult result = MessageBox.Show($"Êtes vous sur de vouloir supprimer ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                attribution.Delete();
+
+                ApplicationData.Attributions.Remove(attribution);
+
+                ApplicationData.Materiels.ToList().Find(materiel => materiel.IdMateriel == attribution.FKIdMateriel).Attributions.Remove(attribution);
+                ApplicationData.Personnels.ToList().Find(personnel => personnel.IdPersonnel == attribution.FKIdPersonnel).Attributions.Remove(attribution);
+
+                Attributions.Refresh();
+            }
         }
 
         private void UpdateFilter(object sender, SelectionChangedEventArgs e)

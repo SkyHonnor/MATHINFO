@@ -66,10 +66,7 @@ namespace SAE_MATINFO.Pages
             bool result = materielWindow.ShowDialog().Value;
 
             if (result)
-            {
                 ApplicationData.Materiels.Add(materiel);
-                ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materiel.FKIdCategorie).Materiels.Add(materiel);
-            }
         }
 
 
@@ -99,10 +96,14 @@ namespace SAE_MATINFO.Pages
                     ApplicationData.Categories.ToList().Find(categorie => categorie.IdCategorie == materielWindow.Materiel.Categorie.IdCategorie).Materiels.Add(materielWindow.Materiel);
                 }
 
+                DataGrid.SelectedItem = null;
+
                 materiel.NomMateriel = materielWindow.Materiel.NomMateriel;
                 materiel.Categorie = materielWindow.Materiel.Categorie;
                 materiel.CodeBarre = materielWindow.Materiel.CodeBarre;
                 materiel.ReferenceConstructeur = materielWindow.Materiel.ReferenceConstructeur;
+
+                DataGrid.SelectedItem = materiel;
 
                 Filtre.Items.Refresh();
                 DataGrid.Items.Refresh();
@@ -134,7 +135,7 @@ namespace SAE_MATINFO.Pages
             }
         }
 
-        private void Show_Attributions(object sender, RoutedEventArgs e)
+        private void Show_Attributions(object sender, MouseButtonEventArgs e)
         {
             Materiel materiel = (Materiel)DataGrid.SelectedItem;
 
@@ -150,6 +151,17 @@ namespace SAE_MATINFO.Pages
         private void Recherche_TextChanged(object sender, TextChangedEventArgs e)
         {
             Materiels.Refresh();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Filtre.Items.Refresh();
+            Filtre.SelectedIndex = 0;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Filtre.SelectedIndex = -1;
         }
     }
 }

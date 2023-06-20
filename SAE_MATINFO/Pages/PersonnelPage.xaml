@@ -33,8 +33,10 @@
                 <Label>Recherchez par mail</Label>
                 <TextBox Name="Recherche" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="Recherche_TextChanged"></TextBox>
             </StackPanel>
+
+            <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">Double clique pour créer une attributions</Label>
             
-            <DataGrid Name="DataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" MouseDoubleClick="Button_Click_Update">
+            <DataGrid Name="DataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" MouseDoubleClick="Show_Attributions">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding NomPersonnel}"/>
                     <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding PrenomPersonnel}"/>
@@ -43,8 +45,8 @@
                     <DataGridTemplateColumn Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Attributions">
-                                    Attributions
+                                <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Update">
+                                    Modifier
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

@@ -56,7 +56,7 @@ namespace SAE_MATINFO.Pages
                 ApplicationData.Personnels.Add(personnel);
         }
 
-        private void Button_Click_Update(object sender, MouseButtonEventArgs e)
+        private void Button_Click_Update(object sender, RoutedEventArgs e)
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 
@@ -70,9 +70,13 @@ namespace SAE_MATINFO.Pages
 
             if (result)
             {
+                DataGrid.SelectedItem = null;
+
                 personnel.NomPersonnel = personnelWindow.Personnel.NomPersonnel;
                 personnel.PrenomPersonnel = personnelWindow.Personnel.PrenomPersonnel;
                 personnel.MailPersonnel = personnelWindow.Personnel.MailPersonnel;
+
+                DataGrid.SelectedItem = personnel;
 
                 DataGrid.Items.Refresh();
             }
@@ -102,7 +106,7 @@ namespace SAE_MATINFO.Pages
             }
         }
 
-        private void Show_Attributions(object sender, RoutedEventArgs e)
+        private void Show_Attributions(object sender, MouseButtonEventArgs e)
         {
             Personnel personnel = (Personnel)DataGrid.SelectedItem;
 

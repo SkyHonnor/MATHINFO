@@ -85,7 +85,12 @@ namespace SAE_MATINFO.Pages
 
             if (result)
             {
+                DataGrid.SelectedItem = null;
+
                 categorie.NomCategorie = categorieWindow.Categorie.NomCategorie;
+
+                DataGrid.SelectedItem = categorie;
+
                 DataGrid.Items.Refresh();
             }
         }

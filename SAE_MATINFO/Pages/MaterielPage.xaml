@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SAE_MATINFO.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MaterielPage">
+      Title="MaterielPage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,7 +22,7 @@
                 <Label Foreground="#FFFFFF">Ajouter un materiel</Label>
             </Button>
 
-            <ComboBox Name="Filtre" Style="{StaticResource MainComboBox}" ItemsSource="{Binding Categories}" HorizontalAlignment="Right" SelectedIndex="0" DisplayMemberPath="NomCategorie"></ComboBox>
+            <ComboBox Name="Filtre" Style="{StaticResource MainComboBox}" ItemsSource="{Binding Categories}" HorizontalAlignment="Right" SelectedIndex="0" DisplayMemberPath="NomCategorie"/>
         </Grid>
 
         <Grid Grid.Row="2">
@@ -36,7 +36,9 @@
                 <TextBox Name="Recherche" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="Recherche_TextChanged"></TextBox>
             </StackPanel>
 
-            <DataGrid Name="DataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" DataContext="{Binding SelectedItem, ElementName=Filtre}" ItemsSource="{Binding Materiels}" MouseDoubleClick="Button_Click_Update">
+            <Label Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">Double clique pour créer une attributions</Label>
+
+            <DataGrid Name="DataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" DataContext="{Binding SelectedItem, ElementName=Filtre}" ItemsSource="{Binding Materiels}" MouseDoubleClick="Show_Attributions">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nom materiel" Width="*" Binding="{Binding NomMateriel}"/>
                     <DataGridTextColumn Header="Catégorie" Width="*" Binding="{Binding Categorie.NomCategorie}"/>
@@ -46,8 +48,8 @@
                     <DataGridTemplateColumn Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Show_Attributions">
-                                    Attributions
+                                <Button Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_Update">
+                                    Modifier
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

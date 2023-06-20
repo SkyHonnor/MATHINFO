@@ -109,8 +109,12 @@ namespace SAE_MATINFO.Windows
 
             if (result)
             {
+                DataGridAttributions.SelectedItem = null;
+
                 attribution.FKDateAttribution = attributionMaterielWindow.Attribution.FKDateAttribution;
                 attribution.Commentaire = attributionMaterielWindow.Attribution.Commentaire;
+
+                DataGridAttributions.SelectedItem = attribution;
 
                 DataGridAttributions.Items.Refresh();
             }
