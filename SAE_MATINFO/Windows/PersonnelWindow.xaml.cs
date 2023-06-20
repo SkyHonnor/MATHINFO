@@ -51,19 +51,21 @@ namespace SAE_MATINFO.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Personnel.NomPersonnel))
+            if (Validation.GetHasError((DependencyObject)NomPersonnel))
             {
                 MessageBox.Show("Nom personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(Personnel.PrenomPersonnel))
+            if (Validation.GetHasError((DependencyObject)PrenomPersonnel))
             {
                 MessageBox.Show("Prénom personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (Personnel.MailPersonnel == null || !MailAddress.TryCreate(Personnel.MailPersonnel, out _))
+            MessageBox.Show((!MailAddress.TryCreate(Personnel.MailPersonnel, out _)).ToString());
+
+            if (Validation.GetHasError((DependencyObject)MailPersonnel))
             {
                 MessageBox.Show("Mail personnel n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

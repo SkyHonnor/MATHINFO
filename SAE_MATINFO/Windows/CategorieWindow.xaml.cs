@@ -58,7 +58,7 @@ namespace SAE_MATINFO.Windows
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Categorie.NomCategorie))
+            if (Validation.GetHasError((DependencyObject)NomCategorie))
             {
                 MessageBox.Show("Nom catégorie n'est pas valide", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

@@ -6,8 +6,10 @@
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:SAE_MATINFO"
         mc:Ignorable="d"
-        Title="MatINFO" Height="720" Width="1080" MinHeight="720" MinWidth="1080" Icon="/matinfo.png">
-
+        Title="MatINFO" Height="720" Width="1080" MinHeight="720" MinWidth="1080" Icon="/matinfo.png"
+        WindowState="Maximized">
+    
+     
     <Window.DataContext>
         <local:ApplicationData x:Name="applicationData"></local:ApplicationData>
     </Window.DataContext>

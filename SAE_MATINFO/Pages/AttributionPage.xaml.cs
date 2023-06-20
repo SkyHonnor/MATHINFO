@@ -126,6 +126,8 @@ namespace SAE_MATINFO.Pages
                 ApplicationData.Personnels.ToList().Find(personnel => personnel.IdPersonnel == attribution.FKIdPersonnel).Attributions.Remove(attribution);
 
                 Attributions.Refresh();
+                Personnels.Refresh();
+                Materiels.Refresh();
             }
         }
 
