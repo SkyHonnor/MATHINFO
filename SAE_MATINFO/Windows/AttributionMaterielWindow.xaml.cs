@@ -61,6 +61,18 @@ namespace SAE_MATINFO.Windows
                 return;
             }
 
+            bool find = ApplicationData.Attributions.ToList().Find(attribution =>
+                attribution.FKIdPersonnel == Attribution.FKIdPersonnel &&
+                attribution.FKIdMateriel == Attribution.FKIdMateriel &&
+                attribution.FKDateAttribution == Attribution.FKDateAttribution
+            ) != null;
+
+            if (find)
+            {
+                MessageBox.Show("Cette attribution existe déjà", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (WindowType == Type.Create)
                 CreateAttribution();
 

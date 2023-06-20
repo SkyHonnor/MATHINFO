@@ -27,13 +27,25 @@
             </Button>
         </Grid>
 
-        <DataGrid Name="DataGridPersonnels" Grid.Row="2" Grid.Column="0" Margin="10,0,10,10" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" SelectionChanged="DataGridPersonnels_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding NomPersonnel}"/>
-                <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding PrenomPersonnel}"/>
-                <DataGridTextColumn Header="Adresse mail" Width="*" Binding="{Binding MailPersonnel}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="2" Grid.Column="0" Margin="10,0,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <Label>Recherchez par mail</Label>
+                <TextBox Name="Recherche" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" TextChanged="Recherche_TextChanged"></TextBox>
+            </StackPanel>
+
+            <DataGrid Name="DataGridPersonnels" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Personnels}" SelectionChanged="DataGridPersonnels_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding NomPersonnel}"/>
+                    <DataGridTextColumn Header="Prénom" Width="*" Binding="{Binding PrenomPersonnel}"/>
+                    <DataGridTextColumn Header="Adresse mail" Width="*" Binding="{Binding MailPersonnel}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
         <DataGrid Name="DataGridAttributions" Grid.Row="2" Grid.Column="1" Margin="10,0,10,10" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Attributions}" MouseDoubleClick="DataGridAttributions_MouseDoubleClick">
             <DataGrid.Columns>

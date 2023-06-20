@@ -27,8 +27,8 @@ namespace SAE_MATINFO.Windows
 
         public Materiel Materiel { get; set; }
 
-        public ObservableCollection<Personnel> Personnels { get; set; }
         public ICollectionView Attributions { get; set; }
+        public ICollectionView Personnels { get; set; }
 
         public AttributionFromMaterielWindow(ApplicationData applicationData, Materiel materiel)
         {
@@ -37,8 +37,6 @@ namespace SAE_MATINFO.Windows
             ApplicationData = applicationData;
 
             Materiel = materiel;
-
-            Personnels = applicationData.Personnels;
 
             CollectionViewSource attributionsView = new CollectionViewSource();
             attributionsView.Source = ApplicationData.Attributions;
@@ -50,6 +48,16 @@ namespace SAE_MATINFO.Windows
                 Personnel personnel = (Personnel)DataGridPersonnels.SelectedItem;
 
                 return attribution.FKIdMateriel == Materiel.IdMateriel && personnel != null && attribution.FKIdPersonnel == personnel.IdPersonnel;
+            };
+
+            CollectionViewSource personnelsView = new CollectionViewSource();
+            personnelsView.Source = ApplicationData.Personnels;
+
+            Personnels = personnelsView.View;
+            Personnels.Filter = o =>
+            {
+                Personnel personnel = (Personnel)o;
+                return personnel.MailPersonnel.IndexOf(Recherche.Text, StringComparison.OrdinalIgnoreCase) >= 0;
             };
 
             DataContext = this;
@@ -125,6 +133,11 @@ namespace SAE_MATINFO.Windows
 
                 Attributions.Refresh();
             }
+        }
+
+        private void Recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Personnels.Refresh();
         }
     }
 }

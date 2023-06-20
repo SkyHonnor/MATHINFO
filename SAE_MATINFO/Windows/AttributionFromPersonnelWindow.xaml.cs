@@ -28,7 +28,7 @@ namespace SAE_MATINFO.Windows
         public Personnel Personnel { get; set; }
 
         public ICollectionView Attributions { get; set; }
-        public ObservableCollection<Materiel> Materiels { get; set; }
+        public ICollectionView Materiels { get; set; }
 
         public AttributionFromPersonnelWindow(ApplicationData applicationData, Personnel personnel)
         {
@@ -50,7 +50,16 @@ namespace SAE_MATINFO.Windows
                 return attribution.FKIdPersonnel == Personnel.IdPersonnel && materiel != null && attribution.FKIdMateriel == materiel.IdMateriel;
             };
 
-            Materiels = applicationData.Materiels;
+
+            CollectionViewSource materielsView = new CollectionViewSource();
+            materielsView.Source = ApplicationData.Materiels;
+
+            Materiels = materielsView.View;
+            Materiels.Filter = o =>
+            {
+                Materiel materiel = (Materiel)o;
+                return materiel.CodeBarre.IndexOf(Recherche.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+            };
 
             DataContext = this;
 
@@ -125,6 +134,11 @@ namespace SAE_MATINFO.Windows
 
                 Attributions.Refresh();
             }
+        }
+
+        private void Recherche_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Materiels.Refresh();
         }
     }
 }

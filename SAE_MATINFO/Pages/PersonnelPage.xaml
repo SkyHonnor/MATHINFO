@@ -15,7 +15,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" FontSize="20" VerticalAlignment="Center" Content="{Binding Personnels.Count}" ContentStringFormat="Liste de personnels ({0})"></Label>
+        <Label Grid.Row="0" FontSize="20" VerticalAlignment="Center" Content="{Binding Personnels.Count}" ContentStringFormat="Liste de personnel(s) ({0})"></Label>
 
         <Grid Grid.Row="1">
             <Button Style="{StaticResource MainButton}" HorizontalAlignment="Left" Click="Button_Click_Create">
